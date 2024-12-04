@@ -44,3 +44,8 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+
+## SecuroSphere
+
+SecuroSphere is an advanced web security platform designed to deliver multi-layered protection for web applications and organizational portals. Combining traditional security practices with cutting-edge AI-driven analysis, SecuroSphere ensures robust authentication, access control, and anomaly detection while offering seamless team and user management capabilities.
