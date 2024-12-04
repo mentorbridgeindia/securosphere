@@ -1,10 +1,53 @@
-# Getting Started with Create React App
+# SecuroSphere
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+SecuroSphere is a web security platform designed to protect applications with multiple layers of security. It uses features like Multi-Factor Authentication (MFA) and Captcha to keep user accounts safe, while OAuth and JWT-based authentication allow secure access without constantly needing passwords. With AI-driven monitoring, SecuroSphere can detect and stop suspicious activities, keeping applications and data safe from threats.
+
+The platform is flexible and helps organizations manage teams and users more effectively. Companies can create teams and sub-teams with their own names, logos, and permissions to control who can access what. SecuroSphere also provides easy-to-use APIs, so developers can quickly add strong security features to their systems without extra effort.
+
+Built with reliable tools like Spring Boot, MongoDB, and React, SecuroSphere is fast, scalable, and easy to use. It offers clear dashboards and detailed insights, making it a great choice for businesses of any size. Whether you’re securing a company portal or a customer app, SecuroSphere makes it simple to keep everything protected.
+
+
+## Key Features
+
+- Multi-Factor Authentication (MFA): Adds an extra layer of security to user accounts by requiring additional verification steps.
+- OAuth Integration: Enables secure third-party access and seamless single sign-on (SSO).
+- JWT-Based Authentication: Facilitates secure, stateless communication between systems.
+- AI-Driven Monitoring: Detects suspicious activities and prevents potential threats using advanced machine learning techniques.
+- Captcha Integration: Protects against bots and automated attacks.
+
+- Team Management:
+    - Create teams and sub-teams with unique names, logos, and attributes.
+    - Define and control access levels for users within each team.
+- Developer-Friendly APIs: Simplifies the process of adding security features to applications.
+- User-Friendly Dashboards: Provides clear insights into security metrics and user activity.
+
+
+# Getting Started with SecuroSphere
+
+### **Prerequisites**
+
+Ensure you have the following installed:
+- [Node.js](https://nodejs.org/) (v14 or above)
+- [npm](https://www.npmjs.com/)
+- [MongoDB](https://www.mongodb.com/)
+- [Java JDK](https://www.oracle.com/java/technologies/javase-downloads.html) (for Spring Boot)
+- A text editor or IDE (e.g., [VS Code](https://code.visualstudio.com/))
 
 ## Available Scripts
 
 In the project directory, you can run:
+
+### 1. Clone the Repository
+
+`git clone <https://github.com/mentorbridgeorg/securosphere.git>`
+
+
+`cd securosphere`
+
+### `npm install`
+
+To install node dependencies
+
 
 ### `npm start`
 
@@ -29,15 +72,11 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+## Run the Backend
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- Configure MongoDB in the backend's application.properties file.
+- Start the Spring Boot server
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
 ## Learn More
 
@@ -45,7 +84,3 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-
-## SecuroSphere
-
-SecuroSphere is an advanced web security platform designed to deliver multi-layered protection for web applications and organizational portals. Combining traditional security practices with cutting-edge AI-driven analysis, SecuroSphere ensures robust authentication, access control, and anomaly detection while offering seamless team and user management capabilities.
