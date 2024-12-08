@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import * as Sentry from "@sentry/react";
 
 Sentry.init({
-  dsn: "https://8b1cae94089e51c260fda354dbbb9d38@o4508422156910592.ingest.us.sentry.io/4508422159400960",
+  dsn: "https://355f968adae109cb3974461d7eca3fad@o4508431058468864.ingest.de.sentry.io/4508431066267728",
   integrations: [],
 });
 const root = ReactDOM.createRoot(

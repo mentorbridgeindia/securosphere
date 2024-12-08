@@ -34,7 +34,7 @@ function App() {
       console.error("Form validation failed:", error);
     }
   };
-
+  
   return (
     <div className="App">
       {/* React-Bootstrap Navbar */}
@@ -74,6 +74,8 @@ function App() {
             <p className="mt-2">Response: {JSON.stringify(response)}</p>
           )}
         </div>
+<button onClick={() => {throw new Error("This is your first error!");}} className="btn btn-primary">Break the world</button>
+        
       </div>
     </div>
   );
