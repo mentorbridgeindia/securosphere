@@ -3,7 +3,12 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import * as Sentry from "@sentry/react";
 
+Sentry.init({
+  dsn: "https://8b1cae94089e51c260fda354dbbb9d38@o4508422156910592.ingest.us.sentry.io/4508422159400960",
+  integrations: [],
+});
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
