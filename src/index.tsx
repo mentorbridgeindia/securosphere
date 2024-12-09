@@ -2,8 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+import ReactGA from "react-ga4";
 import reportWebVitals from './reportWebVitals';
 import * as Sentry from "@sentry/react";
+
+
+ReactGA.initialize("G-J2Y18M9G9N");
+ReactGA.send({ hitType: "pageview", page: window.location.pathname });
+
 
 Sentry.init({
   dsn: "https://553cc39938dcdc71a390d50490bdd693@o4508437918842880.ingest.de.sentry.io/4508438503161936",
