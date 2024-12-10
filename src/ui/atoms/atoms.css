@@ -1,0 +1,60 @@
+/* Anchor Styling */
+.anchor {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+.anchor:hover {
+    text-decoration: underline;
+    color: #9b4d96;
+}
+
+/* Input Styling */
+.input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 16px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.4);
+}
+
+/* Label Styling */
+.label {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 8px;
+    display: block;
+    font-weight: 600;
+}
+
+/* Accessibility Enhancements */
+input:disabled,
+.input:disabled {
+    background-color: #f4f4f4;
+    cursor: not-allowed;
+}
+
+/* General Responsive Adjustments */
+@media (max-width: 768px) {
+    .anchor {
+        font-size: 14px;
+    }
+
+    .input {
+        font-size: 14px;
+    }
+
+    .label {
+        font-size: 14px;
+    }
+}
