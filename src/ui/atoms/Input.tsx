@@ -1,4 +1,4 @@
-import './atoms.css';  // Import the CSS file
+import './atoms.css';  
 
 
 const Input = ({ className, ...rest }: any) => {
