@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { fetchData } from "./api";
 import "./App.scss";
 import ColorPaletteShowcase from "./components/Colors";
 import LoginForm from "@components/LoginForm";
