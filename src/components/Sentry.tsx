@@ -1,35 +1,37 @@
 import React, { useState } from "react";
-const [email, setEmail] = useState("");
-const [response, setResponse] = useState(null);
 
-const simulateApiCall = async () => {
-  try {
-    // Simulating an API error
-    const res = await fetch("https://api.example.com/non-existent-endpoint");
-    if (!res.ok) {
-      throw new Error(`API Error: ${res.status} - ${res.statusText}`);
-    }
-    const data = await res.json();
-    setResponse(data);
-  } catch (error) {
-    console.error("API call failed:", error);
-  }
-};
-
-const validateForm = () => {
-  try {
-    if (!email) {
-      throw new Error("Validation Error: Email field is empty.");
-    }
-    if (!/\S+@\S+\.\S+/.test(email)) {
-      throw new Error("Validation Error: Invalid email format.");
-    }
-    alert("Form submitted successfully!");
-  } catch (error) {
-    console.error("Form validation failed:", error);
-  }
-};
 export default function Sentry() {
+  const [email, setEmail] = useState(""); // Move hooks inside the component
+  const [response, setResponse] = useState(null);
+
+  const simulateApiCall = async () => {
+    try {
+      // Simulating an API error
+      const res = await fetch("https://api.example.com/non-existent-endpoint");
+      if (!res.ok) {
+        throw new Error(`API Error: ${res.status} - ${res.statusText}`);
+      }
+      const data = await res.json();
+      setResponse(data);
+    } catch (error) {
+      console.error("API call failed:", error);
+    }
+  };
+
+  const validateForm = () => {
+    try {
+      if (!email) {
+        throw new Error("Validation Error: Email field is empty.");
+      }
+      if (!/\S+@\S+\.\S+/.test(email)) {
+        throw new Error("Validation Error: Invalid email format.");
+      }
+      alert("Form submitted successfully!");
+    } catch (error) {
+      console.error("Form validation failed:", error);
+    }
+  };
+
   return (
     <div>
       <div

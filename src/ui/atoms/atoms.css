@@ -16,7 +16,8 @@
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 8px;
-    width: 100%;
+    width: 10%;
+    justify-content: center;
     box-sizing: border-box;
     font-size: 16px;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
@@ -44,17 +45,3 @@ input:disabled,
     cursor: not-allowed;
 }
 
-/* General Responsive Adjustments */
-@media (max-width: 768px) {
-    .anchor {
-        font-size: 14px;
-    }
-
-    .input {
-        font-size: 14px;
-    }
-
-    .label {
-        font-size: 14px;
-    }
-}
