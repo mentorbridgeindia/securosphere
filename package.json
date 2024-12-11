@@ -24,10 +24,10 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && npm run sentry:sourcemaps",
+    "build": "react-scripts build && npm run sentry:sourcemaps && npm run sentry:sourcemaps",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "sentry:sourcemaps": "sentry-cli sourcemaps inject --org testing-4n --project sentry-test ./build/static/js && sentry-cli sourcemaps upload --org testing-4n --project sentry-test ./build/static/js"
+    "sentry:sourcemaps": "sentry-cli sourcemaps inject --org mentorbridge --project javascript-react ./build/static/js && sentry-cli sourcemaps upload --org mentorbridge --project javascript-react ./build/static/js"
   },
   "eslintConfig": {
     "extends": [
