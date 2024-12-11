@@ -1,16 +1,13 @@
-import React from "react";
-import "./App.css";
-import AppNavbar from "./components/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
-import LoginForm from "./components/LoginForm";
-import Sentry from "./components/Sentry";
+import "./App.css";
 import ColorPaletteShowcase from "./components/Colors";
+import LoginForm from "./components/LoginForm";
+import AppNavbar from "./components/Navbar";
 
 function App() {
   return (
     <div className="App">
       <AppNavbar />
-      {/* <Sentry /> */}
       <LoginForm />
       <ColorPaletteShowcase />
     </div>
