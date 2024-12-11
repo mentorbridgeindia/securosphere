@@ -1,9 +1,9 @@
 import React from "react";
 
-import { FormActionButtons } from "../ui/molecules/FormActionButtons";
-import { FormInput } from "../ui/atoms/FormInput";
-import { FormLabel } from "../ui/atoms/FormLabel";
-import { Anchor } from "../ui/atoms/Anchor";
+import { FormActionButtons } from "@molecules/FormActionButtons";
+import { FormInput } from "@atoms/FormInput";
+import { FormLabel } from "@atoms/FormLabel";
+import { Anchor } from "@atoms/Anchor";
 
 const handleSubmit = () => {
   alert("Form Submitted!");

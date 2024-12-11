@@ -23,9 +23,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build && npm run sentry:sourcemaps && npm run sentry:sourcemaps",
-    "test": "react-scripts test",
+    "start": "craco start",
+    "build": "craco build && npm run sentry:sourcemaps && npm run sentry:sourcemaps",
+    "test": "craco test",
     "eject": "react-scripts eject",
     "sentry:sourcemaps": "sentry-cli sourcemaps inject --org mentorbridge --project javascript-react ./build/static/js && sentry-cli sourcemaps upload --org mentorbridge --project javascript-react ./build/static/js"
   },
@@ -46,5 +46,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@craco/craco": "^7.1.0"
   }
 }
