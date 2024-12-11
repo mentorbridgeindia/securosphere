@@ -1,9 +1,8 @@
-import React from "react";
-import "./FormAction.css";
 import { Button } from "react-bootstrap";
-import { IFormAction } from "./FormAction.types";
+import "./FormActionButtons.scss";
+import { IFormActionButtons } from "./FormActionButtons.types";
 
-const FormAction = (props: IFormAction) => {
+export const FormActionButtons = (props: IFormActionButtons) => {
   const {
     isPrimaryDisabled,
     primaryLabel,
@@ -28,5 +27,3 @@ const FormAction = (props: IFormAction) => {
     </div>
   );
 };
-
-export default FormAction;

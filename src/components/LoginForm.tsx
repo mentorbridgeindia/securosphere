@@ -1,8 +1,9 @@
 import React from "react";
-import Anchor from "../ui/atoms/Anchor";
-import FormInput from "../ui/atoms/FormInput";
-import FormLabel from "../ui/atoms/FormLabel";
-import FormAction from "../ui/molecules/FormAction";
+
+import { FormActionButtons } from "../ui/molecules/FormActionButtons";
+import { FormInput } from "../ui/atoms/FormInput";
+import { FormLabel } from "../ui/atoms/FormLabel";
+import { Anchor } from "../ui/atoms/Anchor";
 
 const handleSubmit = () => {
   alert("Form Submitted!");
@@ -36,7 +37,7 @@ const LoginForm = () => {
           <Anchor href="/forgot-password">Forgot Password?</Anchor>
         </div>
 
-        <FormAction
+        <FormActionButtons
           onSubmit={handleSubmit}
           onCancel={handleCancel}
           primaryLabel={"Submit"}

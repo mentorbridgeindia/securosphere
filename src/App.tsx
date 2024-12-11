@@ -1,5 +1,4 @@
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
+import "./App.scss";
 import ColorPaletteShowcase from "./components/Colors";
 import LoginForm from "./components/LoginForm";
 import AppNavbar from "./components/Navbar";
