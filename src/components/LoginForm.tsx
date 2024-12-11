@@ -1,19 +1,49 @@
-// LoginForm.tsx for example to use atomics
+import React from "react";
 import Anchor from "../ui/atoms/Anchor";
-import Input from "../ui/atoms/Input";
-import Label from "../ui/atoms/Label";
+import FormInput from "../ui/atoms/FormInput";
+import FormLabel from "../ui/atoms/FormLabel";
+import FormAction from "../ui/molecules/FormAction";
+
+const handleSubmit = () => {
+  alert("Form Submitted!");
+};
+
+const handleCancel = () => {
+  alert("Form Cancelled!");
+};
 
 const LoginForm = () => {
   return (
-    <form className="d-flex flex-column">
-      <Label htmlFor="email">Email</Label>
-      <Input id="email" type="email" placeholder="Enter your email" />
+    <div className="d-flex justify-content-center align-items-center vh-10 mt-5 ">
+      <form className="p-4 rounded shadow bg-white" style={{ width: "300px" }}>
+        <h2 className="text-center mb-4">Login</h2>
 
-      <Label htmlFor="password">Password</Label>
-      <Input id="password" type="password" placeholder="Enter your password" />
+        <div className="mb-3">
+          <FormLabel>Email</FormLabel>
+          <FormInput id="email" type="email" placeholder="Enter your email" />
+        </div>
 
-      <Anchor href="/forgot-password">Forgot Password?</Anchor>
-    </form>
+        <div className="mb-3">
+          <FormLabel htmlFor="password">Password</FormLabel>
+          <FormInput
+            id="password"
+            type="password"
+            placeholder="Enter your password"
+          />
+        </div>
+
+        <div className="d-flex justify-content-between mb-3">
+          <Anchor href="/forgot-password">Forgot Password?</Anchor>
+        </div>
+
+        <FormAction
+          onSubmit={handleSubmit}
+          onCancel={handleCancel}
+          primaryLabel={"Submit"}
+          secondaryLabel={"Cancel"}
+        />
+      </form>
+    </div>
   );
 };
 
