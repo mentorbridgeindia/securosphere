@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import "./App.css";
 import AppNavbar from "./components/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Logoutpage } from "./pages/Logout";
 
 function App() {
+ 
   const [email, setEmail] = useState("");
   const [response, setResponse] = useState(null);
 
@@ -39,6 +41,8 @@ function App() {
     <div className="App">
       {/* React-Bootstrap Navbar */}
       <AppNavbar />
+      {/* React-Bootstrap logoutpage */}
+     <Logoutpage/>
 
       <div
         className="main-content"
@@ -75,9 +79,11 @@ function App() {
           )}
         </div>
 <button onClick={() => {throw new Error("This is your first error!");}} className="btn btn-primary">Break the world</button>
-        
+    
       </div>
+      
     </div>
+    
   );
 }
 
