@@ -18,7 +18,7 @@ Sentry.init({
   dsn: SENTRY_DSN,
   ...SENTRY_CONFIG,
 });
-
+        
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
