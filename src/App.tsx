@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { fetchData } from "./api";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Register } from "./pages/Register";
 import "./App.scss";
 import ColorPaletteShowcase from "./components/Colors";
 import LoginForm from "@components/LoginForm";
@@ -9,10 +9,12 @@ function App() {
   return (
     <div className="App">
       <AppNavbar />
+      <Register />
       <LoginForm />
       <ColorPaletteShowcase />
     </div>
   );
 }
+
 
 export default App;
