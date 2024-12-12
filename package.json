@@ -25,10 +25,10 @@
   },
   "scripts": {
     "start": "craco start",
-    "build": "craco build && npm run sentry:sourcemaps && npm run sentry:sourcemaps",
+    "build": "craco build && npm run sentry:sourcemaps && npm run sentry:sourcemaps && npm run sentry:sourcemaps",
     "test": "craco test",
     "eject": "react-scripts eject",
-    "sentry:sourcemaps": "sentry-cli sourcemaps inject --org mentorbridge --project javascript-react ./build/static/js && sentry-cli sourcemaps upload --org mentorbridge --project javascript-react ./build/static/js"
+    "sentry:sourcemaps": "sentry-cli sourcemaps inject --org mentorbridge-or --project javascript-react ./build/static/js && sentry-cli sourcemaps upload --org mentorbridge-or --project javascript-react ./build/static/js"
   },
   "eslintConfig": {
     "extends": [
