@@ -60,36 +60,36 @@ export const Register = () => {
                 <Form.Group>
                   <Form.Label className="ml-3 d-flex justify-content-start">First name</Form.Label>
                   <Form.Control type="text" {...register("fname")} />
-                  {errors.fname && <p className="text-danger">{errors.fname.message}</p>}
+                  {errors.fname && <p className="text-danger ml-3 d-flex justify-content-start">{errors.fname.message}</p>}
                 </Form.Group>
               </Col>
               <Col sm={12} lg={6}>
                 <Form.Group>
                   <Form.Label className="ml-3 d-flex justify-content-start">Last name</Form.Label>
                   <Form.Control type="text" {...register("lname")} />
-                  {errors.lname && <p className="text-danger">{errors.lname.message}</p>}
+                  {errors.lname && <p className="text-danger ml-3 d-flex justify-content-start">{errors.lname.message}</p>}
                 </Form.Group>
               </Col>
             </Row>
             <Form.Group className="mt-2">
               <Form.Label className="ml-3 d-flex justify-content-start">Email address</Form.Label>
               <Form.Control type="email" {...register("email")} />
-              {errors.email && <p className="text-danger">{errors.email.message}</p>}
+              {errors.email && <p className="text-danger ml-3 d-flex justify-content-start">{errors.email.message}</p>}
             </Form.Group>
             <Form.Group className="mt-2">
               <Form.Label className="ml-3 d-flex justify-content-start">Password</Form.Label>
               <Form.Control type="password" {...register("password")} />
-              {errors.password && <p className="text-danger">{errors.password.message}</p>}
+              {errors.password && <p className="text-danger  ml-3 d-flex justify-content-start">{errors.password.message}</p>}
             </Form.Group>
             <Form.Group className="mt-2">
               <Form.Label className="ml-3 d-flex justify-content-start">Confirm password</Form.Label>
               <Form.Control type="password" {...register("cpassword")} />
-              {errors.cpassword && <p className="text-danger">{errors.cpassword.message}</p>}
+              {errors.cpassword && <p className="text-danger ml-3 d-flex justify-content-start">{errors.cpassword.message}</p>}
             </Form.Group>
-            <h6 className="mt-4 mb-4 d-flex gap-2">
+            <h6 className="mt-4 mb-4 d-flex gap-2 check">
               <Form.Check type="checkbox" /> I agree to the terms and conditions
             </h6>
-            <Button type="submit" id="Submit">Sign up</Button>
+            <Button type="submit" className="Submit">Sign up</Button>
             <p className="mt-2">Have an account already? Sign in</p>
           </Form>
         </Col>
