@@ -17,3 +17,9 @@ export const SENTRY_CONFIG = {
   replaysSessionSampleRate: 0.1, // Sample rate at 10%
   replaysOnErrorSampleRate: 1.0, // Sample 100% of error sessions
 };
+
+export const POSTHOG_API_KEY = "phc_eFeQpd7dcjjWbt32ZljvIBOSoXIrSb7E8eJtTrWVpiK";
+export const POSTHOG_API_CONFIG = {
+  api_host: "https://eu.i.posthog.com",
+  person_profiles: "identified_only",
+};
