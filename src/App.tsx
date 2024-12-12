@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./App.css";
 import AppNavbar from "./components/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Register } from "./pages/Register";
 
 function App() {
   const [email, setEmail] = useState("");
@@ -39,7 +40,7 @@ function App() {
     <div className="App">
       {/* React-Bootstrap Navbar */}
       <AppNavbar />
-
+      <Register/>
       <div
         className="main-content"
         style={{
@@ -80,5 +81,6 @@ function App() {
     </div>
   );
 }
+
 
 export default App;

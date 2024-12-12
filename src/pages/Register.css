@@ -1,0 +1,10 @@
+
+.icon{
+   display: flex;
+   justify-content: center; 
+    gap: 20px;
+   
+}
+.image img{
+    height: 85vh;
+}
