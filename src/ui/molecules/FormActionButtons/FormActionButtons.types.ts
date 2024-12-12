@@ -1,4 +1,4 @@
-export interface IFormAction {
+export interface IFormActionButtons {
   isPrimaryDisabled?: boolean;
   primaryLabel: string;
   secondaryLabel: string;

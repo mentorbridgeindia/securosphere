@@ -1,33 +1,33 @@
 .form-action {
-    display: flex;
-    gap: 10px;
-    justify-content: flex-end;
-    margin-top: 20px;
-}
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 20px;
 
-.btn {
+  .btn {
     padding: 6px 16px;
     font-size: 16px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-}
+  }
 
-.submit-btn {
-    background-color: #0D1F33;
+  .submit-btn {
+    background-color: #0d1f33;
     color: white;
-}
+  }
 
-.submit-btn:hover {
-    color:white;
+  .submit-btn:hover {
+    color: white;
     background-color: #0d1f33e8;
-}
+  }
 
-.cancel-btn {
+  .cancel-btn {
     background-color: #dc3545;
     color: white;
-}
+  }
 
-.cancel-btn:hover {
+  .cancel-btn:hover {
     background-color: #c82333;
+  }
 }
