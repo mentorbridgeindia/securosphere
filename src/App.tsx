@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./App.css";
 import AppNavbar from "./components/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Orgpage from './pages/OrgPage';
 
 function App() {
   const [email, setEmail] = useState("");
@@ -39,6 +40,7 @@ function App() {
     <div className="App">
       {/* React-Bootstrap Navbar */}
       <AppNavbar />
+      <Orgpage/>
 
       <div
         className="main-content"

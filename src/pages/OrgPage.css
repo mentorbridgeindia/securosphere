@@ -1,0 +1,40 @@
+.card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 170vh; 
+    height: 95vh; 
+    margin: 50% auto ;
+    padding: 50;
+    background-color: #fcfcfc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    border-radius: 10px; 
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-top: 70px;
+    border-color: white;
+  }
+  h4{
+    color:rgb(22, 22, 141);
+  }
+  
+  .row{
+   margin-top:2%;
+  }
+  .label
+  {
+    margin-left:4px;
+    color:rgb(24, 10, 118);
+    font-family: Arial;
+    font-size:15px;
+  }
+.inputfield .label{
+  border: 1px solid #d30000;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 14px;
+}
+
+
+
+
