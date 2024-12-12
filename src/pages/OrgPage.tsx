@@ -18,12 +18,12 @@ function orgPage() {
             <Col sm={12} lg={10} >
               <Form.Group className="mb-3 " controlId="exampleForm.ControlInput1">
                 <Form.Label className="text-start d-block  label ">Organization Name</Form.Label>
-                <Form.Control type="text" placeholder="Enter Your Organization Name" />
+                <Form.Control type="text" className="inputfield" placeholder="Enter Your Organization Name" />
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                 <Form.Label className="text-start d-block label">Employee Count</Form.Label>
-                <Form.Select>
+                <Form.Select  className="inputfield" >
                   <option>Select</option>
                   <option>10-20</option>
                   <option>10-20</option>
@@ -31,11 +31,11 @@ function orgPage() {
               </Form.Group>
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                 <Form.Label className="ml-4 text-start d-block label">Website Url</Form.Label>
-                <Form.Control type="url" placeholder="Enter Your Website URL" />
+                <Form.Control type="url" className="inputfield" placeholder="Enter Your Website URL" />
               </Form.Group>
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                 <Form.Label className="text-start d-block label">Email address</Form.Label>
-                <Form.Control type="email" placeholder="name@example.com" />
+                <Form.Control type="email" className="inputfield" placeholder="name@example.com" />
               </Form.Group>
 
             </Col>
@@ -72,7 +72,7 @@ function orgPage() {
 
 
 
-export default orgPage
+export default orgPage;
 
 
 

@@ -27,12 +27,18 @@
     color:rgb(24, 10, 118);
     font-family: Arial;
     font-size:15px;
+    font-weight: 400  ;
   }
-.inputfield .label{
-  border: 1px solid #d30000;
+
+.inputfield{
+  border: 1px solid #f1efef;
   border-radius: 5px;
   padding: 10px;
-  font-size: 14px;
+  font-size: 12px;
+  margin-bottom: 25px;
+  background-color: rgb(241, 241, 255);
+
+
 }
 
 

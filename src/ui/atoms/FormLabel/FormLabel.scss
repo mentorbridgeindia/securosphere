@@ -1,0 +1,16 @@
+/* Label Styling */
+.label {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 8px;
+    display: block;
+    font-weight: 600;
+    text-align: left;
+}
+
+/* Accessibility Enhancements */
+input:disabled,
+.input:disabled {
+    background-color: #f4f4f4;
+    cursor: not-allowed;
+}
