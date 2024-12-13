@@ -1,0 +1,48 @@
+.status-label {
+  display: inline-flex;
+  padding: 2px 12px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 16px;
+  white-space: nowrap;
+  text-transform: capitalize;
+  cursor: default;
+  border-width: 1px;
+  border-style: solid;
+
+  &-primary {
+    background-color: #e7f1ff;
+    color: #007bff;
+    border-color: #007bff;
+  }
+
+  &-secondary {
+    background-color: #f4f4f4;
+    color: #6c757d;
+    border-color: #6c757d;
+  }
+
+  &-warning {
+    background-color: #fff3cd;
+    color: #856404;
+    border-color: #856404;
+  }
+
+  &-success {
+    background-color: #d4edda;
+    color: #155724;
+    border-color: #155724;
+  }
+
+  &-info {
+    background-color: #d1ecf1;
+    color: #0c5460;
+    border-color: #0c5460;
+  }
+
+  &-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border-color: #721c24;
+  }
+}
