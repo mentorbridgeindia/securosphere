@@ -30,16 +30,44 @@
     font-weight: 400  ;
   }
 
-.inputfield{
-  border: 1px solid #f1efef;
-  border-radius: 5px;
-  padding: 10px;
-  font-size: 12px;
-  margin-bottom: 25px;
-  background-color: rgb(241, 241, 255);
+  .inputfield {
+    border: 1px solid #ffffff;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 12px;
+    margin-bottom: 25px;
+    background-color: #f1f1ff;
+    color: rgb(189, 189, 189);
+  }
+  
+  .inputfield:hover {
+    background-color: #ffffff;
+    border-color: #002851;
+  }
+  .inputfield:active {
+    background-color: #ffffff;
+    box-shadow: 0; 
+    
+  }
 
+  .button{
+    background-color: #002851;
+    color:white;
+    border: 1px solid #002851;
+    width:200px;
 
-}
+  }
+  .button:hover{
+    color : #002851;
+    background-color:white;
+    border: 1px solid #002851;
+  }
+  .errormsg{
+    color:red;
+    font-size:12px;
+  }
+  
+  
 
 
 

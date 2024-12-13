@@ -9,10 +9,12 @@ import OrgPage from "./pages/OrgPage";
 function App() {
   return (
     <div className="App">
+       
       <AppNavbar />
+      <OrgPage/>
       <LoginForm />
       <ColorPaletteShowcase />
-      <OrgPage/>
+     
     </div>
   );
 }
