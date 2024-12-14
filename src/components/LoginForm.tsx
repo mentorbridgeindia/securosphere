@@ -1,11 +1,12 @@
 import React from "react";
 
-import { FormActionButtons } from "@ui/molecules/FormActionButtons";
 import { FormInput } from "@ui/atoms/FormInput/index";
 import { FormLabel } from "@ui/atoms/FormLabel/index";
 import { Anchor } from "@ui/atoms/Anchor/index";
+import { FormActionButtons } from "@ui/molecules/FormActionButtons";
 import { StatusLabel } from "@ui/atoms/StatusLabel/index";
 import { RoleLabel } from "@/ui/atoms/RoleLabel";
+import AvatarComponent from "@/ui/atoms/AvatarComponent/AvatarComponent";
 
 const handleSubmit = () => {
   alert("Form Submitted!");
@@ -68,6 +69,25 @@ const LoginForm = () => {
           <RoleLabel color="yellow">Junior</RoleLabel>
           <RoleLabel color="gray">Senior</RoleLabel>
           <RoleLabel color="brown">User</RoleLabel>
+        </div>
+        <br />
+        <div className="d-flex flex-column gap-2 align-items-center">
+          <AvatarComponent
+            src="https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-1.2.1&w=128&h=128&dpr=2&q=80"
+            alt="Pedro Duarte"
+            onClick={() => alert("Avatar clicked!")}
+            fallbackText="UA"
+          />
+          <AvatarComponent
+            src="https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?&w=128&h=128&dpr=2&q=80"
+            alt="Pedro Duarte"
+            onClick={() => alert("Avatar clicked!")}
+            fallbackText="UA"
+          />
+          <AvatarComponent
+            fallbackText="JA"
+            onClick={() => alert("Avatar clicked!")}
+          />
         </div>
       </form>
     </div>
