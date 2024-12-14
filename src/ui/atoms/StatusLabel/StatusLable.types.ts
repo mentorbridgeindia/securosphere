@@ -1,3 +1,4 @@
+import { PropsWithChildren } from "react";
 export type LabelType =
   | "primary"
   | "secondary"
@@ -6,7 +7,7 @@ export type LabelType =
   | "info"
   | "danger";
 
-export interface LabelProps {
+export interface LabelProps extends PropsWithChildren {
   children: React.ReactNode;
   type: LabelType;
 }
