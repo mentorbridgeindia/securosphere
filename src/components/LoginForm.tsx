@@ -5,6 +5,7 @@ import { FormInput } from "../ui/atoms/FormInput/index";
 import { FormLabel } from "../ui/atoms/FormLabel/index";
 import { Anchor } from "../ui/atoms/Anchor/index";
 import { StatusLabel } from "../ui/atoms/StatusLabel/index";
+import { RoleLabel } from "@/ui/atoms/RoleLabel";
 
 const handleSubmit = () => {
   alert("Form Submitted!");
@@ -47,26 +48,26 @@ const LoginForm = () => {
         <br />
         <h5>Status Labels </h5>
 
-        <div className="mb-2">
+        <div className="d-flex flex-column gap-2 align-items-center">
           <StatusLabel type="primary">Primary </StatusLabel>
-        </div>
-        <div className="mb-2">
           <StatusLabel type="secondary">Secondary </StatusLabel>
-        </div>
-        <div className="mb-2">
           <StatusLabel type="warning">Warning </StatusLabel>
-        </div>
-        <div className="mb-2">
           <StatusLabel type="success">Success </StatusLabel>
-        </div>
-        <div className="mb-2">
           <StatusLabel type="info">Info </StatusLabel>
-        </div>
-        <div className="mb-2">
           <StatusLabel type="danger">Danger </StatusLabel>
         </div>
-        <div>
-          <StatusLabel type="primary"> Jagan</StatusLabel>
+
+        <br />
+
+        <h5>Role labels</h5>
+
+        <div className="d-flex flex-column gap-2 align-items-center">
+          <RoleLabel type="admin">HR</RoleLabel>
+          <RoleLabel type="developer">Developer</RoleLabel>
+          <RoleLabel type="tester">Marketing</RoleLabel>
+          <RoleLabel type="junior">Junior</RoleLabel>
+          <RoleLabel type="senior">Senior</RoleLabel>
+          <RoleLabel type="user">User</RoleLabel>
         </div>
       </form>
     </div>

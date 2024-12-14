@@ -1,0 +1,41 @@
+.role-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px; 
+    font-size: 14px;
+    font-weight: bold;
+    white-space: nowrap;
+    cursor: default;
+  
+    .role-label-dot {
+      width: 4px; 
+      height: 4px;
+      border-radius: 50%; 
+      background-color: currentColor; 
+    }
+  
+    &-admin {
+      color: #d04646; 
+    }
+  
+    &-developer {
+      color: #548fcf; 
+    }
+  
+    &-tester {
+      color: #d0aa50; 
+    }
+  
+    &-senior {
+      color: #59935c; 
+    }
+  
+    &-junior {
+      color: #7a4b96; 
+    }
+  
+    &-user {
+      color: #546e7a; 
+    }
+  }
+  
