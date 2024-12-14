@@ -1,5 +1,3 @@
-
-
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -12,22 +10,22 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 
 const schema = yup.object().shape({
-  oname: yup
+  orgName: yup
     .string()
     .min(4, "Please enter a valid Organization Name")
     .required("Organization Name is required"),
-  ecount: yup
+    empCount: yup
     .string()
     .min(4, "Please enter at least 4 characters")
     .required("Employee Count is required"),
-    web: yup
+    website: yup
     .string()
     .min(4, "Please enter a valid Web address")
     .required("Employee Count is required"),
     domain: yup
     .string()
     .min(4, "Please enter a valid Domain Name")
-    .required("Employee Count is required"),
+    .required("Domain Name is required"),
 });
 
 
@@ -47,10 +45,10 @@ const schema = yup.object().shape({
   return (
     <div className="card">
       <Container>
-        <Form className="container" onSubmit={handleSubmit((data) => console.log(data))}>
+        <Form  onSubmit={handleSubmit((data: any) => console.log(data))}>
           <h4>Secure Your Site With SecuroSphere</h4>
           <Row>
-            <Col sm={12} lg={6}><img src="form.png" alt="form_image" /></Col>
+            <Col sm={0} lg={6}><img src="form1.png" alt="form_image" /></Col>
             <Col sm={12} lg={6} className="row">
 
               <Col sm={12} lg={10} >
@@ -58,48 +56,54 @@ const schema = yup.object().shape({
                   <Form.Label className="text-start d-block label">Organization Name</Form.Label>
                   <Form.Control
                     type="text"
-                    {...register("oname")}
+                    {...register("orgName")}
                     className="inputfield"
                     placeholder="Enter Your Organization Name"
                   />
-                   <p className="text-start d-block errormsg">{errors.oname?.message}</p>
+                   <p className="text-start d-block errormsg">{errors.orgName?.message}</p>
              
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                   <Form.Label className="text-start d-block label">Employee Count</Form.Label>
                   <Form.Select className="inputfield" 
-                  {...register("ecount")}>
+                  {...register("empCount")}>
                     <option>Select</option>
                     <option>10-20</option>
                     <option>10-20</option>
                   </Form.Select>
-                  <p>{errors.ecount?.message}</p>
+                  <p>{errors.empCount?.message}</p>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                   <Form.Label className="ml-4 text-start d-block label">Website Url</Form.Label>
-                  <Form.Control type="url" className="inputfield" {...register("web")} placeholder="Enter Your Website URL" />
-                  <p className="text-start d-block errormsg">{errors.web?.message}</p>
+                  <Form.Control type="url" className="inputfield" {...register("website")} placeholder="Enter Your Website URL" />
+                  <p className="text-start d-block errormsg">{errors.website?.message}</p>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                  <Form.Label className="text-start d-block label">Domain address</Form.Label>
-                  <Form.Control type="text" className="inputfield" {...register("domain")} placeholder="name@example.com" />
+                  <Form.Label className="text-start d-block label">Domain Name</Form.Label>
+                  <Form.Select className="inputfield" 
+                  {...register("domain")}>
+                    <option>Select</option>
+                    <option>Retail</option>
+                    <option>Banking</option>
+                    <option>Ecommerece</option>
+                    <option>Other</option>
+                  </Form.Select>
                   <p className=" text-start d-block errormsg">{errors.domain?.message}</p>
                 </Form.Group>
 
               </Col>
               <Row>
-                <Col lg={6} sm={12}>
+                <Col lg={6} sm={6}>
                  
                     <Button type="submit" className="button" disabled={isDirty && ! isValid}>Submit</Button>
-                 
 
-                </Col>
-                <Col lg={6} sm={12}>
-                  
-                    <Button type="reset" value="Reset" className="button" >Clear</Button>
-                 
-                </Col>
+                    
+                    </Col>
+                    <Col lg={6} sm={6}><Button type="reset" value="Reset" className="button" >Clear</Button>
+                    </Col>        
+
+
               </Row>
 
             </Col>
