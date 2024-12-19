@@ -1,7 +1,7 @@
 import LoginForm from "@components/LoginForm";
 import AppNavbar from "@components/Navbar";
 import "./App.scss";
-import ColorPaletteShowcase from "./components/Colors";
+import ColorPaletteShowcase from "@components/Colors";
 
 function App() {
   return (

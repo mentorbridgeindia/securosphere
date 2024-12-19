@@ -1,0 +1,1 @@
+export { AvatarComponent } from "./AvatarComponent";

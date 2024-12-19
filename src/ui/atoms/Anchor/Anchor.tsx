@@ -1,6 +1,7 @@
 import "./Anchor.scss";
+import { AnchorProps } from "./Anchor.types";
 
-export const Anchor = ({ children, href, className, ...rest }: any) => {
+export const Anchor = ({ children, href, className, ...rest }: AnchorProps) => {
   return (
     <a href={href} className={`anchor ${className || ""}`} {...rest}>
       {children}

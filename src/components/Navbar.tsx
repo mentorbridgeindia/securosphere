@@ -6,7 +6,7 @@ function AppNavbar() {
   return (
     <Navbar
       expand="lg"
-      style={{ backgroundColor: "#0D1F33" }}
+      style={{ backgroundColor: "#002851" }}
       className="navbar-dark shadow-lg"
     >
       <Container>
