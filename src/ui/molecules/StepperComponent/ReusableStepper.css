@@ -1,0 +1,112 @@
+.stepper-container {
+    width: 60%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.stepper-nav {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    align-items: center;
+}
+
+.stepper-progress-line {
+    position: absolute;
+    top: 70%;
+    transform: translateY(-50%);
+    left: 0;
+    right: 0;
+    height: 4px;
+    background-color: #ddd;
+    border-radius: 8px;
+    z-index: 0;
+}
+
+.stepper-content{
+    margin: 70px 0px;
+}
+.stepper-progress-line-active {
+    position: absolute;
+    top: 70%;
+    transform: translateY(-50%);
+    left: 0;
+    height: 4px;
+    background-color: #002851;
+    border-radius: 8px;
+    z-index: 1;
+}
+
+.stepper-step {
+    text-align: center;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.step-count {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 14px;
+    transition: background-color 0.3s;
+}
+
+.step-label {
+    display: flex;
+    color: #333;
+    font-size: 14px;
+    white-space: nowrap;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@media (max-width: 768px) {
+    .step-label {
+        font-size: 12px;
+        max-width: 60px;
+    }
+}
+
+.stepper-step.step-active .step-count {
+    background-color: #002851;
+}
+
+.stepper-step.step-disabled .step-count {
+    background-color: #888;
+}
+
+.stepper-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.stepper-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #002851;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.stepper-btn:disabled {
+    background-color: #bbb;
+    cursor: not-allowed;
+}
+
+.stepper-btn:hover:not(:disabled) {
+    background-color: #004080;
+}
