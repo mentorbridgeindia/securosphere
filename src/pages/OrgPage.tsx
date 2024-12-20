@@ -1,129 +1,122 @@
+import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import "./OrgPage.css";
-import { yupResolver } from "@hookform/resolvers/yup";
-import React from "react";
-import { useForm } from "react-hook-form";
+import { Form, Button } from 'react-bootstrap';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
+// import { Variable } from './Register.types';
+import { FormLabel } from '@/ui/atoms/FormLabel';
+
 
 const schema = yup.object().shape({
   orgName: yup
     .string()
     .min(4, "Please enter a valid Organization Name")
     .required("Organization Name is required"),
-    empCount: yup
+  empCount: yup
     .string()
     .min(4, "Please enter at least 4 characters")
     .required("Employee Count is required"),
-    website: yup
+  website: yup
     .string()
     .min(4, "Please enter a valid Web address")
     .required("Employee Count is required"),
-    domain: yup
+  domain: yup
     .string()
     .min(4, "Please enter a valid Domain Name")
     .required("Domain Name is required"),
 });
-
-
-
-
-
-  export const OrgPage: React.FC = () => {
-    const {
-      register,
-      handleSubmit,
-      formState: { errors, isValid, isDirty },
-    } = useForm({
-      resolver: yupResolver(schema),
-      mode: "onChange",
-    });
-  
+export const OrgPage: React.FC = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid, isDirty },
+  } = useForm({
+    resolver: yupResolver(schema),
+    mode: "onChange",
+  });
   return (
-    <div className="card">
-      <Container>
-        <Form  onSubmit={handleSubmit((data: any) => console.log(data))}>
-          <h4>Secure Your Site With SecuroSphere</h4>
-          <Row>
-            <Col sm={0} lg={6}><img src="form1.png" alt="form_image" /></Col>
-            <Col sm={12} lg={6} className="row">
+    <Container fluid className="d-flex justify-content-center align-items-center mb-4" >
+      <Row className="w-100">
+        {/* Left Section */}
 
-              <Col sm={12} lg={10} >
-                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                  <Form.Label className="text-start d-block label">Organization Name</Form.Label>
-                  <Form.Control
+        <Col lg={6} className="d-none d-lg-flex justify-content-center align-items-center">
+          <video width="700" height="700" autoPlay muted loop>
+            <source src="Data Security.mp4"></source>
+          </video>
+
+        </Col>
+
+        {/* Right Section */}
+
+        <Col lg={6} xs={12} className="d-flex justify-content-center align-items-center mt-4 mb-4 "  >
+          <div className="p-4 shadow rounded position-relative card-with-corners rounded-4 "
+            style={{
+              maxWidth: '100%',
+              marginLeft: 'auto',
+              marginRight: 'auto',
+            }}
+          >
+             <Form onSubmit={handleSubmit((data: any) => console.log(data))} >
+              <h4 className="text-center vh-20 mt-3 mb-5" style={{ color: "#0c0a7e" }}> Secure Your Site With SecuroSphere</h4>
+              <Col xs={12} lg={12}>
+                <Form.Group>
+                  <FormLabel>Organization Name</FormLabel>
+                  <Form.Control style={{ backgroundColor: "#f1f1ff", borderColor: "#ffffff" }}
                     type="text"
                     {...register("orgName")}
-                    className="inputfield"
-                    placeholder="Enter Your Organization Name"
-                  />
-                   <p className="text-start d-block errormsg">{errors.orgName?.message}</p>
-             
+                    className=" mb-3" />
+                    <p className="text-start d-block text-danger ml-4 d-flex">{errors.orgName?.message}</p>
                 </Form.Group>
-
-                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                  <Form.Label className="text-start d-block label">Employee Count</Form.Label>
-                  <Form.Select className="inputfield" 
-                  {...register("empCount")}>
-                    <option>Select</option>
-                    <option>10-20</option>
-                    <option>10-20</option>
-                  </Form.Select>
-                  <p>{errors.empCount?.message}</p>
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                  <Form.Label className="ml-4 text-start d-block label">Website Url</Form.Label>
-                  <Form.Control type="url" className="inputfield" {...register("website")} placeholder="Enter Your Website URL" />
-                  <p className="text-start d-block errormsg">{errors.website?.message}</p>
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                  <Form.Label className="text-start d-block label">Domain Name</Form.Label>
-                  <Form.Select className="inputfield" 
-                  {...register("domain")}>
-                    <option>Select</option>
-                    <option>Retail</option>
-                    <option>Banking</option>
-                    <option>Ecommerece</option>
-                    <option>Other</option>
-                  </Form.Select>
-                  <p className=" text-start d-block errormsg">{errors.domain?.message}</p>
-                </Form.Group>
-
               </Col>
-              <Row>
-                <Col lg={6} sm={6}>
-                 
-                    <Button type="submit" className="button" disabled={isDirty && ! isValid}>Submit</Button>
+              <Form.Group>
+                <FormLabel >Employee Count</FormLabel>
+                <Form.Select className="mb-3" style={{ backgroundColor: "#f1f1ff", borderColor: "#ffffff" }}
+                  {...register("empCount")}>
+                  <option></option>
+                  <option>0-10</option>
+                  <option>10-20</option>
+                  <option>20-30</option>
+                </Form.Select>
 
-                    
-                    </Col>
-                    <Col lg={6} sm={6}><Button type="reset" value="Reset" className="button" >Clear</Button>
-                    </Col>        
+                <p className="text-start d-block text-danger ml-4 d-flex">{errors.empCount?.message}</p>
+              </Form.Group>
 
+              <Form.Group>
+                <FormLabel  >Webiste Url</FormLabel>
+                <Form.Control style={{ backgroundColor: "#f1f1ff", borderColor: "#ffffff" }}
+                  type="text"
+                  {...register("website")}
+                  className=" mb-4" />
 
-              </Row>
+                <p className="text-start d-block text-danger mb-4 ">{errors.website?.message}</p>
+              </Form.Group>
 
-            </Col>
-          </Row>
-        </Form>
-      </Container>
-    </div>
-  )
-}
+              <Form.Group>
+                <FormLabel>Domain Name</FormLabel>
+                <Form.Select className="mb-4 " style={{ backgroundColor: "#f1f1ff", borderColor: "#ffffff" }}
+                  {...register("domain")}>
+                  <option></option>
+                  <option>Retail</option>
+                  <option>Banking</option>
+                  <option>Ecommerece</option>
+                  <option>Other</option>
+                </Form.Select>
+                <p className="text-start d-block text-danger ml-4 d-flex">{errors.domain?.message}</p>
+              </Form.Group>
+              <Button type="submit" className="w-100" style={{ backgroundColor: "#0c0a7e", borderColor: "#ffffff" }} disabled={isDirty && !isValid}>Submit</Button>
+            </Form>
+          </div>
 
+        </Col>
+      </Row>
+    </Container>
 
+  );
 
-
-
-
-
-
-
-
-
+};
 
 export default OrgPage;
 
