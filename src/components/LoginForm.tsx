@@ -7,10 +7,6 @@ import { FormActionButtons } from "@ui/molecules/FormActionButtons";
 import { StatusLabel } from "@ui/atoms/StatusLabel/index";
 import { RoleLabel } from "@/ui/atoms/RoleLabel";
 import { AvatarComponent } from "@/ui/atoms/AvatarComponent/AvatarComponent";
-import { ReusableStepper } from "@/ui/molecules/StepperComponent";
-import StepOne from "@/ui/molecules/StepperComponent/StepOne";
-import StepTwo from "@/ui/molecules/StepperComponent/StepTwo";
-import StepThree from "@/ui/molecules/StepperComponent/StepThree";
 
 const handleSubmit = () => {
   alert("Form Submitted!");
@@ -21,11 +17,6 @@ const handleCancel = () => {
 };
 
 const LoginForm = () => {
-  const steps1 = [
-    { component: StepOne, label: "Organization config" },
-    { component: StepTwo, label: "Signin page preview" },
-    { component: StepThree, label: "Domain details" },
-  ];
   return (
     <>
       <div className="d-flex justify-content-center align-items-center vh-10 mt-5">
@@ -106,9 +97,6 @@ const LoginForm = () => {
       </div>
       <br />
       <br />
-      <div>
-        <ReusableStepper steps={steps1} />
-      </div>
     </>
   );
 };
