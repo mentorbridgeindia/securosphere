@@ -7,6 +7,9 @@ import { FormActionButtons } from "@ui/molecules/FormActionButtons";
 import { StatusLabel } from "@ui/atoms/StatusLabel/index";
 import { RoleLabel } from "@/ui/atoms/RoleLabel";
 import AvatarComponent from "@/ui/atoms/AvatarComponent/AvatarComponent";
+import StepOne from "@/ui/molecules/StepperComponent/StepOne";
+import StepTwo from "@/ui/molecules/StepperComponent/StepTwo";
+import StepThree from "@/ui/molecules/StepperComponent/StepThree";
 
 const handleSubmit = () => {
   alert("Form Submitted!");
@@ -17,6 +20,11 @@ const handleCancel = () => {
 };
 
 const LoginForm = () => {
+  const steps1 = [
+    { component: StepOne, label: "Organization config" },
+    { component: StepTwo, label: "Signin page preview" },
+    { component: StepThree, label: "Domain details" },
+  ];
   return (
     <div className="d-flex justify-content-center align-items-center vh-10 mt-5">
       <form className="p-4 rounded shadow bg-white" style={{ width: "300px" }}>
@@ -38,6 +46,24 @@ const LoginForm = () => {
 
         <div className="d-flex justify-content-between mb-3">
           <Anchor href="/forgot-password">Forgot Password?</Anchor>
+        </div>
+
+        <FormActionButtons
+          onSubmit={handleSubmit}
+          onCancel={handleCancel}
+          primaryLabel={"Submit"}
+          secondaryLabel={"Cancel"}
+        />
+        <br />
+        <h5>Status Labels </h5>
+
+        <div className="d-flex flex-column gap-2 align-items-center">
+          <StatusLabel type="primary">Work </StatusLabel>
+          <StatusLabel type="secondary">Secondary </StatusLabel>
+          <StatusLabel type="warning">Warning </StatusLabel>
+          <StatusLabel type="success">Success </StatusLabel>
+          <StatusLabel type="info">Info </StatusLabel>
+          <StatusLabel type="danger">Danger </StatusLabel>
         </div>
 
         <FormActionButtons
