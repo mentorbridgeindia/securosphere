@@ -24,6 +24,8 @@
     "react-ga4": "^2.1.0",
     "react-icons": "^5.4.0",
     "react-scripts": "5.0.1",
+    "react-social-login-buttons": "^4.1.0",
+    "reactjs-social-login": "^2.6.3",
     "sass": "^1.82.0",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"

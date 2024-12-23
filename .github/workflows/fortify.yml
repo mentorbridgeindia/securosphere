@@ -23,7 +23,11 @@ on:
     # The branches below must be a subset of the branches above
     branches: [ "main" ]
   schedule:
+<<<<<<< HEAD
     - cron: '19 21 * * 5'
+=======
+    - cron: '16 16 * * 6'
+>>>>>>> 9aa124427795fadcca7aafd74cb6281f8016444f
   workflow_dispatch:
 
 jobs:

@@ -18,8 +18,49 @@ export const SENTRY_CONFIG = {
   replaysOnErrorSampleRate: 1.0, // Sample 100% of error sessions
 };
 
-export const POSTHOG_API_KEY = "phc_eFeQpd7dcjjWbt32ZljvIBOSoXIrSb7E8eJtTrWVpiK";
+export const POSTHOG_API_KEY =
+  "phc_eFeQpd7dcjjWbt32ZljvIBOSoXIrSb7E8eJtTrWVpiK";
 export const POSTHOG_API_CONFIG = {
   api_host: "https://eu.i.posthog.com",
   person_profiles: "identified_only",
 };
+
+// OAuth and API credentials for multiple providers
+export const PROVIDER_FACEBOOK_APP_ID =
+  process.env.REACT_APP_PROVIDER_FACEBOOK_APP_ID || "";
+export const PROVIDER_FACEBOOK_APP_SECRET =
+  process.env.REACT_APP_PROVIDER_FACEBOOK_APP_SECRET || "";
+
+export const PROVIDER_GOOGLE_CLIENT_ID =
+  process.env.REACT_APP_PROVIDER_GOOGLE_CLIENT_ID || "";
+export const PROVIDER_GOOGLE_CLIENT_SECRET =
+  process.env.REACT_APP_PROVIDER_GOOGLE_CLIENT_SECRET || "";
+
+export const PROVIDER_TWITTER_API_KEY =
+  process.env.REACT_APP_PROVIDER_TWITTER_API_KEY || "";
+export const PROVIDER_TWITTER_API_SECRET =
+  process.env.REACT_APP_PROVIDER_TWITTER_API_SECRET || "";
+
+export const PROVIDER_GITHUB_CLIENT_ID =
+  process.env.REACT_APP_PROVIDER_GITHUB_CLIENT_ID || "";
+export const PROVIDER_GITHUB_CLIENT_SECRET =
+  process.env.REACT_APP_PROVIDER_GITHUB_CLIENT_SECRET || "";
+
+// Default avatar image URL
+export const DEFAULT_AVATAR_URL =
+  process.env.REACT_APP_DEFAULT_AVATAR_URL ||
+  "";
+
+// API URLs or endpoints
+export const API_BASE_URL =
+  process.env.REACT_APP_API_BASE_URL || "https://your-api-base-url.com";
+export const API_AUTH_URL =
+  process.env.REACT_APP_API_AUTH_URL || "https://your-api-base-url.com/auth";
+export const API_PROFILE_URL =
+  process.env.REACT_APP_API_PROFILE_URL ||
+  "https://your-api-base-url.com/profile";
+
+// Frontend base URL (if needed for routing or linking)
+export const FRONTEND_BASE_URL =
+  process.env.REACT_APP_FRONTEND_BASE_URL || "https://your-frontend-url.com";
+
