@@ -187,27 +187,7 @@ const SocialLogin = () => {
         >
           <GithubLoginButton />
         </LoginSocialGithub>
-        <LoginSocialPinterest
-          client_id={process.env.REACT_APP_PINTEREST_APP_ID || ""}
-          client_secret={process.env.REACT_APP_PINTEREST_APP_SECRET || ""}
-          redirect_uri={REDIRECT_URI}
-          onLoginStart={onLoginStart}
-          onResolve={({ provider, data }: IResolveParams) => {
-            setProvider(provider);
-            setProfile(data);
-          }}
-          onReject={(err: any) => {
-            console.log(err);
-          }}
-          className="pinterest-btn"
-        >
-          <div className="content">
-            <div className="icon">
-              <PinterestLogo />
-            </div>
-            <span className="txt">Login With Pinterest</span>
-          </div>
-        </LoginSocialPinterest>
+   
 
         <LoginSocialTwitter
           client_id={process.env.REACT_APP_TWITTER_V2_APP_KEY || ""}

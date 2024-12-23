@@ -36,6 +36,21 @@ export const PROVIDER_GOOGLE_CLIENT_ID =
 export const PROVIDER_GOOGLE_CLIENT_SECRET =
   process.env.REACT_APP_PROVIDER_GOOGLE_CLIENT_SECRET || "";
 
+export const PROVIDER_APPLE_APP_ID =
+  process.env.REACT_APP_PROVIDER_FACEBOOK_APP_ID || "";
+export const PROVIDER_APPLE_APP_SECRET =
+  process.env.REACT_APP_PROVIDER_FACEBOOK_APP_SECRET || "";
+
+export const PROVIDER_INSTAGRAM_APP_ID =
+  process.env.REACT_APP_PROVIDER_FACEBOOK_APP_ID || "";
+export const PROVIDER_INSTAGRAM_APP_SECRET =
+  process.env.REACT_APP_PROVIDER_FACEBOOK_APP_SECRET || "";
+
+export const PROVIDER_MICROSOFT_APP_ID =
+  process.env.REACT_APP_PROVIDER_FACEBOOK_APP_ID || "";
+export const PROVIDER_MICROSOFT_APP_SECRET =
+  process.env.REACT_APP_PROVIDER_FACEBOOK_APP_SECRET || "";
+
 export const PROVIDER_TWITTER_API_KEY =
   process.env.REACT_APP_PROVIDER_TWITTER_API_KEY || "";
 export const PROVIDER_TWITTER_API_SECRET =
@@ -46,10 +61,19 @@ export const PROVIDER_GITHUB_CLIENT_ID =
 export const PROVIDER_GITHUB_CLIENT_SECRET =
   process.env.REACT_APP_PROVIDER_GITHUB_CLIENT_SECRET || "";
 
+export const PROVIDER_GITLAB_APP_ID =
+  process.env.REACT_APP_PROVIDER_FACEBOOK_APP_ID || "";
+export const PROVIDER_GITLAB_APP_SECRET =
+  process.env.REACT_APP_PROVIDER_FACEBOOK_APP_SECRET || "";
+
+export const PROVIDER_LINKEDIN_APP_ID =
+  process.env.REACT_APP_PROVIDER_FACEBOOK_APP_ID || "";
+export const PROVIDER_LINKEDIN_APP_SECRET =
+  process.env.REACT_APP_PROVIDER_FACEBOOK_APP_SECRET || "";
+
 // Default avatar image URL
 export const DEFAULT_AVATAR_URL =
-  process.env.REACT_APP_DEFAULT_AVATAR_URL ||
-  "";
+  process.env.REACT_APP_DEFAULT_AVATAR_URL || "";
 
 // API URLs or endpoints
 export const API_BASE_URL =
@@ -63,4 +87,3 @@ export const API_PROFILE_URL =
 // Frontend base URL (if needed for routing or linking)
 export const FRONTEND_BASE_URL =
   process.env.REACT_APP_FRONTEND_BASE_URL || "https://your-frontend-url.com";
-
