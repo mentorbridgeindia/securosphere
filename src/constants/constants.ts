@@ -17,73 +17,29 @@ export const SENTRY_CONFIG = {
   replaysSessionSampleRate: 0.1, // Sample rate at 10%
   replaysOnErrorSampleRate: 1.0, // Sample 100% of error sessions
 };
-
-export const POSTHOG_API_KEY =
-  "phc_eFeQpd7dcjjWbt32ZljvIBOSoXIrSb7E8eJtTrWVpiK";
+export const POSTHOG_API_KEY = "YOUR_POSTHOG_API_KEY";
 export const POSTHOG_API_CONFIG = {
-  api_host: "https://eu.i.posthog.com",
-  person_profiles: "identified_only",
+  api_host: "https://app.posthog.com", // Example API host, you can modify this as per your needs
+  // Other PostHog config options
 };
+// constants.ts
+export const REDIRECT_URI =
+  "https://plenty-planets-beam-42-118-51-2.loca.lt/account/login";
+// or for local development
+// export const REDIRECT_URI = 'http://localhost:3000/account/login';
 
-// OAuth and API credentials for multiple providers
-export const PROVIDER_FACEBOOK_APP_ID =
-  process.env.REACT_APP_PROVIDER_FACEBOOK_APP_ID || "";
-export const PROVIDER_FACEBOOK_APP_SECRET =
-  process.env.REACT_APP_PROVIDER_FACEBOOK_APP_SECRET || "";
-
-export const PROVIDER_GOOGLE_CLIENT_ID =
-  process.env.REACT_APP_PROVIDER_GOOGLE_CLIENT_ID || "";
-export const PROVIDER_GOOGLE_CLIENT_SECRET =
-  process.env.REACT_APP_PROVIDER_GOOGLE_CLIENT_SECRET || "";
-
-export const PROVIDER_APPLE_APP_ID =
-  process.env.REACT_APP_PROVIDER_FACEBOOK_APP_ID || "";
-export const PROVIDER_APPLE_APP_SECRET =
-  process.env.REACT_APP_PROVIDER_FACEBOOK_APP_SECRET || "";
-
-export const PROVIDER_INSTAGRAM_APP_ID =
-  process.env.REACT_APP_PROVIDER_FACEBOOK_APP_ID || "";
-export const PROVIDER_INSTAGRAM_APP_SECRET =
-  process.env.REACT_APP_PROVIDER_FACEBOOK_APP_SECRET || "";
-
-export const PROVIDER_MICROSOFT_APP_ID =
-  process.env.REACT_APP_PROVIDER_FACEBOOK_APP_ID || "";
-export const PROVIDER_MICROSOFT_APP_SECRET =
-  process.env.REACT_APP_PROVIDER_FACEBOOK_APP_SECRET || "";
-
-export const PROVIDER_TWITTER_API_KEY =
-  process.env.REACT_APP_PROVIDER_TWITTER_API_KEY || "";
-export const PROVIDER_TWITTER_API_SECRET =
-  process.env.REACT_APP_PROVIDER_TWITTER_API_SECRET || "";
-
-export const PROVIDER_GITHUB_CLIENT_ID =
-  process.env.REACT_APP_PROVIDER_GITHUB_CLIENT_ID || "";
-export const PROVIDER_GITHUB_CLIENT_SECRET =
-  process.env.REACT_APP_PROVIDER_GITHUB_CLIENT_SECRET || "";
-
-export const PROVIDER_GITLAB_APP_ID =
-  process.env.REACT_APP_PROVIDER_FACEBOOK_APP_ID || "";
-export const PROVIDER_GITLAB_APP_SECRET =
-  process.env.REACT_APP_PROVIDER_FACEBOOK_APP_SECRET || "";
-
-export const PROVIDER_LINKEDIN_APP_ID =
-  process.env.REACT_APP_PROVIDER_FACEBOOK_APP_ID || "";
-export const PROVIDER_LINKEDIN_APP_SECRET =
-  process.env.REACT_APP_PROVIDER_FACEBOOK_APP_SECRET || "";
-
-// Default avatar image URL
-export const DEFAULT_AVATAR_URL =
-  process.env.REACT_APP_DEFAULT_AVATAR_URL || "";
-
-// API URLs or endpoints
-export const API_BASE_URL =
-  process.env.REACT_APP_API_BASE_URL || "https://your-api-base-url.com";
-export const API_AUTH_URL =
-  process.env.REACT_APP_API_AUTH_URL || "https://your-api-base-url.com/auth";
-export const API_PROFILE_URL =
-  process.env.REACT_APP_API_PROFILE_URL ||
-  "https://your-api-base-url.com/profile";
-
-// Frontend base URL (if needed for routing or linking)
-export const FRONTEND_BASE_URL =
-  process.env.REACT_APP_FRONTEND_BASE_URL || "https://your-frontend-url.com";
+// constants.ts
+export const SOCIAL_LOGIN_IDS = {
+  FACEBOOK_APP_ID: "your-facebook-app-id",
+  GOOGLE_CLIENT_ID: "your-google-client-id",
+  APPLE_CLIENT_ID: "your-apple-client-id",
+  AMAZON_CLIENT_ID: "your-amazon-client-id",
+  INSTAGRAM_APP_ID: "your-instagram-app-id",
+  INSTAGRAM_APP_SECRET: "your-instagram-app-secret",
+  MICROSOFT_APP_ID: "your-microsoft-app-id",
+  LINKEDIN_APP_ID: "your-linkedin-app-id",
+  LINKEDIN_APP_SECRET: "your-linkedin-app-secret",
+  GITHUB_APP_ID: "your-github-app-id",
+  GITHUB_APP_SECRET: "your-github-app-secret", // Add this line
+  TWITTER_V2_APP_KEY: "your-twitter-v2-app-key",
+};

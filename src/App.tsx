@@ -4,6 +4,7 @@ import FinalSetup from "./pages/FinalSetup";
 import { ReusableStepper } from "./ui/molecules/StepperComponent";
 import SignUpOptions from "./pages/SignUpOptions";
 import SocialLogin from "./components/SocialLogin";
+import ErrorBoundary from "./ErrorBoundary";
 
 function App() {
   const steps = [
@@ -12,8 +13,10 @@ function App() {
   ];
   return (
     <div className="App">
-      <AppNavbar />
-      <SocialLogin />
+      <ErrorBoundary>
+        <AppNavbar />
+        <SocialLogin />
+      </ErrorBoundary>
     </div>
   );
 }
