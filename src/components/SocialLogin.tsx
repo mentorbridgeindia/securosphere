@@ -32,7 +32,7 @@ const REDIRECT_URI =
   "https://plenty-planets-beam-42-118-51-2.loca.lt/account/login";
 // const REDIRECT_URI = 'http://localhost:3000/account/login'
 
-const App = () => {
+const SocialLogin = () => {
   const [provider, setProvider] = useState("");
   const [profile, setProfile] = useState<any>();
 
@@ -230,4 +230,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default SocialLogin;
