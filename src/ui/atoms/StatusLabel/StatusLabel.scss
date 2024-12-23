@@ -1,0 +1,50 @@
+@import "../colors.scss";
+
+.status-label {
+  display: inline-flex;
+  padding: 2px 12px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 16px;
+  white-space: nowrap;
+  text-transform: capitalize;
+  cursor: default;
+  border-width: 1px;
+  border-style: solid;
+
+  &-primary {
+    background-color: $primary-bg;
+    color: $primary;
+    border-color: $primary;
+  }
+
+  &-secondary {
+    background-color: $secondary-bg;
+    color: $secondary;
+    border-color: $secondary;
+  }
+
+  &-warning {
+    background-color: $warning-bg;
+    color: $warning;
+    border-color: $warning;
+  }
+
+  &-success {
+    background-color: $success-bg;
+    color: $success;
+    border-color: $success;
+  }
+
+  &-info {
+    background-color: $info-bg;
+    color: $info;
+    border-color: $info;
+  }
+
+  &-danger {
+    background-color: $danger-bg;
+    color: $danger;
+    border-color: $danger;
+  }
+}

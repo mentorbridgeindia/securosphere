@@ -1,5 +1,5 @@
 import "./FormInput.scss";
-
-export const FormInput = ({ className, ...rest }: any) => {
-  return <input className={`input ${className || ""}`} {...rest} />;
+import { FormInputProps } from "./FormInput.types";
+export const FormInput = ({ className, ...rest }: FormInputProps) => {
+  return <input className={`form-input ${className || ""}`} {...rest} />;
 };

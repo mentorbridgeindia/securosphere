@@ -1,0 +1,42 @@
+@import "../colors.scss";
+
+.role-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+  font-weight: bold;
+  white-space: nowrap;
+  cursor: default;
+
+  .role-label-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: currentColor;
+  }
+
+  &-red {
+    color: $red;
+  }
+
+  &-blue {
+    color: $blue;
+  }
+
+  &-green {
+    color: $green;
+  }
+
+  &-yellow {
+    color: $yellow;
+  }
+
+  &-gray {
+    color: $gray;
+  }
+
+  &-brown {
+    color: $brown;
+  }
+}
