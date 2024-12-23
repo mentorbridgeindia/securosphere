@@ -1,5 +1,5 @@
 .stepper-container {
-    width: 60%;
+    width: 70%;
     margin: 0 auto;
     padding: 20px;
 }
@@ -23,9 +23,9 @@
     z-index: 0;
 }
 
-.stepper-content{
+/* .stepper-content{
     margin: 70px 0px;
-}
+} */
 .stepper-progress-line-active {
     position: absolute;
     top: 70%;
