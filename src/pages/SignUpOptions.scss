@@ -1,0 +1,42 @@
+.signup-options-container {
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+.custom-button {
+  background-color: #002851 !important;
+  border-color: #002851 !important;
+}
+
+.custom-switch .form-check-input:checked {
+  background-color: #002851 !important;
+  border-color: #002851 !important;
+}
+
+.social-btn {
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 8px !important;
+  padding: 0 !important;
+  border: 1px solid #dddbdb !important;
+  margin: 2px;
+}
+
+.social-btn:hover {
+  background-color: #f7f7f7 !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.password-toggle-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #ffffff;
+  margin-top: -8px;
+}
+
+.hover-bg-light:hover {
+  background-color: rgba(0, 0, 0, 0.02);
+}

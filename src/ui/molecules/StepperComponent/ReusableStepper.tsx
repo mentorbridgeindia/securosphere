@@ -1,7 +1,7 @@
 import React from "react";
 import { useStepper } from "headless-stepper";
 import { ReusableStepperProps } from "./ReusableStepper.types";
-import "./ReusableStepper.css";
+import "./ReusableStepper.scss";
 
 export const ReusableStepper = ({ steps }: ReusableStepperProps) => {
   const { state, nextStep, prevStep, stepsProps, stepperProps } = useStepper({
