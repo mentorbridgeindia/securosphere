@@ -2,7 +2,7 @@ import React from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { Form, Button, FormLabel } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -12,8 +12,7 @@ import { toast } from "react-toastify";
 import { LoginData } from "./Login.types";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FormActionButtons } from "@/ui/molecules/FormActionButtons";
-
-
+import { FormLabel } from "@/ui/atoms/FormLabel";
 
 const schema = yup.object().shape({
   email: yup.string().email("Invalid email").required("Please enter an email"),
@@ -73,16 +72,17 @@ export const Login = () => {
           className="d-none d-lg-flex justify-content-center align-items-center"
         >
           <img
-            src="image.jpg"
+            src="loginpageimg.jpg"
             alt="Logo"
-            className="w-100 h-100"
+            className="img-fluid"
             style={{
               objectFit: "cover",
-              objectPosition: "center",
+              objectPosition: "center center",
+              width: "70%",
+              maxHeight: "70%",
             }}
           />
         </Col>
-
         <Col
           lg={6}
           xs={12}
@@ -169,6 +169,7 @@ export const Login = () => {
                   </Form.Control.Feedback>
                 )}
               </Form.Group>
+              <br />
               <Form.Group>
                 <FormLabel>Password</FormLabel>
                 <Form.Control
@@ -202,3 +203,4 @@ export const Login = () => {
     </Container>
   );
 };
+export default Login;
