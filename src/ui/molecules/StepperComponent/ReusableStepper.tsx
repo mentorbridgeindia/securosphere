@@ -1,14 +1,30 @@
+// ReusableStepper.tsx
+
 import React from "react";
 import { useStepper } from "headless-stepper";
 import { ReusableStepperProps } from "./ReusableStepper.types";
 import "./ReusableStepper.scss";
 
-export const ReusableStepper = ({ steps }: ReusableStepperProps) => {
+export const ReusableStepper = ({ steps, onSubmit }: ReusableStepperProps) => {
   const { state, nextStep, prevStep, stepsProps, stepperProps } = useStepper({
     steps,
   });
 
   const progressWidth = `${((state.currentStep + 1) / steps.length) * 100}%`;
+
+  // Check if the current step is the last step
+  const isLastStep = state.currentStep === steps.length - 1;
+
+  const handleNext = () => {
+    if (isLastStep) {
+      // Trigger the submit logic if it's the last step
+      if (onSubmit) {
+        onSubmit();
+      }
+    } else {
+      nextStep();
+    }
+  };
 
   return (
     <div className="stepper-container">
@@ -49,14 +65,13 @@ export const ReusableStepper = ({ steps }: ReusableStepperProps) => {
         >
           Prev
         </button>
+
         <button
           className="stepper-btn"
-          onClick={nextStep}
-          disabled={
-            !state.hasNextStep || steps[state.currentStep + 1]?.disabled
-          }
+          onClick={handleNext}
+          disabled={steps[state.currentStep + 1]?.disabled}
         >
-          Next
+          {isLastStep ? "Submit" : "Next"}
         </button>
       </div>
     </div>

@@ -1,7 +1,7 @@
 // StepTwo.tsx
 import React from "react";
 
-const StepTwo: React.FC = () => {
+const StepTwo = () => {
   return (
     <div>
       <h2>Content for Step 2</h2>
