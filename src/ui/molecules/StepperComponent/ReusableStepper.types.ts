@@ -1,5 +1,7 @@
+import { ReactNode } from "react";
+
 export interface Step {
-  component: React.ElementType;
+  component: ReactNode;
   label: string;
   disabled?: boolean;
 }

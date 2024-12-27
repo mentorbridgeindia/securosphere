@@ -1,18 +1,22 @@
+import { LoginCallbackConfig } from "@modules/LoginCallbackConfig";
+import { SignUpConfig } from "@modules/SignUpConfig";
 import { ReusableStepper } from "@molecules/StepperComponent";
-import FinalSetup from "./FinalSetup";
-import SignUpOptions from "./SignUpOptions";
 
 export const AuthConfiguration = () => {
-  const steps = [
-    { label: "Sign-up Options", component: SignUpOptions, disabled: false },
-    { label: "Final Setup", component: FinalSetup, disabled: false },
-  ];
-
-  const handleSubmit = () => {
+  const onFinalSubmit = () => {
     console.log("Form submitted!");
-    // You can perform the final actions, such as API calls or validation
-    // Example: sendDataToApi();
   };
 
-  return <ReusableStepper steps={steps} onSubmit={handleSubmit} />;
+  const steps = [
+    {
+      label: "Sign up Configuration",
+      component: <SignUpConfig />,
+    },
+    {
+      label: "Login Callback Configuration",
+      component: <LoginCallbackConfig />,
+    },
+  ];
+
+  return <ReusableStepper steps={steps} onSubmit={onFinalSubmit} />;
 };

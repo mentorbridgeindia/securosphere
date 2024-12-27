@@ -1,7 +1,6 @@
-import React, { useState } from "react";
-import { Form, Row, Col } from "react-bootstrap";
+import { useState } from "react";
+import { Col, Form, FormLabel, Row } from "react-bootstrap";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { FormInput } from "@/ui/atoms/FormInput";
 
 const SignUpForm = () => {
   const [firstName, setFirstName] = useState("");
@@ -14,7 +13,9 @@ const SignUpForm = () => {
       <Row className="mb-3">
         <Col>
           <Form.Group>
-            <FormInput
+            <FormLabel>First Name</FormLabel>
+            <Form.Control
+              className="mt-2"
               type="text"
               placeholder="First Name"
               value={firstName}
@@ -24,7 +25,9 @@ const SignUpForm = () => {
         </Col>
         <Col>
           <Form.Group>
-            <FormInput
+            <FormLabel>Last Name</FormLabel>
+            <Form.Control
+              className="mt-2"
               type="text"
               placeholder="Last Name"
               value={lastName}
@@ -35,33 +38,50 @@ const SignUpForm = () => {
       </Row>
 
       <Form.Group className="mb-3">
-        <FormInput type="email" placeholder="Email Address" />
+        <FormLabel>Email</FormLabel>
+        <Form.Control
+          className="mt-2"
+          type="email"
+          placeholder="Email Address"
+        />
       </Form.Group>
 
       <Form.Group className="position-relative mb-3">
-        <FormInput
+        <FormLabel>Password</FormLabel>
+        <Form.Control
           type={showPassword ? "text" : "password"}
+          className="mt-2"
           placeholder="Password"
         />
-        <div
-          className="password-toggle-icon"
+        <button
+          type="button"
+          className="password-toggle-icon empty-btn"
           onClick={() => setShowPassword(!showPassword)}
+          aria-label={showPassword ? "Hide password" : "Show password"}
         >
           {showPassword ? <FaEyeSlash /> : <FaEye />}
-        </div>
+        </button>
       </Form.Group>
 
       <Form.Group className="position-relative mb-3">
-        <FormInput
+        <FormLabel>Confirm Password</FormLabel>
+        <Form.Control
           type={showConfirmPassword ? "text" : "password"}
+          className="mt-2"
           placeholder="Confirm Password"
         />
-        <div
-          className="password-toggle-icon"
+        <button
+          type="button"
+          className="password-toggle-icon empty-btn"
           onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+          aria-label={
+            showConfirmPassword
+              ? "Hide confirm password"
+              : "Show confirm password"
+          }
         >
           {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
-        </div>
+        </button>
       </Form.Group>
     </>
   );

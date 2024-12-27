@@ -1,8 +1,7 @@
+import { FormLabel } from "@atoms/FormLabel";
 import React from "react";
 import { Card, Form, Stack } from "react-bootstrap";
-import { FormLabel } from "@/ui/atoms/FormLabel";
-import { FormInput } from "@/ui/atoms/FormInput";
-import { ICONS, renderIcon } from "../utils";
+import { SocialLoginIcons } from "./SocialLoginIcons";
 
 interface SignUpOptionsCardProps {
   appName: string;
@@ -37,18 +36,18 @@ const SignUpOptionsCard = ({
   };
 
   return (
-    <Card className="shadow-sm">
+    <Card className="shadow-sm px-2">
       <Card.Body>
         <h4 className="fs-4 mb-2">Configure Sign Up Options</h4>
-        <p className="text-muted small mb-4">
-          Customize sign up settings. You can modify these later in the
-          dashboard.
+        <p className="text-muted fs-8 mb-2">
+          Customize sign up settings. You can modify these later.
         </p>
 
         <Form>
           <Form.Group className="mb-4">
             <FormLabel>Application Name</FormLabel>
-            <FormInput
+            <Form.Control
+              className="mt-2"
               type="text"
               placeholder="Enter application name"
               value={appName}
@@ -65,19 +64,15 @@ const SignUpOptionsCard = ({
                   className="d-flex justify-content-between align-items-center p-2 rounded hover-bg-light mb-2"
                 >
                   <div className="d-flex align-items-center gap-3">
-                    {renderIcon(ICONS[option])}
+                    {SocialLoginIcons[option]}
                     <span className="fw-medium">
                       {option.charAt(0).toUpperCase() + option.slice(1)}
                     </span>
                   </div>
                   <Form.Check
                     type="switch"
-                    checked={
-                      signupOptions[option as keyof typeof signupOptions]
-                    }
-                    onChange={() =>
-                      handleOptionToggle(option as keyof typeof signupOptions)
-                    }
+                    checked={signupOptions[option]}
+                    onChange={() => handleOptionToggle(option)}
                     className="custom-switch"
                   />
                 </div>

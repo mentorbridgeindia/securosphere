@@ -19,10 +19,10 @@ const handleCancel = () => {
 };
 
 const ComponentsList = () => {
-  const steps1 = [
-    { component: StepOne, label: "Organization config" },
-    { component: StepTwo, label: "Signin page preview" },
-    { component: StepThree, label: "Domain details" },
+  const   steps1 = [
+    { component: <StepOne />, label: "Organization config" },
+    { component: <StepTwo />, label: "Signin page preview" },
+    { component: <StepThree />, label: "Domain details" },
   ];
 
   const statusLabels = [

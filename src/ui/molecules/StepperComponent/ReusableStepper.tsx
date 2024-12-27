@@ -1,9 +1,6 @@
-// ReusableStepper.tsx
-
-import React from "react";
 import { useStepper } from "headless-stepper";
-import { ReusableStepperProps } from "./ReusableStepper.types";
 import "./ReusableStepper.scss";
+import { ReusableStepperProps } from "./ReusableStepper.types";
 
 export const ReusableStepper = ({ steps, onSubmit }: ReusableStepperProps) => {
   const { state, nextStep, prevStep, stepsProps, stepperProps } = useStepper({
@@ -36,13 +33,13 @@ export const ReusableStepper = ({ steps, onSubmit }: ReusableStepperProps) => {
         ></div>
         {stepsProps.map((_step, index) => (
           <div
-            key={index}
+            key={steps[index].label}
             className={`stepper-step ${
               steps[index].disabled ? "step-disabled" : ""
             } ${state.currentStep === index ? "step-active" : ""}`}
           >
             <div className="step-count">{index + 1}</div>
-            <span className="step-label">{steps[index].label}</span>
+            <div className="step-label">{steps[index].label}</div>
           </div>
         ))}
       </nav>
@@ -53,7 +50,7 @@ export const ReusableStepper = ({ steps, onSubmit }: ReusableStepperProps) => {
             This step is currently disabled.
           </p>
         ) : (
-          React.createElement(steps[state.currentStep].component)
+          steps[state.currentStep].component
         )}
       </div>
 
