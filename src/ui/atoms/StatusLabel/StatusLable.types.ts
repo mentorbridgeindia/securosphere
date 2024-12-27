@@ -8,6 +8,5 @@ export type LabelType =
   | "danger";
 
 export interface LabelProps extends PropsWithChildren {
-  children: React.ReactNode;
-  type: LabelType;
+  readonly type: LabelType;
 }

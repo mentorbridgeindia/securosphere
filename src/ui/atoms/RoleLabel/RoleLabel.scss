@@ -1,10 +1,10 @@
-@import "../colors.scss";
+@import "../../../colors.scss";
 
 .role-label {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: bold;
   white-space: nowrap;
   cursor: default;

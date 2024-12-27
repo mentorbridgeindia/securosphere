@@ -1,10 +1,11 @@
-import React from "react";
 import "./StatusLabel.scss";
 import { LabelProps } from "./StatusLable.types";
 
-export function StatusLabel({ type, children }: LabelProps) {
+export function StatusLabel(props: Readonly<LabelProps>) {
   return (
-    <span className={`status-label status-label-${type}`}>{children}</span>
+    <span className={`status-label status-label-${props.type}`}>
+      {props.children}
+    </span>
   );
 }
 

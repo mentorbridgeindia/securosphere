@@ -1,11 +1,11 @@
-@import "../colors.scss";
+@import "../../../colors.scss";
 
 .status-label {
   display: inline-flex;
   padding: 2px 12px;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: bold;
-  border-radius: 16px;
+  border-radius: 5px;
   white-space: nowrap;
   text-transform: capitalize;
   cursor: default;
