@@ -1,19 +1,18 @@
 // Import dependencies
-import React, { useState } from "react";
+import { Anchor } from "@/ui/atoms/Anchor";
+import { FormLabel } from "@/ui/atoms/FormLabel";
+import { useState } from "react";
 import {
-  Container,
-  Row,
-  Col,
-  Form,
   Button,
   Card,
+  Col,
+  Container,
+  Form,
+  Row,
   Stack,
 } from "react-bootstrap";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "./SignUpOptions.scss";
-import { FormLabel } from "@/ui/atoms/FormLabel";
-import { FormInput } from "@/ui/atoms/FormInput";
-import { Anchor } from "@/ui/atoms/Anchor";
 
 // Define types
 interface SignUpOptionsState {
@@ -121,8 +120,7 @@ const SignUpOptions = () => {
               <Form>
                 <Form.Group className="mb-4">
                   <FormLabel>Application Name</FormLabel>
-                  <FormInput
-                    type="text"
+                  <Form.Control
                     placeholder="Enter application name"
                     value={appName}
                     onChange={(e) => setAppName(e.target.value)}
@@ -219,7 +217,7 @@ const SignUpOptions = () => {
               <Row className="mb-3">
                 <Col>
                   <Form.Group>
-                    <FormInput
+                    <Form.Control
                       type="text"
                       placeholder="First Name"
                       value={firstName}
@@ -229,7 +227,7 @@ const SignUpOptions = () => {
                 </Col>
                 <Col>
                   <Form.Group>
-                    <FormInput
+                    <Form.Control
                       type="text"
                       placeholder="Last Name"
                       value={lastName}
@@ -241,12 +239,12 @@ const SignUpOptions = () => {
 
               {signupOptions.email && (
                 <Form.Group className="mb-3">
-                  <FormInput type="email" placeholder="Email Address" />
+                  <Form.Control type="email" placeholder="Email Address" />
                 </Form.Group>
               )}
 
               <Form.Group className="position-relative mb-3">
-                <FormInput
+                <Form.Control
                   type={showPassword ? "text" : "password"}
                   placeholder="Password"
                 />
@@ -259,7 +257,7 @@ const SignUpOptions = () => {
               </Form.Group>
 
               <Form.Group className="position-relative mb-3">
-                <FormInput
+                <Form.Control
                   type={showConfirmPassword ? "text" : "password"}
                   placeholder="Confirm Password"
                 />

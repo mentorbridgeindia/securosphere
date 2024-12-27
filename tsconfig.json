@@ -30,7 +30,8 @@
       "@services/*": ["services/*"],
       "@types/*": ["types/*"],
       "@assets/*": ["assets/*"],
-      "@styles/*": ["styles/*"]
+      "@styles/*": ["styles/*"],
+      "@modules/*": ["modules/*"]
     }
   },
   "include": ["src"]

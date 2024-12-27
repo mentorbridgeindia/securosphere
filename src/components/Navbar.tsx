@@ -10,16 +10,16 @@ function AppNavbar() {
       className="navbar-dark shadow-lg"
     >
       <Container>
-        <Navbar.Brand href="#home" className="fs-3 fw-bold text-light">
+        <Navbar.Brand href="/" className="fs-3 fw-bold text-light">
           SecuroSphere
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
-            <Nav.Link href="#home" className="text-light me-3 fs-5">
+            <Nav.Link href="/" className="text-light me-3">
               Signup
             </Nav.Link>
-            <Nav.Link href="#login" className="text-light me-3 fs-5">
+            <Nav.Link href="/login" className="text-light me-3">
               Login
             </Nav.Link>
           </Nav>

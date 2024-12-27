@@ -17,6 +17,7 @@ $theme-colors: map-merge(
 );
 
 @import "bootstrap/scss/bootstrap.scss";
+@import "./anchor.scss";
 @import "https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap";
 
 html {
@@ -34,8 +35,8 @@ body {
 }
 
 svg {
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
 }
 
 ::placeholder {
@@ -112,40 +113,6 @@ input[type="number"] {
   text-overflow: ellipsis;
 }
 
-a {
-  font-size: 14px;
-  color: $primary;
-  cursor: pointer;
-  display: inline-block;
-  padding: 5px 0;
-  position: relative;
-  text-decoration: none;
-  font-weight: 500;
-
-  &:hover {
-    text-decoration: none;
-  }
-
-  &::after {
-    background-color: $info;
-    bottom: 0;
-    content: "";
-    height: 1px;
-    left: 0;
-    position: absolute;
-    right: 0;
-    transform: scaleX(0);
-    transition: transform 0.8s;
-    width: 100%;
-  }
-
-  &:hover::after {
-    transform: scaleX(1);
-  }
-
-  @extend .truncate;
-}
-
 .cm-editor,
 .cm-scroller {
   border-radius: 10px;
@@ -164,4 +131,26 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.fs-7 {
+  font-size: 14px !important;
+}
+
+.fs-8 {
+  font-size: 12px !important;
+}
+
+.social-login {
+  svg {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.brand-lg {
+  svg {
+    width: 150px;
+    height: 100px;
+  }
 }

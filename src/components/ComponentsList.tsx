@@ -1,7 +1,4 @@
-import { Anchor } from "@atoms/Anchor/index";
 import AvatarComponent from "@atoms/AvatarComponent/AvatarComponent";
-import { FormInput } from "@atoms/FormInput/index";
-import { FormLabel } from "@atoms/FormLabel/index";
 import { RoleLabel } from "@atoms/RoleLabel";
 import { StatusLabel } from "@atoms/StatusLabel/index";
 import { LabelType } from "@atoms/StatusLabel/StatusLable.types";
@@ -9,6 +6,9 @@ import { FormActionButtons } from "@molecules/FormActionButtons";
 import StepOne from "@molecules/StepperComponent/StepOne";
 import StepThree from "@molecules/StepperComponent/StepThree";
 import StepTwo from "@molecules/StepperComponent/StepTwo";
+import { ReusableStepper } from "../ui/molecules/StepperComponent";
+import Col from "react-bootstrap/esm/Col";
+import Row from "react-bootstrap/esm/Row";
 
 const handleSubmit = () => {
   alert("Form Submitted!");
@@ -18,7 +18,7 @@ const handleCancel = () => {
   alert("Form Cancelled!");
 };
 
-const LoginForm = () => {
+const ComponentsList = () => {
   const steps1 = [
     { component: StepOne, label: "Organization config" },
     { component: StepTwo, label: "Signin page preview" },
@@ -35,32 +35,35 @@ const LoginForm = () => {
   ];
 
   return (
-    <div className="d-flex flex-column justify-content-start align-items-start vh-10 mt-5">
-      <h5 className="float-start">Status Labels </h5>
-      <br />
+    <div>
+      <Row>
+        <Col>
+          <h5 className="float-start">Status Labels </h5>
+          <br />
+          <br />
+          <div className="d-flex flex-column gap-2 align-items-start justify-content-center">
+            {statusLabels.map((status) => (
+              <StatusLabel key={status.type} type={status.type as LabelType}>
+                {status.label}
+              </StatusLabel>
+            ))}
+          </div>
+        </Col>
+        <Col>
+          <h5 className="float-start">Role labels</h5>
+          <br />
+          <br />
 
-      <div className="d-flex flex-column gap-2 align-items-start justify-content-center">
-        {statusLabels.map((status) => (
-          <StatusLabel key={status.type} type={status.type as LabelType}>
-            {status.label}
-          </StatusLabel>
-        ))}
-      </div>
-
-      <br />
-
-      <h5 className="float-start">Role labels</h5>
-      <br />
-
-      <div className="d-flex flex-column gap-2 align-items-start justify-content-center">
-        <RoleLabel color="red">HR</RoleLabel>
-        <RoleLabel color="blue">Developer</RoleLabel>
-        <RoleLabel color="green">Marketing</RoleLabel>
-        <RoleLabel color="yellow">Junior</RoleLabel>
-        <RoleLabel color="gray">Senior</RoleLabel>
-        <RoleLabel color="brown">User</RoleLabel>
-      </div>
-      <br />
+          <div className="d-flex flex-column gap-2 align-items-start justify-content-center">
+            <RoleLabel color="red">HR</RoleLabel>
+            <RoleLabel color="blue">Developer</RoleLabel>
+            <RoleLabel color="green">Marketing</RoleLabel>
+            <RoleLabel color="yellow">Junior</RoleLabel>
+            <RoleLabel color="gray">Senior</RoleLabel>
+            <RoleLabel color="brown">User</RoleLabel>
+          </div>
+        </Col>
+      </Row>
       <div className="d-flex flex-column gap-2 align-items-start justify-content-center">
         <h5 className="float-start">Avatars</h5>
         <br />
@@ -87,9 +90,11 @@ const LoginForm = () => {
           secondaryLabel={"Cancel"}
         />
         <br />
+
+        <ReusableStepper steps={steps1} />
       </div>
     </div>
   );
 };
 
-export default LoginForm;
+export default ComponentsList;
