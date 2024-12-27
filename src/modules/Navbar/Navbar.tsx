@@ -1,25 +1,20 @@
+import { ReactComponent as IconLogo } from "@assets/icons/logo-inverted.svg";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import "./Navbar.scss";
 
-function AppNavbar() {
+export const AppNavbar = () => {
   return (
-    <Navbar
-      expand="lg"
-      style={{ backgroundColor: "#002851" }}
-      className="navbar-dark shadow-lg"
-    >
+    <Navbar expand="lg" className="navbar-dark shadow-lg bg-primary">
       <Container>
-        <Navbar.Brand href="#home" className="fs-3 fw-bold text-light">
-          SecuroSphere
+        <Navbar.Brand href="/" className="brand">
+          <IconLogo />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
-            <Nav.Link href="#home" className="text-light me-3 fs-5">
-              Signup
-            </Nav.Link>
-            <Nav.Link href="#login" className="text-light me-3 fs-5">
+            <Nav.Link href="/login" className="text-light me-3">
               Login
             </Nav.Link>
           </Nav>
@@ -27,6 +22,4 @@ function AppNavbar() {
       </Container>
     </Navbar>
   );
-}
-
-export default AppNavbar;
+};
