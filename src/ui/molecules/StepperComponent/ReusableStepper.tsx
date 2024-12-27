@@ -1,14 +1,27 @@
-import React from "react";
 import { useStepper } from "headless-stepper";
-import { ReusableStepperProps } from "./ReusableStepper.types";
 import "./ReusableStepper.scss";
+import { ReusableStepperProps } from "./ReusableStepper.types";
 
-export const ReusableStepper = ({ steps }: ReusableStepperProps) => {
+export const ReusableStepper = ({ steps, onSubmit }: ReusableStepperProps) => {
   const { state, nextStep, prevStep, stepsProps, stepperProps } = useStepper({
     steps,
   });
 
   const progressWidth = `${((state.currentStep + 1) / steps.length) * 100}%`;
+
+  // Check if the current step is the last step
+  const isLastStep = state.currentStep === steps.length - 1;
+
+  const handleNext = () => {
+    if (isLastStep) {
+      // Trigger the submit logic if it's the last step
+      if (onSubmit) {
+        onSubmit();
+      }
+    } else {
+      nextStep();
+    }
+  };
 
   return (
     <div className="stepper-container">
@@ -20,13 +33,13 @@ export const ReusableStepper = ({ steps }: ReusableStepperProps) => {
         ></div>
         {stepsProps.map((_step, index) => (
           <div
-            key={index}
+            key={steps[index].label}
             className={`stepper-step ${
               steps[index].disabled ? "step-disabled" : ""
             } ${state.currentStep === index ? "step-active" : ""}`}
           >
             <div className="step-count">{index + 1}</div>
-            <span className="step-label">{steps[index].label}</span>
+            <div className="step-label">{steps[index].label}</div>
           </div>
         ))}
       </nav>
@@ -37,7 +50,7 @@ export const ReusableStepper = ({ steps }: ReusableStepperProps) => {
             This step is currently disabled.
           </p>
         ) : (
-          React.createElement(steps[state.currentStep].component)
+          steps[state.currentStep].component
         )}
       </div>
 
@@ -49,14 +62,13 @@ export const ReusableStepper = ({ steps }: ReusableStepperProps) => {
         >
           Prev
         </button>
+
         <button
           className="stepper-btn"
-          onClick={nextStep}
-          disabled={
-            !state.hasNextStep || steps[state.currentStep + 1]?.disabled
-          }
+          onClick={handleNext}
+          disabled={steps[state.currentStep + 1]?.disabled}
         >
-          Next
+          {isLastStep ? "Submit" : "Next"}
         </button>
       </div>
     </div>

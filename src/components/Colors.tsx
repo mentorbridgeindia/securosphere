@@ -1,6 +1,6 @@
 import React from "react";
 
-const ColorPaletteShowcase: React.FC = () => {
+const ColorPaletteShowcase = () => {
   return (
     <div
       style={{
