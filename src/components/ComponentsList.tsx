@@ -35,7 +35,7 @@ const ComponentsList = () => {
   ];
 
   return (
-    <div>
+    <div className="mt-3">
       <Row>
         <Col>
           <h5 className="float-start">Status Labels </h5>

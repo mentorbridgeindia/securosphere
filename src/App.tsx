@@ -1,4 +1,4 @@
-import AppNavbar from "@components/Navbar";
+import { AppNavbar } from "@modules/Navbar";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import { Container } from "react-bootstrap";
