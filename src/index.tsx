@@ -6,6 +6,7 @@ import ReactGA from "react-ga4";
 import App from "./App";
 import "./index.scss";
 import reportWebVitals from "./reportWebVitals";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 
 // Import constants
 import {
@@ -35,6 +36,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <ErrorBoundary>
+      <SpeedInsights />
       <App />
     </ErrorBoundary>
   </React.StrictMode>
