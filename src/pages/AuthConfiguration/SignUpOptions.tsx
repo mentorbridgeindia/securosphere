@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
-import SignUpOptionsCard from "../components/configurationPage/SignUpOptionsCard";
-import SignUpForm from "../components/configurationPage/SignUpForm";
-import SocialSignUp from "../components/configurationPage/SocialSignUp";
+import SignUpOptionsCard from "../../components/configurationPage/SignUpOptionsCard";
+import SignUpForm from "../../components/configurationPage/SignUpForm";
+import SocialSignUp from "../../components/configurationPage/SocialSignUp";
 import { Anchor } from "@/ui/atoms/Anchor";
 import "./SignUpOptions.scss";
 const SignUpOptions = () => {
