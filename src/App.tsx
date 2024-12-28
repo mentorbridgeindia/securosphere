@@ -7,6 +7,7 @@ import { Container } from "react-bootstrap";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.scss";
 import ComponentsList from "./components/ComponentsList";
+import Register from "./pages/Register";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
       </Container>
       <SpeedInsights />
       <Analytics />
+      <Register />
     </div>
   );
 }
