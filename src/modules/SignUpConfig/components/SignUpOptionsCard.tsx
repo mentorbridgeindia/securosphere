@@ -23,6 +23,13 @@ const SignUpOptionsCard = ({
   setErrorMessage,
 }: SignUpOptionsCardProps) => {
   const handleOptionToggle = (option: keyof typeof signupOptions) => {
+    const enabledOptions = Object.values(signupOptions).filter(Boolean).length;
+
+    // If only one option is enabled, toggling it off
+    if (enabledOptions === 1 && signupOptions[option]) {
+      return;
+    }
+
     setSignupOptions((prevOptions) => {
       const updatedOptions = { ...prevOptions, [option]: !prevOptions[option] };
       const hasSelectedOption = Object.values(updatedOptions).some(
@@ -58,25 +65,38 @@ const SignUpOptionsCard = ({
           <div className="signup-options-container">
             <h6 className="mb-3">Select Sign Up Methods</h6>
             <Stack>
-              {Object.keys(signupOptions).map((option) => (
-                <div
-                  key={option}
-                  className="d-flex justify-content-between align-items-center p-2 rounded hover-bg-light mb-2"
-                >
-                  <div className="d-flex align-items-center gap-3">
-                    {SocialLoginIcons[option]}
-                    <span className="fw-medium">
-                      {option.charAt(0).toUpperCase() + option.slice(1)}
-                    </span>
+              {Object.keys(signupOptions).map((option) => {
+                const isOnlyOption =
+                  Object.values(signupOptions).filter(Boolean).length === 1 &&
+                  signupOptions[option];
+
+                return (
+                  <div
+                    key={option}
+                    className={`d-flex justify-content-between align-items-center p-2 rounded ${
+                      isOnlyOption ? "bg-light" : "hover-bg-light"
+                    } mb-2`}
+                  >
+                    <div className="d-flex align-items-center gap-3">
+                      {SocialLoginIcons[option]}
+                      <span
+                        className={`fw-medium ${
+                          isOnlyOption ? "text-muted" : ""
+                        }`}
+                      >
+                        {option.charAt(0).toUpperCase() + option.slice(1)}
+                      </span>
+                    </div>
+                    <Form.Check
+                      type="switch"
+                      checked={signupOptions[option]}
+                      onChange={() => handleOptionToggle(option)}
+                      disabled={isOnlyOption}
+                      className="custom-switch"
+                    />
                   </div>
-                  <Form.Check
-                    type="switch"
-                    checked={signupOptions[option]}
-                    onChange={() => handleOptionToggle(option)}
-                    className="custom-switch"
-                  />
-                </div>
-              ))}
+                );
+              })}
             </Stack>
           </div>
 
