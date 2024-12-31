@@ -9,7 +9,7 @@ import { schema } from "./ForgotPasswordSchema";
 import { ForgotPasswordData } from "./ForgotPassword.types";
 
 export const ForgotPasswordForm = () => {
-  const [submitted, setSubmitted] = useState(false); // State to track submission
+  const [submitted, setSubmitted] = useState(false); 
   const {
     register,
     handleSubmit,
