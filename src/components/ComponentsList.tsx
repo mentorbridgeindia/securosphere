@@ -3,12 +3,12 @@ import { RoleLabel } from "@atoms/RoleLabel";
 import { StatusLabel } from "@atoms/StatusLabel/index";
 import { LabelType } from "@atoms/StatusLabel/StatusLable.types";
 import { FormActionButtons } from "@molecules/FormActionButtons";
-import StepOne from "@molecules/StepperComponent/StepOne";
-import StepThree from "@molecules/StepperComponent/StepThree";
-import StepTwo from "@molecules/StepperComponent/StepTwo";
 import { ReusableStepper } from "../ui/molecules/StepperComponent";
 import Col from "react-bootstrap/esm/Col";
 import Row from "react-bootstrap/esm/Row";
+import StepOne from "@/ui/molecules/StepperComponent/StepOne";
+import StepTwo from "@/ui/molecules/StepperComponent/StepTwo";
+import StepThree from "@/ui/molecules/StepperComponent/StepThree";
 
 const handleSubmit = () => {
   alert("Form Submitted!");
