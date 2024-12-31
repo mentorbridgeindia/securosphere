@@ -1,13 +1,13 @@
 import { ReactComponent as IconLogo } from "@assets/icons/logo.svg";
-import { LoginForm } from "@modules/LoginForm";
+import { RegisterForm } from "@modules/RegisterForm";
 import { SocialLogin } from "@modules/SocialLogin";
 import { Card } from "react-bootstrap";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
-export const Login = () => {
+export const Register = () => {
   return (
-    <div className="d-flex align-items-center justify-content-center">
+    <div className="d-flex align-items-center justify-content-center my-2 mt-5">
       <Row className="w-100 center">
         <Col
           lg={7}
@@ -24,7 +24,6 @@ export const Login = () => {
           xs={12}
           md={10}
           className="d-flex align-items-center justify-content-center"
-          style={{ height: "100vh", paddingBottom: "150px" }}
         >
           <Card className="p-4 shadow rounded w-100">
             <div className="d-flex justify-content-center brand-lg">
@@ -39,7 +38,7 @@ export const Login = () => {
               <hr />
             </div>
             <div className="mt-3">
-              <LoginForm />
+              <RegisterForm />
             </div>
           </Card>
         </Col>

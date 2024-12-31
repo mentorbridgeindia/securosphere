@@ -1,12 +1,12 @@
+import StepOne from "@/ui/molecules/Stepper/StepOne";
+import StepThree from "@/ui/molecules/Stepper/StepThree";
+import StepTwo from "@/ui/molecules/Stepper/StepTwo";
 import AvatarComponent from "@atoms/AvatarComponent/AvatarComponent";
 import { RoleLabel } from "@atoms/RoleLabel";
 import { StatusLabel } from "@atoms/StatusLabel/index";
 import { LabelType } from "@atoms/StatusLabel/StatusLable.types";
 import { FormActionButtons } from "@molecules/FormActionButtons";
-import StepOne from "@molecules/StepperComponent/StepOne";
-import StepThree from "@molecules/StepperComponent/StepThree";
-import StepTwo from "@molecules/StepperComponent/StepTwo";
-import { ReusableStepper } from "../ui/molecules/StepperComponent";
+import { Stepper } from "@molecules/Stepper";
 import Col from "react-bootstrap/esm/Col";
 import Row from "react-bootstrap/esm/Row";
 
@@ -19,7 +19,7 @@ const handleCancel = () => {
 };
 
 const ComponentsList = () => {
-  const   steps1 = [
+  const steps1 = [
     { component: <StepOne />, label: "Organization config" },
     { component: <StepTwo />, label: "Signin page preview" },
     { component: <StepThree />, label: "Domain details" },
@@ -91,7 +91,7 @@ const ComponentsList = () => {
         />
         <br />
 
-        <ReusableStepper steps={steps1} />
+        <Stepper steps={steps1} />
       </div>
     </div>
   );

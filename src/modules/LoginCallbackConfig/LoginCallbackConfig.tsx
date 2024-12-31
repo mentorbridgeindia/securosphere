@@ -1,59 +1,86 @@
 import { ReactComponent as IconPlus } from "@assets/icons/icon-plus.svg";
 import { ReactComponent as IconTrash } from "@assets/icons/icon-trash.svg";
 import { FormLabel } from "@atoms/FormLabel";
+import { useAtom } from "jotai";
 import { useState } from "react";
 import { Card, Col, Form, Row } from "react-bootstrap";
+import { toast } from "react-toastify";
+import { loginCallbackConfigAtom } from "./atoms/loginCallbackConfigAtom";
+import { LoginCallbackConfigState } from "./LoginCallbackConfig.types";
 
 export const LoginCallbackConfig = () => {
-  const [setup, setSetup] = useState<{
-    logo: string;
-    origins: string[];
-    callbackUrl: string;
-  }>({
-    logo: "",
-    origins: [""],
-    callbackUrl: "",
+  const [loginCallbackConfig, setLoginCallbackConfig] = useAtom(
+    loginCallbackConfigAtom
+  );
+  console.log(
+    "loginCallbackConfig in LoginCallbackConfig",
+    loginCallbackConfig
+  );
+  const [setup, setSetup] = useState<LoginCallbackConfigState>({
+    orgName: loginCallbackConfig?.orgName || "",
+    website: loginCallbackConfig?.website || "",
+    orgLogo: loginCallbackConfig?.orgLogo || "",
+    authorizedOrigins: loginCallbackConfig?.authorizedOrigins || [""],
+    callbackUrl: loginCallbackConfig?.callbackUrl || "",
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setSetup((prev) => ({ ...prev, [name]: value }));
+    setLoginCallbackConfig(setup);
   };
 
   const handleUpdateOrigins = (index: number, value: string) => {
     setSetup((prev) => ({
       ...prev,
-      origins: prev.origins.map((origin, i) => (i === index ? value : origin)),
+      authorizedOrigins: prev.authorizedOrigins.map((origin, i) =>
+        i === index ? value : origin
+      ),
     }));
+    setLoginCallbackConfig(setup);
   };
 
   const handleAddOrigin = () => {
-    const isFilled = setup.origins.every((origin) => origin.trim() !== "");
+    const isFilled = setup.authorizedOrigins.every(
+      (origin) => origin.trim() !== ""
+    );
     if (isFilled) {
-      setSetup((prev) => ({ ...prev, origins: [...prev.origins, ""] }));
+      setSetup((prev) => ({
+        ...prev,
+        authorizedOrigins: [...prev.authorizedOrigins, ""],
+      }));
+      setLoginCallbackConfig(setup);
     }
   };
 
   const handleRemoveOrigin = (index: number) => {
     setSetup((prev) => ({
       ...prev,
-      origins: prev.origins.filter((_, i) => i !== index),
+      authorizedOrigins: prev.authorizedOrigins.filter((_, i) => i !== index),
     }));
+    setLoginCallbackConfig(setup);
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(setup);
+    setLoginCallbackConfig(setup);
   };
 
   const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, files } = e.target;
     if (files && files.length > 0) {
       const file = files[0];
+      if (
+        (file.type !== "image/png" && file.type !== "image/jpeg") ||
+        file.size > 3000000
+      ) {
+        toast.error("Please upload a PNG or JPEG file");
+        return;
+      }
       const reader = new FileReader();
       reader.onloadend = () => {
         setSetup((prev) => ({ ...prev, [name]: reader.result }));
-        console.log(reader.result);
+        setLoginCallbackConfig(setup);
       };
       reader.readAsDataURL(file);
     }
@@ -65,23 +92,43 @@ export const LoginCallbackConfig = () => {
         <Col md={6}>
           <Card className="p-4 shadow-sm w-100">
             <Form onSubmit={handleSubmit} noValidate>
-              <Form.Group controlId="domain">
+              <Form.Group controlId="domain" className="mb-3">
+                <FormLabel>Organization Name</FormLabel>
+                <Form.Control
+                  className="mt-2"
+                  type="text"
+                  name="orgName"
+                  onChange={handleChange}
+                  value={setup.orgName}
+                />
+              </Form.Group>
+              <Form.Group controlId="domain" className="mb-3">
+                <FormLabel>Organization Website</FormLabel>
+                <Form.Control
+                  className="mt-2"
+                  type="text"
+                  name="website"
+                  onChange={handleChange}
+                  value={setup.website}
+                />
+              </Form.Group>
+              <Form.Group controlId="domain" className="mb-3">
                 <FormLabel>Organization Logo</FormLabel>
                 <Form.Control
                   className="mt-2"
                   type="file"
-                  name="logo"
+                  name="orgLogo"
                   onChange={handleUpload}
                 />
               </Form.Group>
-              <Form.Group controlId="website" className="mt-3">
+              <Form.Group controlId="website" className="mb-3">
                 <FormLabel className="d-flex align-items-center justify-content-between">
                   <div>Authorized Origins</div>
                   <button className="ms-2 empty-btn" onClick={handleAddOrigin}>
                     <IconPlus />
                   </button>
                 </FormLabel>
-                {setup.origins.map((origin, index) => (
+                {setup.authorizedOrigins.map((origin, index) => (
                   <div className="d-flex align-items-center" key={index}>
                     <Form.Control
                       className="mt-2"
@@ -94,7 +141,7 @@ export const LoginCallbackConfig = () => {
                         handleUpdateOrigins(index, e.target.value)
                       }
                     />
-                    {setup.origins.length > 1 && (
+                    {setup.authorizedOrigins.length > 1 && (
                       <button
                         className="ms-2 empty-btn text-danger"
                         onClick={() => handleRemoveOrigin(index)}
@@ -105,7 +152,7 @@ export const LoginCallbackConfig = () => {
                   </div>
                 ))}
               </Form.Group>
-              <Form.Group controlId="callbackUrls" className="mt-3">
+              <Form.Group controlId="callbackUrls" className="mb-3">
                 <FormLabel className="d-flex align-items-center justify-content-start">
                   Callback URL
                 </FormLabel>

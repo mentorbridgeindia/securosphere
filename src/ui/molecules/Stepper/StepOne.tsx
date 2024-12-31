@@ -1,5 +1,4 @@
 // StepOne.tsx
-import React from "react";
 
 const StepOne = () => {
   return (

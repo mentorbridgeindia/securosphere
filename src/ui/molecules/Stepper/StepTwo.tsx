@@ -1,10 +1,9 @@
-// StepThree.tsx
-import React from "react";
+// StepTwo.tsx
 
-const StepThree = () => {
+const StepTwo = () => {
   return (
     <div>
-      <h2>Content for Step 3</h2>
+      <h2>Content for Step 2</h2>
       <br />
       <p>
         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consectetur
@@ -25,4 +24,4 @@ const StepThree = () => {
   );
 };
 
-export default StepThree;
+export default StepTwo;
