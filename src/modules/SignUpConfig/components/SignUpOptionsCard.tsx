@@ -1,6 +1,6 @@
 import { FormLabel } from "@atoms/FormLabel";
-import React from "react";
-import { Card, Form, Stack } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Card, Form, Stack, Button } from "react-bootstrap";
 import { SocialLoginIcons } from "./SocialLoginIcons";
 
 interface SignUpOptionsCardProps {
@@ -22,24 +22,39 @@ const SignUpOptionsCard = ({
   errorMessage,
   setErrorMessage,
 }: SignUpOptionsCardProps) => {
+  const [isSubmitAttempted, setIsSubmitAttempted] = useState(false);
+
   const handleOptionToggle = (option: keyof typeof signupOptions) => {
     const enabledOptions = Object.values(signupOptions).filter(Boolean).length;
 
-    // If only one option is enabled, toggling it off
     if (enabledOptions === 1 && signupOptions[option]) {
       return;
     }
 
     setSignupOptions((prevOptions) => {
       const updatedOptions = { ...prevOptions, [option]: !prevOptions[option] };
-      const hasSelectedOption = Object.values(updatedOptions).some(
-        (value) => value
-      );
       setErrorMessage(
-        hasSelectedOption ? "" : "Please select at least one option."
+        Object.values(updatedOptions).some(Boolean)
+          ? ""
+          : "Please select at least one option."
       );
       return updatedOptions;
     });
+  };
+
+  useEffect(() => {
+    if (isSubmitAttempted && !appName.trim()) {
+      setErrorMessage("Please enter application name.");
+    } else {
+      setErrorMessage("");
+    }
+  }, [appName, isSubmitAttempted, setErrorMessage]);
+
+  const handleCreateApplication = () => {
+    setIsSubmitAttempted(true);
+    if (!appName.trim()) {
+      setErrorMessage("Please enter application name.");
+    }
   };
 
   return (
@@ -59,7 +74,11 @@ const SignUpOptionsCard = ({
               placeholder="Enter application name"
               value={appName}
               onChange={(e) => setAppName(e.target.value)}
+              isInvalid={isSubmitAttempted && !appName.trim()}
             />
+            <Form.Control.Feedback type="invalid">
+              {errorMessage}
+            </Form.Control.Feedback>
           </Form.Group>
 
           <div className="signup-options-container">
@@ -100,9 +119,15 @@ const SignUpOptionsCard = ({
             </Stack>
           </div>
 
-          {errorMessage && (
-            <p className="text-danger small mt-3">{errorMessage}</p>
-          )}
+          <div className="mt-4">
+            <Button
+              variant="primary"
+              onClick={handleCreateApplication}
+              disabled={!!errorMessage || !appName.trim()}
+            >
+              Create Application
+            </Button>
+          </div>
         </Form>
       </Card.Body>
     </Card>

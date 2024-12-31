@@ -2,7 +2,7 @@ import { ReactComponent as IconPlus } from "@assets/icons/icon-plus.svg";
 import { ReactComponent as IconTrash } from "@assets/icons/icon-trash.svg";
 import { FormLabel } from "@atoms/FormLabel";
 import { useState } from "react";
-import { Card, Col, Form, Row } from "react-bootstrap";
+import { Card, Col, Form, Row, Button } from "react-bootstrap";
 
 export const LoginCallbackConfig = () => {
   const [setup, setSetup] = useState<{
@@ -12,6 +12,16 @@ export const LoginCallbackConfig = () => {
   }>({
     logo: "",
     origins: [""],
+    callbackUrl: "",
+  });
+
+  const [errors, setErrors] = useState<{
+    logo: string;
+    origins: string[];
+    callbackUrl: string;
+  }>({
+    logo: "",
+    origins: [],
     callbackUrl: "",
   });
 
@@ -43,7 +53,63 @@ export const LoginCallbackConfig = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(setup);
+
+    // Reset errors
+    setErrors({
+      logo: "",
+      origins: [],
+      callbackUrl: "",
+    });
+
+    // Validation
+    let hasError = false;
+    const newErrors = {
+      logo: "",
+      origins: [] as string[],
+      callbackUrl: "",
+    };
+
+    if (!setup.logo) {
+      newErrors.logo = "Please upload an organization logo.";
+      hasError = true;
+    }
+
+    if (!setup.origins.some((origin) => origin.trim() !== "")) {
+      newErrors.origins.push("Please enter at least one valid origin.");
+      hasError = true;
+    } else {
+      setup.origins.forEach((origin, index) => {
+        if (origin.trim() && !isValidUrl(origin)) {
+          newErrors.origins[index] = "Please enter a valid URL.";
+          hasError = true;
+        }
+      });
+    }
+
+    if (!setup.callbackUrl || !isValidUrl(setup.callbackUrl)) {
+      newErrors.callbackUrl = "Please enter a valid callback URL.";
+      hasError = true;
+    }
+
+    if (hasError) {
+      setErrors(newErrors);
+    } else {
+      console.log(setup);
+    }
+  };
+
+  const isValidUrl = (url: string) => {
+    const pattern = new RegExp(
+      "^(https?:\\/\\/)?" + // optional protocol
+        "(([A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\\.)+[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?|" + // domain...
+        "localhost|" + // localhost...
+        "(([0-9]{1,3}\\.){3}[0-9]{1,3}))" + // ...or IP address
+        "(\\:[0-9]+)?(\\/[-A-Z0-9+&@#/%=~_|$?!,;]*)*" + // port and path
+        "(\\?[A-Z0-9+&@#/%=~_|$?!,;]*)?" + // query string
+        "(\\#[-A-Z0-9_]*)?$",
+      "i"
+    );
+    return pattern.test(url);
   };
 
   const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,8 +118,7 @@ export const LoginCallbackConfig = () => {
       const file = files[0];
       const reader = new FileReader();
       reader.onloadend = () => {
-        setSetup((prev) => ({ ...prev, [name]: reader.result }));
-        console.log(reader.result);
+        setSetup((prev) => ({ ...prev, [name]: reader.result as string }));
       };
       reader.readAsDataURL(file);
     }
@@ -72,9 +137,16 @@ export const LoginCallbackConfig = () => {
                   type="file"
                   name="logo"
                   onChange={handleUpload}
+                  isInvalid={!!errors.logo}
                 />
+                {errors.logo && (
+                  <Form.Control.Feedback type="invalid">
+                    {errors.logo}
+                  </Form.Control.Feedback>
+                )}
               </Form.Group>
-              <Form.Group controlId="website" className="mt-3">
+
+              <Form.Group controlId="website" className="mt-3 w-100">
                 <FormLabel className="d-flex align-items-center justify-content-between">
                   <div>Authorized Origins</div>
                   <button className="ms-2 empty-btn" onClick={handleAddOrigin}>
@@ -84,7 +156,7 @@ export const LoginCallbackConfig = () => {
                 {setup.origins.map((origin, index) => (
                   <div className="d-flex align-items-center" key={index}>
                     <Form.Control
-                      className="mt-2"
+                      className="mt-2 "
                       type="url"
                       name="origin"
                       autoComplete="off"
@@ -93,7 +165,13 @@ export const LoginCallbackConfig = () => {
                       onChange={(e) =>
                         handleUpdateOrigins(index, e.target.value)
                       }
+                      isInvalid={!!errors.origins[index]}
                     />
+                    {errors.origins[index] && (
+                      <Form.Control.Feedback type="invalid">
+                        {errors.origins[index]}
+                      </Form.Control.Feedback>
+                    )}
                     {setup.origins.length > 1 && (
                       <button
                         className="ms-2 empty-btn text-danger"
@@ -105,10 +183,9 @@ export const LoginCallbackConfig = () => {
                   </div>
                 ))}
               </Form.Group>
+
               <Form.Group controlId="callbackUrls" className="mt-3">
-                <FormLabel className="d-flex align-items-center justify-content-start">
-                  Callback URL
-                </FormLabel>
+                <FormLabel>Callback URL</FormLabel>
                 <Form.Control
                   className="mt-2"
                   type="text"
@@ -116,8 +193,18 @@ export const LoginCallbackConfig = () => {
                   placeholder="https://example.com/oauth/success"
                   value={setup.callbackUrl}
                   onChange={handleChange}
+                  isInvalid={!!errors.callbackUrl}
                 />
+                {errors.callbackUrl && (
+                  <Form.Control.Feedback type="invalid">
+                    {errors.callbackUrl}
+                  </Form.Control.Feedback>
+                )}
               </Form.Group>
+
+              <Button type="submit" className="mt-3">
+                Submit
+              </Button>
             </Form>
           </Card>
         </Col>
