@@ -4,9 +4,10 @@ export interface Step {
   component: ReactNode;
   label: string;
   disabled?: boolean;
+  isValid?: boolean;
 }
 
-export interface ReusableStepperProps {
+export interface StepperProps {
   steps: Step[];
   onSubmit?: () => void;
 }

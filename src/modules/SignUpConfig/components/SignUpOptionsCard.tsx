@@ -23,16 +23,17 @@ const SignUpOptionsCard = ({
   setErrorMessage,
 }: SignUpOptionsCardProps) => {
   const handleOptionToggle = (option: keyof typeof signupOptions) => {
-    setSignupOptions((prevOptions) => {
-      const updatedOptions = { ...prevOptions, [option]: !prevOptions[option] };
-      const hasSelectedOption = Object.values(updatedOptions).some(
-        (value) => value
-      );
-      setErrorMessage(
-        hasSelectedOption ? "" : "Please select at least one option."
-      );
-      return updatedOptions;
-    });
+    const hasSelectedOptions =
+      Object.values(signupOptions).filter(Boolean).length >= 2;
+    if (!signupOptions[option] || hasSelectedOptions) {
+      setSignupOptions((prevOptions) => {
+        const updatedOptions = {
+          ...prevOptions,
+          [option]: !prevOptions[option],
+        };
+        return updatedOptions;
+      });
+    }
   };
 
   return (

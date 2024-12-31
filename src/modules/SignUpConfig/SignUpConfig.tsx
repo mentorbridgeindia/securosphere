@@ -1,23 +1,38 @@
-import { useState } from "react";
+import { useAtom } from "jotai";
+import { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import "./SignUpConfig.scss";
+import { signUpConfigAtom } from "./atoms/signUpConfigAtom";
 import SignUpOptionsCard from "./components/SignUpOptionsCard";
 import { SignUpPreview } from "./components/SignUpPreview";
+import "./SignUpConfig.scss";
+import { SocialProvider } from "./SignUpConfig.types";
 
 export const SignUpConfig = () => {
-  const [appName, setAppName] = useState("");
+  const [signUpConfig, setSignUpConfig] = useAtom(signUpConfigAtom);
+  
+
+  const [appName, setAppName] = useState(signUpConfig?.appName || "");
   const [signupOptions, setSignupOptions] = useState<Record<string, boolean>>({
-    email: true,
-    google: true,
-    facebook: false,
-    github: false,
-    gitlab: false,
-    microsoft: false,
-    twitter: false,
-    linkedin: false,
+    email: signUpConfig?.socialProviders?.includes("email") || false,
+    google: signUpConfig?.socialProviders?.includes("google") || false,
+    facebook: signUpConfig?.socialProviders?.includes("facebook") || false,
+    github: signUpConfig?.socialProviders?.includes("github") || false,
+    microsoft: signUpConfig?.socialProviders?.includes("microsoft") || false,
+    twitter: signUpConfig?.socialProviders?.includes("twitter") || false,
+    linkedin: signUpConfig?.socialProviders?.includes("linkedin") || false,
   });
 
   const [errorMessage, setErrorMessage] = useState("");
+
+  useEffect(() => {
+    setSignUpConfig({
+      appName,
+      socialProviders: Object.keys(signupOptions).filter(
+        (key) => signupOptions[key as SocialProvider]
+      ) as SocialProvider[],
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [appName, signupOptions]);
 
   return (
     <Container fluid className="py-4">

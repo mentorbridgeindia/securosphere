@@ -1,8 +1,8 @@
 import { useStepper } from "headless-stepper";
-import "./ReusableStepper.scss";
-import { ReusableStepperProps } from "./ReusableStepper.types";
+import "./Stepper.scss";
+import { StepperProps } from "./Stepper.types";
 
-export const ReusableStepper = ({ steps, onSubmit }: ReusableStepperProps) => {
+export const Stepper = ({ steps, onSubmit }: StepperProps) => {
   const { state, nextStep, prevStep, stepsProps, stepperProps } = useStepper({
     steps,
   });
@@ -66,7 +66,7 @@ export const ReusableStepper = ({ steps, onSubmit }: ReusableStepperProps) => {
         <button
           className="stepper-btn"
           onClick={handleNext}
-          disabled={steps[state.currentStep + 1]?.disabled}
+          disabled={!steps[state.currentStep]?.isValid}
         >
           {isLastStep ? "Submit" : "Next"}
         </button>
@@ -74,5 +74,3 @@ export const ReusableStepper = ({ steps, onSubmit }: ReusableStepperProps) => {
     </div>
   );
 };
-
-export default ReusableStepper;

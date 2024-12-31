@@ -10,10 +10,10 @@
 a:not(.brand),
 .anchor {
   text-decoration: none;
-  font-weight: 500;
+  font-weight: bold;
   transition: color 0.3s ease, text-decoration 0.3s ease;
   font-size: 14px;
-  color: $primary;
+  color: $info;
   cursor: pointer;
   padding: 5px 0;
   position: relative;

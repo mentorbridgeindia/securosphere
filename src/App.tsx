@@ -1,6 +1,7 @@
 import { AppNavbar } from "@modules/Navbar";
 import { AuthConfiguration } from "@pages/AuthConfiguration";
 import { Login } from "@pages/Login/Login";
+import { Register } from "@pages/Register";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import { Container } from "react-bootstrap";
