@@ -1,15 +1,14 @@
 import { AppNavbar } from "@modules/Navbar";
 import { AuthConfiguration } from "@pages/AuthConfiguration";
 import { Login } from "@pages/Login/Login";
-import { Register } from "@pages/Register";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import { Container } from "react-bootstrap";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.scss";
 import ComponentsList from "./components/ComponentsList";
-import Register from "./pages/Register";
 import { ForgotPassword } from "./pages/ForgotPassword";
+import { Register } from "./pages/Register";
 import { ResetPassword } from "./pages/ResetPassword";
 
 function App() {

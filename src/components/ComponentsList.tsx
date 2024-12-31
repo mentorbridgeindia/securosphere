@@ -1,17 +1,14 @@
-import StepOne from "@/ui/molecules/Stepper/StepOne";
-import StepThree from "@/ui/molecules/Stepper/StepThree";
-import StepTwo from "@/ui/molecules/Stepper/StepTwo";
 import AvatarComponent from "@atoms/AvatarComponent/AvatarComponent";
 import { RoleLabel } from "@atoms/RoleLabel";
 import { StatusLabel } from "@atoms/StatusLabel/index";
 import { LabelType } from "@atoms/StatusLabel/StatusLable.types";
 import { FormActionButtons } from "@molecules/FormActionButtons";
 import { Stepper } from "@molecules/Stepper";
+import StepOne from "@molecules/Stepper/StepOne";
+import StepThree from "@molecules/Stepper/StepThree";
+import StepTwo from "@molecules/Stepper/StepTwo";
 import Col from "react-bootstrap/esm/Col";
 import Row from "react-bootstrap/esm/Row";
-import StepOne from "@/ui/molecules/StepperComponent/StepOne";
-import StepTwo from "@/ui/molecules/StepperComponent/StepTwo";
-import StepThree from "@/ui/molecules/StepperComponent/StepThree";
 
 const handleSubmit = () => {
   alert("Form Submitted!");

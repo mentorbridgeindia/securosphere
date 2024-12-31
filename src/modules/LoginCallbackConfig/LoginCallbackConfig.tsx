@@ -106,7 +106,7 @@ export const LoginCallbackConfig = () => {
                 <FormLabel>Organization Website</FormLabel>
                 <Form.Control
                   className="mt-2"
-                  type="text"
+                  type="url"
                   name="website"
                   onChange={handleChange}
                   value={setup.website}
