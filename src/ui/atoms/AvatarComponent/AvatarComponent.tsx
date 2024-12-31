@@ -1,16 +1,11 @@
 import * as Avatar from "@radix-ui/react-avatar";
-import { AvatarProps } from "./AvatarComponent.types";
 import "./AvatarComponent.scss";
+import { AvatarProps } from "./AvatarComponent.types";
 
-export const AvatarComponent = ({
-  alt,
-  fallbackText,
-  src,
-  onClick,
-}: AvatarProps) => (
+export const AvatarComponent = ({ alt, fallbackText, src }: AvatarProps) => (
   <div>
     <Avatar.Root className="AvatarRoot">
-      <div onClick={onClick}>
+      <div>
         {src ? (
           <Avatar.Image alt={alt} className="AvatarImage" src={src} />
         ) : (

@@ -10,7 +10,7 @@ export const schema = yup
       .string()
       .required("Password is required")
       .min(8, "Password must be at least 8 characters")
-      .matches(/[a-z][A-Z][0-9][@#$%]/, "Make a strong password"),
+      .matches(/[a-z][A-Z]\d[@#$%]/, "Make a strong password"),
     confirmPassword: yup
       .string()
       .oneOf([yup.ref("password")], "Passwords must match")
