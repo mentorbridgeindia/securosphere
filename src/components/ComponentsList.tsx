@@ -9,6 +9,9 @@ import { FormActionButtons } from "@molecules/FormActionButtons";
 import { Stepper } from "@molecules/Stepper";
 import Col from "react-bootstrap/esm/Col";
 import Row from "react-bootstrap/esm/Row";
+import StepOne from "@/ui/molecules/StepperComponent/StepOne";
+import StepTwo from "@/ui/molecules/StepperComponent/StepTwo";
+import StepThree from "@/ui/molecules/StepperComponent/StepThree";
 
 const handleSubmit = () => {
   alert("Form Submitted!");
