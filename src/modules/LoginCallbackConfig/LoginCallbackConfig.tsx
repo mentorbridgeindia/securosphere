@@ -124,6 +124,14 @@ export const LoginCallbackConfig = () => {
     }
   };
 
+  // Disable button until all fields are valid
+  const isFormValid =
+    setup.logo &&
+    setup.origins.some(
+      (origin) => origin.trim() !== "" && isValidUrl(origin)
+    ) &&
+    isValidUrl(setup.callbackUrl);
+
   return (
     <div className="mt-5">
       <Row className="justify-content-center">
@@ -202,7 +210,7 @@ export const LoginCallbackConfig = () => {
                 )}
               </Form.Group>
 
-              <Button type="submit" className="mt-3">
+              <Button type="submit" className="mt-3" disabled={!isFormValid}>
                 Submit
               </Button>
             </Form>
