@@ -1,51 +1,36 @@
 import { FormLabel } from "@atoms/FormLabel";
 import { yupResolver } from "@hookform/resolvers/yup";
-import axios from "axios";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
 import { RegisterData } from "./RegisterForm.types";
 
 import { Anchor } from "@atoms/Anchor";
+import { IRegisterMutation } from "@entities/Register";
 import { schema } from "./schema";
 
-export const RegisterForm = () => {
+export const RegisterForm = ({
+  registerUser,
+}: {
+  registerUser: (data: IRegisterMutation) => void;
+}) => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm<RegisterData>({
     resolver: yupResolver(schema),
   });
 
   const onSubmit = async (data: RegisterData) => {
-    console.log("Data being sent to backend:", data);
-    const jsonData = {
-      fname: data.firstName,
-      lname: data.lastName,
-      email: data.email,
-      password: data.password,
-    };
-
-    try {
-      const response = await axios.post(
-        "http://localhost:8080/signup",
-        jsonData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      console.log("Response:", response); // Log the response to check
-      if (response.status === 200) {
-        toast.success("Registration successful");
-      } else {
-        toast.error("Registration failed");
-      }
-    } catch (error) {
-      console.error("Error during registration:", error); // Log error for debugging
-      toast.error("Registration failed. Check the server.");
+    if (isValid) {
+      console.log("Data being sent to backend:", data);
+      const jsonData: IRegisterMutation = {
+        firstName: data.firstName,
+        lastName: data.lastName,
+        email: data.email,
+        password: data.password,
+      };
+      registerUser(jsonData);
     }
   };
 

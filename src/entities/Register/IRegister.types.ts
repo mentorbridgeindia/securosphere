@@ -1,3 +1,5 @@
+import { SocialProvider } from "../../types/auth";
+
 export interface IRegisterEntity {
   firstName: string;
   lastName: string;
@@ -10,4 +12,5 @@ export interface IRegisterMutation {
   lastName: string;
   email: string;
   password: string;
+  socialId?: string;
 }

@@ -1,12 +1,4 @@
-export type SocialProvider =
-  | "email"
-  | "google"
-  | "facebook"
-  | "apple"
-  | "microsoft"
-  | "linkedin"
-  | "github"
-  | "twitter";
+import { SocialProvider } from "@/types/auth";
 
 export interface SignUpConfigState {
   appName: string;

@@ -3,7 +3,7 @@ import { ReactComponent as IconTrash } from "@assets/icons/icon-trash.svg";
 import { FormLabel } from "@atoms/FormLabel";
 import { useAtom } from "jotai";
 import { useState } from "react";
-import { Card, Col, Form, Row } from "react-bootstrap";
+import { Card, Col, Form, InputGroup, Row } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { loginCallbackConfigAtom } from "./atoms/loginCallbackConfigAtom";
 import { LoginCallbackConfigState } from "./LoginCallbackConfig.types";
@@ -22,6 +22,8 @@ export const LoginCallbackConfig = () => {
     orgLogo: loginCallbackConfig?.orgLogo || "",
     authorizedOrigins: loginCallbackConfig?.authorizedOrigins || [""],
     callbackUrl: loginCallbackConfig?.callbackUrl || "",
+    subDomain: loginCallbackConfig?.subDomain || "",
+    termsOfServiceUrl: loginCallbackConfig?.termsOfServiceUrl || "",
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -102,26 +104,22 @@ export const LoginCallbackConfig = () => {
                   value={setup.orgName}
                 />
               </Form.Group>
-              <Form.Group controlId="domain" className="mb-3">
-                <FormLabel>Organization Website</FormLabel>
-                <Form.Control
-                  className="mt-2"
-                  type="url"
-                  name="website"
-                  onChange={handleChange}
-                  value={setup.website}
-                />
+              <Form.Group controlId="subDomain" className="mb-3">
+                <FormLabel>Sub Domain</FormLabel>
+                <InputGroup className="mb-3">
+                  <Form.Control
+                    className="mt-2"
+                    type="text"
+                    name="subDomain"
+                    onChange={handleChange}
+                    value={setup.subDomain}
+                  />
+                  <InputGroup.Text className="text-small">
+                    .securosphere.com
+                  </InputGroup.Text>
+                </InputGroup>
               </Form.Group>
-              <Form.Group controlId="domain" className="mb-3">
-                <FormLabel>Organization Logo</FormLabel>
-                <Form.Control
-                  className="mt-2"
-                  type="file"
-                  name="orgLogo"
-                  onChange={handleUpload}
-                />
-              </Form.Group>
-              <Form.Group controlId="website" className="mb-3">
+              <Form.Group controlId="authorizedOrigins" className="mb-3">
                 <FormLabel className="d-flex align-items-center justify-content-between">
                   <div>Authorized Origins</div>
                   <button className="ms-2 empty-btn" onClick={handleAddOrigin}>
@@ -163,6 +161,35 @@ export const LoginCallbackConfig = () => {
                   placeholder="https://example.com/oauth/success"
                   value={setup.callbackUrl}
                   onChange={handleChange}
+                />
+              </Form.Group>
+              <Form.Group controlId="orgLogo" className="mb-3">
+                <FormLabel>Organization Logo</FormLabel>
+                <Form.Control
+                  className="mt-2"
+                  type="file"
+                  name="orgLogo"
+                  onChange={handleUpload}
+                />
+              </Form.Group>
+              <Form.Group controlId="website" className="mb-3">
+                <FormLabel>Organization Website</FormLabel>
+                <Form.Control
+                  className="mt-2"
+                  type="url"
+                  name="website"
+                  onChange={handleChange}
+                  value={setup.website}
+                />
+              </Form.Group>
+              <Form.Group controlId="termsOfServiceUrl" className="mb-3">
+                <FormLabel>Terms of Service URL</FormLabel>
+                <Form.Control
+                  className="mt-2"
+                  type="url"
+                  name="termsOfServiceUrl"
+                  onChange={handleChange}
+                  value={setup.termsOfServiceUrl}
                 />
               </Form.Group>
             </Form>

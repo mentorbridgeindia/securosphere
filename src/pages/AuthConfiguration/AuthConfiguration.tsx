@@ -45,7 +45,18 @@ export const AuthConfiguration = () => {
   }, [signUpConfig, loginCallbackConfig]);
 
   const onFinalSubmit = () => {
-    console.log("Form submitted!", signUpConfig, loginCallbackConfig);
+    console.log({
+      subDomain: loginCallbackConfig.subDomain,
+      authorizedDomains: loginCallbackConfig.authorizedOrigins,
+      callbackUrl: loginCallbackConfig.callbackUrl,
+      website: loginCallbackConfig.website,
+      applicationName: signUpConfig.appName,
+      organizationName: loginCallbackConfig.orgName,
+      termsOfServiceUrl: loginCallbackConfig.termsOfServiceUrl,
+      socialProviders: signUpConfig.socialProviders.map((provider) => ({
+        [provider]: true,
+      })),
+    });
   };
 
   return <Stepper steps={steps} onSubmit={onFinalSubmit} />;

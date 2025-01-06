@@ -1,22 +1,21 @@
+import { useAtomValue } from "jotai";
+import { signUpConfigAtom } from "../atoms/signUpConfigAtom";
 import { SocialLoginIcons } from "./SocialLoginIcons";
 
-interface SocialSignUpProps {
-  signupOptions: Record<string, boolean>;
-}
-
-const SocialSignUp = ({ signupOptions }: SocialSignUpProps) => {
+const SocialSignUp = () => {
+  const signUpConfig = useAtomValue(signUpConfigAtom);
   return (
     <div className="my-3">
       <div className="d-flex flex-wrap justify-content-center gap-2">
-        {Object.entries(signupOptions)
-          .filter(
-            ([provider, isSelected]) => isSelected && SocialLoginIcons[provider]
-          )
-          .map(([provider]) => (
-            <button key={provider} className="empty-btn social-login">
-              {SocialLoginIcons[provider]}
-            </button>
-          ))}
+        {signUpConfig.socialProviders.map((provider) => (
+          <button
+            key={provider}
+            className="empty-btn social-login"
+            style={{ pointerEvents: "none" }}
+          >
+            {SocialLoginIcons[provider]}
+          </button>
+        ))}
       </div>
     </div>
   );

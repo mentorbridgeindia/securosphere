@@ -12,9 +12,3 @@ export interface IMutationParams {
   onSuccess?: (response: MutationResponse) => void;
   onError?: (error: Error) => void;
 }
-
-export interface IRegisterResponse {
-  success: boolean;
-  message: string;
-  userId?: string; 
-}
