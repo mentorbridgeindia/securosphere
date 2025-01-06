@@ -1,13 +1,28 @@
 import { ReactComponent as IconLogo } from "@assets/icons/logo.svg";
+import { Spinner } from "@atoms/Spinner";
+import { useRegister } from "@entities/Register";
 import { RegisterForm } from "@modules/RegisterForm";
 import { SocialLogin } from "@modules/SocialLogin";
 import { Card } from "react-bootstrap";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export const Register = () => {
+  const navigate = useNavigate();
+  const { mutate: registerUser, isPending } = useRegister({
+    onSuccess: () => {
+      toast.success("Registration successful");
+      navigate("/login");
+    },
+    onError: (error) => {
+      toast.error("Registration failed! Something went wrong");
+    },
+  });
   return (
     <div className="d-flex align-items-center justify-content-center my-2 mt-5">
+      <Spinner isLoading={isPending} />
       <Row className="w-100 center">
         <Col
           lg={7}
@@ -38,7 +53,7 @@ export const Register = () => {
               <hr />
             </div>
             <div className="mt-3">
-              <RegisterForm />
+              <RegisterForm registerUser={registerUser} />
             </div>
           </Card>
         </Col>

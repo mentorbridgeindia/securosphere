@@ -1,1 +1,1 @@
-export const REGISTER_ENDPOINT = `users/register`; 
+export const REGISTER_ENDPOINT = `/account/signup`;

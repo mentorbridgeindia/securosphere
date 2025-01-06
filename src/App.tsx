@@ -11,14 +11,15 @@ import { ForgotPassword } from "./pages/ForgotPassword";
 import { Register } from "./pages/Register";
 import { ResetPassword } from "./pages/ResetPassword";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ToastContainer } from "react-toastify";
 
 function App() {
-  
   const queryClient = new QueryClient();
 
   return (
     <div className="App">
       <AppNavbar />
+      <ToastContainer />
       <Container className="well-container">
         <QueryClientProvider client={queryClient}>
           <BrowserRouter>

@@ -1,0 +1,53 @@
+@import "../../../colors.scss";
+
+.progress-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Make sure it stays on top of other content */
+}
+
+.progress_bar {
+  --r1: 154%;
+  --r2: 68.5%;
+  width: 67.2px;
+  height: 67.2px;
+  position: absolute;
+  transform: translateX(-50%); /* Center adjustment */
+  border-radius: 50%;
+  background: radial-gradient(
+        var(--r1) var(--r2) at top,
+        #0000 79.5%,
+        $primary 80%
+      )
+      center left,
+    radial-gradient(var(--r1) var(--r2) at bottom, $primary 79.5%, #0000 80%)
+      center center,
+    radial-gradient(var(--r1) var(--r2) at top, #0000 79.5%, $primary 80%)
+      center right,
+    #d3d3da;
+  background-size: 50.5% 220%;
+  background-position: -100% 0%, 0% 0%, 100% 0%;
+  background-repeat: no-repeat;
+  animation: progress-mbj53w 3s infinite linear;
+}
+
+@keyframes progress-mbj53w {
+  33% {
+    background-position: 0% 33%, 100% 33%, 200% 33%;
+  }
+
+  66% {
+    background-position: -100% 66%, 0% 66%, 100% 66%;
+  }
+
+  100% {
+    background-position: 0% 100%, 100% 100%, 200% 100%;
+  }
+}

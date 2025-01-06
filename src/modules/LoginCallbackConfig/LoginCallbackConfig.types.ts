@@ -4,4 +4,6 @@ export interface LoginCallbackConfigState {
   orgLogo: string;
   orgName: string;
   website: string;
+  subDomain: string;
+  termsOfServiceUrl: string;
 }

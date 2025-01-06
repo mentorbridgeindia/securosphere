@@ -1,3 +1,4 @@
+import { SocialProvider } from "@/types/auth";
 import { useAtom } from "jotai";
 import { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
@@ -5,11 +6,9 @@ import { signUpConfigAtom } from "./atoms/signUpConfigAtom";
 import SignUpOptionsCard from "./components/SignUpOptionsCard";
 import { SignUpPreview } from "./components/SignUpPreview";
 import "./SignUpConfig.scss";
-import { SocialProvider } from "./SignUpConfig.types";
 
 export const SignUpConfig = () => {
   const [signUpConfig, setSignUpConfig] = useAtom(signUpConfigAtom);
-  
 
   const [appName, setAppName] = useState(signUpConfig?.appName || "");
   const [signupOptions, setSignupOptions] = useState<Record<string, boolean>>({
