@@ -10,22 +10,31 @@ import ComponentsList from "./components/ComponentsList";
 import { ForgotPassword } from "./pages/ForgotPassword";
 import { Register } from "./pages/Register";
 import { ResetPassword } from "./pages/ResetPassword";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 function App() {
+  
+  const queryClient = new QueryClient();
+
   return (
     <div className="App">
       <AppNavbar />
       <Container className="well-container">
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<ComponentsList />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/forgot-password" element={<ForgotPassword />} />
-            <Route path="/reset-password" element={<ResetPassword />} />
-            <Route path="/auth-configuration" element={<AuthConfiguration />} />
-          </Routes>
-        </BrowserRouter>
+        <QueryClientProvider client={queryClient}>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<ComponentsList />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
+              <Route path="/reset-password" element={<ResetPassword />} />
+              <Route
+                path="/auth-configuration"
+                element={<AuthConfiguration />}
+              />
+            </Routes>
+          </BrowserRouter>
+        </QueryClientProvider>
       </Container>
       <SpeedInsights />
       <Analytics />
