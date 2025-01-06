@@ -31,7 +31,9 @@
       "@types/*": ["types/*"],
       "@assets/*": ["assets/*"],
       "@styles/*": ["styles/*"],
-      "@modules/*": ["modules/*"]
+      "@modules/*": ["modules/*"],
+      "@api/*": ["api/*"],
+      "@entities/*": ["entities/*"]
     }
   },
   "include": ["src"]
