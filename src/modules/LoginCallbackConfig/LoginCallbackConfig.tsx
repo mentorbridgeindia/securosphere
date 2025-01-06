@@ -3,7 +3,7 @@ import { ReactComponent as IconTrash } from "@assets/icons/icon-trash.svg";
 import { FormLabel } from "@atoms/FormLabel";
 import { useAtom } from "jotai";
 import { useState } from "react";
-import { Card, Col, Form, FormControl, InputGroup, Row } from "react-bootstrap";
+import { Card, Col, Form, InputGroup, Row } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { loginCallbackConfigAtom } from "./atoms/loginCallbackConfigAtom";
 import { LoginCallbackConfigState } from "./LoginCallbackConfig.types";

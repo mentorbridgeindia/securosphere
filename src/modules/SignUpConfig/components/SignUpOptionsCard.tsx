@@ -1,6 +1,9 @@
 import { FormLabel } from "@atoms/FormLabel";
+import { useAtom } from "jotai";
 import React from "react";
 import { Card, Form, Stack } from "react-bootstrap";
+import { SocialProvider } from "../../../types/auth";
+import { signUpConfigAtom } from "../atoms/signUpConfigAtom";
 import { SocialLoginIcons } from "./SocialLoginIcons";
 
 interface SignUpOptionsCardProps {
@@ -14,28 +17,34 @@ interface SignUpOptionsCardProps {
   setErrorMessage: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const SignUpOptionsCard = ({
-  appName,
-  setAppName,
-  signupOptions,
-  setSignupOptions,
-  errorMessage,
-  setErrorMessage,
-}: SignUpOptionsCardProps) => {
-  const handleOptionToggle = (option: keyof typeof signupOptions) => {
-    const hasSelectedOptions =
-      Object.values(signupOptions).filter(Boolean).length >= 2;
-    if (!signupOptions[option] || hasSelectedOptions) {
-      setSignupOptions((prevOptions) => {
-        const updatedOptions = {
-          ...prevOptions,
-          [option]: !prevOptions[option],
-        };
-        return updatedOptions;
+const SignUpOptionsCard = () => {
+  const [signUpConfig, setSignUpConfig] = useAtom(signUpConfigAtom);
+
+  const signUpOptions = [
+    "Email",
+    "Google",
+    "Facebook",
+    "Github",
+    "Microsoft",
+    "Twitter",
+    "LinkedIn",
+  ];
+
+  const updateSocialProvider = (checked: boolean, option: SocialProvider) => {
+    if (checked) {
+      setSignUpConfig({
+        ...signUpConfig,
+        socialProviders: [...signUpConfig.socialProviders, option],
+      });
+    } else {
+      setSignUpConfig({
+        ...signUpConfig,
+        socialProviders: signUpConfig.socialProviders.filter(
+          (p) => p !== option
+        ),
       });
     }
   };
-
   return (
     <Card className="shadow-sm px-2">
       <Card.Body>
@@ -51,39 +60,42 @@ const SignUpOptionsCard = ({
               className="mt-2"
               type="text"
               placeholder="Enter application name"
-              value={appName}
-              onChange={(e) => setAppName(e.target.value)}
+              value={signUpConfig?.appName}
+              onChange={(e) =>
+                setSignUpConfig({ ...signUpConfig, appName: e.target.value })
+              }
             />
           </Form.Group>
 
           <div className="signup-options-container">
             <h6 className="mb-3">Select Sign Up Methods</h6>
             <Stack>
-              {Object.keys(signupOptions).map((option) => (
+              {signUpOptions.map((option) => (
                 <div
                   key={option}
                   className="d-flex justify-content-between align-items-center p-2 rounded hover-bg-light mb-2"
                 >
                   <div className="d-flex align-items-center gap-3">
-                    {SocialLoginIcons[option]}
-                    <span className="fw-medium">
-                      {option.charAt(0).toUpperCase() + option.slice(1)}
-                    </span>
+                    {SocialLoginIcons[option.toLowerCase() as SocialProvider]}
+                    <span className="fw-medium">{option}</span>
                   </div>
                   <Form.Check
                     type="switch"
-                    checked={signupOptions[option]}
-                    onChange={() => handleOptionToggle(option)}
+                    checked={signUpConfig?.socialProviders?.includes(
+                      option.toLowerCase() as SocialProvider
+                    )}
+                    onChange={(e) =>
+                      updateSocialProvider(
+                        e.target.checked,
+                        option.toLowerCase() as SocialProvider
+                      )
+                    }
                     className="custom-switch"
                   />
                 </div>
               ))}
             </Stack>
           </div>
-
-          {errorMessage && (
-            <p className="text-danger small mt-3">{errorMessage}</p>
-          )}
         </Form>
       </Card.Body>
     </Card>
