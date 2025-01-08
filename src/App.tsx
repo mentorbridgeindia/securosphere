@@ -11,15 +11,9 @@ import { ForgotPassword } from "./pages/ForgotPassword";
 import { Register } from "./pages/Register";
 import { ResetPassword } from "./pages/ResetPassword";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-<<<<<<< HEAD
-
-function App() {
-  
-=======
 import { ToastContainer } from "react-toastify";
 
 function App() {
->>>>>>> 7a55698ae10e77038761100de53638b88c0666d9
   const queryClient = new QueryClient();
 
   return (
