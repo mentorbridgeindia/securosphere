@@ -7,45 +7,32 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { LoginData } from "./LoginForm.types";
 import { schema } from "./loginSchema";
+import { ILoginMutation } from "@/entities/Login";
 
-export const LoginForm = () => {
+export const LoginForm = ({
+  loginUser,
+}: {
+  loginUser: (data: ILoginMutation) => void;
+}) => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm({
+    formState: { errors, isValid },
+  } = useForm<LoginData>({
     resolver: yupResolver(schema),
   });
 
   const onSubmit = async (data: LoginData) => {
-    console.log("Data being sent to backend:", data);
-    const jsonData = {
-      email: data.email,
-      password: data.password,
-    };
+    if (isValid) {
+      console.log("Data being sent to backend:", data);
+      const jsonData: ILoginMutation = {
+        email: data.email,
+        password: data.password,
+      };
 
-    try {
-      const response = await axios.post(
-        "http://localhost:8080/signin",
-        jsonData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      console.log("Response:", response);
-      if (response.status === 200) {
-        toast.success("Login successful! Welcome back!");
-      } else {
-        toast.error("Login failed. Please check your credentials.");
-      }
-    } catch (error) {
-      console.error("Error during login:", error);
-      toast.error("Login failed. Please check the server or your connection.");
+      loginUser(jsonData);
     }
   };
-
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       <Form.Group>

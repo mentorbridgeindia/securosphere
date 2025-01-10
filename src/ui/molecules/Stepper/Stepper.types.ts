@@ -10,4 +10,5 @@ export interface Step {
 export interface StepperProps {
   steps: Step[];
   onSubmit?: () => void;
+  isLoading?: boolean; 
 }

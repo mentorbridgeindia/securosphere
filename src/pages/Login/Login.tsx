@@ -1,13 +1,29 @@
 import { ReactComponent as IconLogo } from "@assets/icons/logo.svg";
+import { Spinner } from "@atoms/Spinner";
 import { LoginForm } from "@modules/LoginForm";
 import { SocialLogin } from "@modules/SocialLogin";
 import { Card } from "react-bootstrap";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useLogin } from "@entities/Login";
 
 export const Login = () => {
+  const navigate = useNavigate();
+  const { mutate: loginUser, isPending } = useLogin({
+    onSuccess: () => {
+      toast.success("Login successful! Welcome back!");
+      navigate("/dashboard");
+    },
+    onError: (error) => {
+      toast.error("Login failed. Please check your credentials.");
+    },
+  });
+
   return (
     <div className="d-flex align-items-center justify-content-center">
+      <Spinner isLoading={isPending} />
       <Row className="w-100 center">
         <Col
           lg={7}
@@ -39,7 +55,7 @@ export const Login = () => {
               <hr />
             </div>
             <div className="mt-3">
-              <LoginForm />
+              <LoginForm loginUser={loginUser} />
             </div>
           </Card>
         </Col>
