@@ -8,6 +8,8 @@ import "./index.scss";
 import reportWebVitals from "./reportWebVitals";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 
+import { PostHogProvider } from "posthog-js/react";
+
 // Import constants
 import {
   GOOGLE_ANALYTICS_CODE,
@@ -17,6 +19,10 @@ import {
   SENTRY_DSN,
 } from "./constants/constants";
 import ErrorBoundary from "./ErrorBoundary";
+
+const options = {
+  api_host: process.env.REACT_APP_POSTHOG_API_HOST,
+};
 
 // Initialize Google Analytics
 ReactGA.initialize(GOOGLE_ANALYTICS_CODE);
@@ -35,10 +41,15 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <ErrorBoundary>
-      <SpeedInsights />
-      <App />
-    </ErrorBoundary>
+    <PostHogProvider
+      apiKey={process.env.REACT_APP_POSTHOG_API_KEY}
+      options={options}
+    >
+      <ErrorBoundary>
+        <SpeedInsights />
+        <App />
+      </ErrorBoundary>
+    </PostHogProvider>
   </React.StrictMode>
 );
 
