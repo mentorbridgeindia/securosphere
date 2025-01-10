@@ -13,4 +13,6 @@ export interface IRegisterMutation {
   email: string;
   password: string;
   socialId?: string;
+  socialProvider?: SocialProvider;
+  profilePicture?: string;
 }

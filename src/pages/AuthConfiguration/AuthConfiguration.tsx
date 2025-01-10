@@ -5,10 +5,21 @@ import { signUpConfigAtom } from "@modules/SignUpConfig/atoms/signUpConfigAtom";
 import { Step, Stepper } from "@molecules/Stepper";
 import { useAtomValue } from "jotai";
 import { useEffect, useState } from "react";
+import { useConfiguration } from "@entities/Configuration";
+import { toast } from "react-toastify";
 
 export const AuthConfiguration = () => {
   const signUpConfig = useAtomValue(signUpConfigAtom);
   const loginCallbackConfig = useAtomValue(loginCallbackConfigAtom);
+
+  const { mutate: saveConfig } = useConfiguration({
+    onSuccess: () => {
+      toast.success("Configuration saved successfully!");
+    },
+    onError: (error) => {
+      toast.error("Failed to save configuration. Please try again.");
+    },
+  });
 
   const [steps, setSteps] = useState<Step[]>([
     {
@@ -41,11 +52,10 @@ export const AuthConfiguration = () => {
       { ...prev[0], isValid: validateSignUpConfig },
       { ...prev[1], isValid: validateLoginCallbackConfig },
     ]);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [signUpConfig, loginCallbackConfig]);
 
   const onFinalSubmit = () => {
-    console.log({
+    const configurationData = {
       subDomain: loginCallbackConfig.subDomain,
       authorizedDomains: loginCallbackConfig.authorizedOrigins,
       callbackUrl: loginCallbackConfig.callbackUrl,
@@ -53,10 +63,13 @@ export const AuthConfiguration = () => {
       applicationName: signUpConfig.appName,
       organizationName: loginCallbackConfig.orgName,
       termsOfServiceUrl: loginCallbackConfig.termsOfServiceUrl,
-      socialProviders: signUpConfig.socialProviders.map((provider) => ({
-        [provider]: true,
-      })),
-    });
+      socialProviders: signUpConfig.socialProviders.reduce((acc, provider) => {
+        acc[provider] = true;
+        return acc;
+      }, {} as Record<string, boolean>),
+    };
+
+    saveConfig(configurationData);
   };
 
   return <Stepper steps={steps} onSubmit={onFinalSubmit} />;
