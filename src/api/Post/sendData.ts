@@ -8,7 +8,7 @@ export const sendData = async <T>(
     const response = await api.post<T>(url, body);
     console.log("response", response);
     if (response.status === 200 || response.status === 201) {
-      handleLoginResponse(response);
+      if (url.includes("signin")) handleLoginResponse(response);
       return response.data;
     }
     return null;
