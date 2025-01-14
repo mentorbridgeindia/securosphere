@@ -1,11 +1,11 @@
-import { useNavigate, useLocation, useSearchParams } from "react-router-dom";
+import { Spinner } from "@atoms/Spinner";
+import { useSocialLogin } from "@entities/Login";
+import { useSocialRegister } from "@entities/Register/useRegister";
 import { SocialLogin } from "@modules/SocialLogin";
-import { SocialProvider } from "./OAuth.types";
 import { useEffect, useState } from "react";
-import { Spinner } from "../../ui/atoms/Spinner";
-import { useSocialRegister } from "../../entities/Register/useRegister";
-import { useSocialLogin } from "../../entities/Login";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import { SocialProvider } from "./OAuth.types";
 
 declare global {
   interface Window {

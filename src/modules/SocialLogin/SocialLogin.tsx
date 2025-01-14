@@ -1,8 +1,6 @@
-import { useCallback, useEffect, useState } from "react";
-import { IResolveParams } from "reactjs-social-login";
-
 import { Spinner } from "@atoms/Spinner";
-import { ISocialLoginProps } from "./SocialLogin.types";
+import { useCallback, useEffect, useState } from "react";
+import { IResolveParams, ISocialLoginProps } from "./SocialLogin.types";
 import { useLoginSocialAmazon } from "./components/Amazon";
 import { useLoginSocialApple } from "./components/Apple";
 import { useLoginSocialFacebook } from "./components/Facebook";
@@ -27,7 +25,7 @@ export const SocialLogin = ({
     onReject: onError,
     onResolve: ({ provider, data }: IResolveParams) => {
       setIsLoading(false);
-      if(data){
+      if (data) {
         const response = {
           firstName: data.name.split(" ")[0],
           lastName: data.name.split(" ")?.[1] ?? "",
