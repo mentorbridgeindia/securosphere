@@ -1,3 +1,4 @@
+import { useConfiguration } from "@entities/Configuration";
 import { LoginCallbackConfig } from "@modules/LoginCallbackConfig";
 import { loginCallbackConfigAtom } from "@modules/LoginCallbackConfig/atoms/loginCallbackConfigAtom";
 import { SignUpConfig } from "@modules/SignUpConfig";
@@ -5,16 +6,18 @@ import { signUpConfigAtom } from "@modules/SignUpConfig/atoms/signUpConfigAtom";
 import { Step, Stepper } from "@molecules/Stepper";
 import { useAtomValue } from "jotai";
 import { useEffect, useState } from "react";
-import { useConfiguration } from "@entities/Configuration";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 export const AuthConfiguration = () => {
+  const navigate = useNavigate();
   const signUpConfig = useAtomValue(signUpConfigAtom);
   const loginCallbackConfig = useAtomValue(loginCallbackConfigAtom);
 
   const { mutate: saveConfig } = useConfiguration({
     onSuccess: () => {
       toast.success("Configuration saved successfully!");
+      navigate("/");
     },
     onError: () => {
       toast.error("Failed to save configuration. Please try again.");
@@ -70,7 +73,7 @@ export const AuthConfiguration = () => {
         return acc;
       }, {} as Record<string, boolean>),
     };
-
+    console.log(configurationData);
     saveConfig(configurationData);
   };
 

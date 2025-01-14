@@ -1,21 +1,35 @@
 import { ReactComponent as IconPlus } from "@assets/icons/icon-plus.svg";
 import { ReactComponent as IconTrash } from "@assets/icons/icon-trash.svg";
 import { FormLabel } from "@atoms/FormLabel";
+import { useCheckDomain } from "@entities/Domain";
 import { useAtom } from "jotai";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Card, Col, Form, InputGroup, Row } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { loginCallbackConfigAtom } from "./atoms/loginCallbackConfigAtom";
 import { LoginCallbackConfigState } from "./LoginCallbackConfig.types";
 
 export const LoginCallbackConfig = () => {
+  const [domainValue, setDomainValue] = useState("");
+  const [isDomainAvailable, setIsDomainAvailable] = useState(false);
   const [loginCallbackConfig, setLoginCallbackConfig] = useAtom(
     loginCallbackConfigAtom
   );
-  console.log(
-    "loginCallbackConfig in LoginCallbackConfig",
-    loginCallbackConfig
-  );
+  const {
+    data: domainData,
+    isLoading: domainLoading,
+    error: domainError,
+  } = useCheckDomain(domainValue);
+
+  useEffect(() => {
+    if (!domainLoading && !domainError && !!loginCallbackConfig?.subDomain) {
+      setDomainValue("");
+      setIsDomainAvailable(true);
+    } else {
+      setIsDomainAvailable(false);
+    }
+  }, [domainData, domainLoading, domainError, loginCallbackConfig?.subDomain]);
+
   const [setup, setSetup] = useState<LoginCallbackConfigState>({
     orgName: loginCallbackConfig?.orgName || "",
     website: loginCallbackConfig?.website || "",
@@ -28,6 +42,7 @@ export const LoginCallbackConfig = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+
     setSetup((prev) => ({ ...prev, [name]: value }));
     setLoginCallbackConfig(setup);
   };
@@ -55,6 +70,21 @@ export const LoginCallbackConfig = () => {
     }
   };
 
+  const handleWebsiteBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    const validateUrl = async (url: string) => {
+      try {
+        const res = await fetch(url, { method: 'HEAD' });
+        if (res.status === 404) {
+          toast.error("Terms & Conditions url not valid");
+        }
+      } catch {
+        toast.error("Terms & Conditions url not valid");
+      }
+    };
+
+    validateUrl(e.target.value);
+  };
+
   const handleRemoveOrigin = (index: number) => {
     setSetup((prev) => ({
       ...prev,
@@ -66,6 +96,10 @@ export const LoginCallbackConfig = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoginCallbackConfig(setup);
+  };
+
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    setDomainValue(e.target.value);
   };
 
   const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -113,6 +147,7 @@ export const LoginCallbackConfig = () => {
                     name="subDomain"
                     onChange={handleChange}
                     value={setup.subDomain}
+                    onBlur={handleBlur}
                   />
                   <InputGroup.Text className="text-small">
                     .securosphere.com
@@ -190,6 +225,7 @@ export const LoginCallbackConfig = () => {
                   name="termsOfServiceUrl"
                   onChange={handleChange}
                   value={setup.termsOfServiceUrl}
+                  onBlur={handleWebsiteBlur}
                 />
               </Form.Group>
             </Form>

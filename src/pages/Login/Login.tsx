@@ -15,7 +15,7 @@ export const Login = () => {
   const { mutate: loginUser, isPending } = useLogin({
     onSuccess: () => {
       toast.success("Login successful! Welcome back!");
-      navigate("/dashboard");
+      navigate("/");
     },
     onError: (error) => {
       toast.error("Login failed. Please check your credentials.");
@@ -23,10 +23,8 @@ export const Login = () => {
   });
 
   useEffect(() => {
-    if (localStorage.getItem("accessToken")) {
-      navigate("/dashboard");
-    }
-  }, [navigate]);
+    sessionStorage.removeItem("accessToken");
+  }, []);
 
   return (
     <div className="d-flex align-items-center justify-content-center">

@@ -6,7 +6,6 @@ export const sendData = async <T>(
 ): Promise<T | null> => {
   try {
     const response = await api.post<T>(url, body);
-    console.log("response", response);
     if (response.status === 200 || response.status === 201) {
       if (url.includes("signin")) handleLoginResponse(response);
       return response.data;
@@ -24,7 +23,7 @@ const handleLoginResponse = (response: any) => {
     const accessToken = response.headers["authorization"];
     if (accessToken !== undefined && accessToken !== null) {
       console.log("accessToken", accessToken);
-      localStorage.setItem("accessToken", accessToken.split(" ")[1]);
+      sessionStorage.setItem("accessToken", accessToken.split(" ")[1]);
     }
   }
 };

@@ -23,10 +23,8 @@ export const Register = () => {
   });
 
   useEffect(() => {
-    if (localStorage.getItem("accessToken")) {
-      navigate("/dashboard");
-    }
-  }, [navigate]);
+    sessionStorage.removeItem("accessToken");
+  }, []);
   return (
     <div className="d-flex align-items-center justify-content-center my-2 mt-5">
       <Spinner isLoading={isPending} />

@@ -2,7 +2,7 @@ import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
 
 const tokenType = "Bearer";
 
-const token = localStorage.getItem("accessToken") ?? null;
+const token = sessionStorage.getItem("accessToken") ?? null;
 
 const baseURL = process.env.REACT_APP_API_URL;
 
