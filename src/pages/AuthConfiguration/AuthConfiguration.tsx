@@ -16,7 +16,7 @@ export const AuthConfiguration = () => {
     onSuccess: () => {
       toast.success("Configuration saved successfully!");
     },
-    onError: (error) => {
+    onError: () => {
       toast.error("Failed to save configuration. Please try again.");
     },
   });
@@ -44,6 +44,8 @@ export const AuthConfiguration = () => {
     loginCallbackConfig?.orgName !== "" &&
     loginCallbackConfig?.website !== "" &&
     loginCallbackConfig?.callbackUrl !== "" &&
+    loginCallbackConfig?.termsOfServiceUrl !== "" &&
+    loginCallbackConfig?.subDomain !== "" &&
     loginCallbackConfig?.authorizedOrigins?.length > 0 &&
     loginCallbackConfig?.authorizedOrigins.every((origin) => origin !== "");
 

@@ -2,7 +2,8 @@ import { ReactComponent as IconLogo } from "@assets/icons/logo.svg";
 import { Spinner } from "@atoms/Spinner";
 import { useRegister } from "@entities/Register";
 import { RegisterForm } from "@modules/RegisterForm";
-import { SocialLogin } from "@modules/SocialLogin";
+import { SocialLoginButtons } from "@modules/SocialLogin";
+import { useEffect } from "react";
 import { Card } from "react-bootstrap";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
@@ -20,6 +21,12 @@ export const Register = () => {
       toast.error("Registration failed! Something went wrong");
     },
   });
+
+  useEffect(() => {
+    if (localStorage.getItem("accessToken")) {
+      navigate("/dashboard");
+    }
+  }, [navigate]);
   return (
     <div className="d-flex align-items-center justify-content-center my-2 mt-5">
       <Spinner isLoading={isPending} />
@@ -44,7 +51,7 @@ export const Register = () => {
             <div className="d-flex justify-content-center brand-lg">
               <IconLogo />
             </div>
-            <SocialLogin
+            <SocialLoginButtons
               isGoogleAvailable
               isLinkedinAvailable
               isGithubAvailable

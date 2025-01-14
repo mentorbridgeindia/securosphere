@@ -1,0 +1,10 @@
+export const LINKEDIN_URL: string = "https://www.linkedin.com/oauth/v2";
+export const LINKEDIN_API_URL: string = "https://api.linkedin.com";
+export const PREVENT_CORS_URL: string = "https://cors.bridged.cc";
+export const state = "_linkedin";
+export const scope = "r_liteprofile";
+export const response_type = "code";
+export const isOnlyGetCode = false;
+export const isOnlyGetToken = false;
+export const client_id = process.env.REACT_APP_LINKEDIN_CLIENT_ID;
+export const client_secret = process.env.REACT_APP_LINKEDIN_CLIENT_SECRET;

@@ -88,6 +88,19 @@ input[type="number"] {
   gap: 4px;
 }
 
+.btn-social {
+  height: 1px;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.btn-bg {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
 .form-label {
   margin-bottom: 0 !important;
 }

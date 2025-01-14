@@ -1,13 +1,14 @@
 import { ReactComponent as IconLogo } from "@assets/icons/logo.svg";
 import { Spinner } from "@atoms/Spinner";
+import { useLogin } from "@entities/Login";
 import { LoginForm } from "@modules/LoginForm";
-import { SocialLogin } from "@modules/SocialLogin";
+import { SocialLoginButtons } from "@modules/SocialLogin";
+import { useEffect } from "react";
 import { Card } from "react-bootstrap";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useLogin } from "@entities/Login";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -20,6 +21,12 @@ export const Login = () => {
       toast.error("Login failed. Please check your credentials.");
     },
   });
+
+  useEffect(() => {
+    if (localStorage.getItem("accessToken")) {
+      navigate("/dashboard");
+    }
+  }, [navigate]);
 
   return (
     <div className="d-flex align-items-center justify-content-center">
@@ -46,7 +53,7 @@ export const Login = () => {
             <div className="d-flex justify-content-center brand-lg">
               <IconLogo />
             </div>
-            <SocialLogin
+            <SocialLoginButtons
               isGoogleAvailable
               isLinkedinAvailable
               isGithubAvailable
