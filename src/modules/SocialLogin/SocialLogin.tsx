@@ -9,7 +9,6 @@ import { useLoginSocialGoogle } from "./components/Google";
 import { useLoginSocialLinkedIn } from "./components/LinkedIn";
 import { useLoginSocialMicrosoft } from "./components/Microsoft";
 import { useLoginSocialTwitter } from "./components/Twitter";
-import { REDIRECT_URI } from "./social-constants";
 export const SocialLogin = ({
   onSuccess,
   onError,
@@ -21,7 +20,7 @@ export const SocialLogin = ({
   }, []);
 
   const params = {
-    redirect_uri: REDIRECT_URI,
+    redirect_uri: process.env.REACT_APP_REDIRECT_URI ?? "",
     onReject: onError,
     onResolve: ({ provider, data }: IResolveParams) => {
       setIsLoading(false);
