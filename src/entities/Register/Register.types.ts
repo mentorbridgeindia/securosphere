@@ -1,4 +1,4 @@
-import { SocialProvider } from "../../types/auth";
+import { SocialProvider } from "@/types/auth";
 
 export interface IRegisterEntity {
   firstName: string;

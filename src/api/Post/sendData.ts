@@ -1,11 +1,29 @@
 import api from "../api";
 
-export const sendData = async <T>(url: string, body: unknown): Promise<T | null> => {
+export const sendData = async <T>(
+  url: string,
+  body: unknown
+): Promise<T | null> => {
   try {
     const response = await api.post<T>(url, body);
-    return response.data;
+    if (response.status === 200 || response.status === 201) {
+      if (url.includes("signin")) handleLoginResponse(response);
+      return response.data;
+    }
+    return null;
   } catch (error) {
     console.error("Error sending data:", error);
-    return null;
+    throw new Error("Something went wrong");
+  }
+};
+
+const handleLoginResponse = (response: any) => {
+  if (response) {
+    // TODO: Check if its login URL
+    const accessToken = response.headers["authorization"];
+    if (accessToken !== undefined && accessToken !== null) {
+      console.log("accessToken", accessToken);
+      sessionStorage.setItem("accessToken", accessToken.split(" ")[1]);
+    }
   }
 };

@@ -1,0 +1,10 @@
+export const GITHUB_URL: string = "https://github.com";
+export const GITHUB_API_URL: string = "https://api.github.com/";
+export const PREVENT_CORS_URL: string = "https://cors.bridged.cc";
+export const CLIENT_ID = process.env.REACT_APP_GITHUB_CLIENT_ID;
+export const CLIENT_SECRET = process.env.REACT_APP_GITHUB_CLIENT_SECRET;
+export const isOnlyGetCode = false;
+export const isOnlyGetToken = false;
+export const allow_signup = false;
+export const scope = "repo,gist";
+export const state = "";

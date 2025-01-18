@@ -1,2 +1,2 @@
-export * from "./IRegister.types";
+export * from "./Register.types";
 export * from "./useRegister";
