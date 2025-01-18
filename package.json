@@ -20,6 +20,8 @@
     "@vercel/speed-insights": "^1.1.0",
     "axios": "^1.7.9",
     "bootstrap": "^5.3.3",
+    "cross-env": "^7.0.3",
+    "file-loader": "^6.2.0",
     "headless-stepper": "^1.11.0",
     "jotai": "^2.11.0",
     "posthog-js": "^1.205.0",
@@ -37,7 +39,7 @@
     "yup": "^1.6.1"
   },
   "scripts": {
-    "start": "NODE_ENV=development craco start",
+    "start": "cross-env NODE_ENV=development craco start",
     "build": "craco build && npm run sentry:sourcemaps",
     "test": "craco test",
     "eject": "react-scripts eject",

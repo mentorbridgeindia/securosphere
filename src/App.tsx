@@ -2,6 +2,7 @@ import { AppNavbar } from "@modules/Navbar";
 import { AuthConfiguration } from "@pages/AuthConfiguration";
 import { ErrorPage } from "@pages/Error";
 import { ForgotPassword } from "@pages/ForgotPassword";
+import { ChangePassword } from "@pages/ChangePassword";
 import { Home } from "@pages/Home";
 import { Login } from "@pages/Login/Login";
 import { OAuth } from "@pages/OAuth";
@@ -30,6 +31,7 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
+              <Route path="/change-password" element={<ChangePassword />} />
               <Route path="/reset-password" element={<ResetPassword />} />
               <Route path="/oauth" element={<OAuth />} />
               <Route element={<PrivateRoute />}>
