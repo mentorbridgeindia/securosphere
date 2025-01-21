@@ -8,6 +8,7 @@ import { ReusableStepper } from "./ui/molecules/StepperComponent";
 import SignUpOptions from "./pages/SignUpOptions";
 import SocialLogin from "./components/SocialLogin";
 import ErrorBoundary from "./ErrorBoundary";
+import EmailTemplateConfig from "./pages/EmailTemplateConfig";
 
 function App() {
   const steps = [
@@ -17,6 +18,7 @@ function App() {
   return (
     <div className="App">
       <AppNavbar />
+      <EmailTemplateConfig />
       <Login />
       <ToastContainer />
       <ErrorBoundary>
