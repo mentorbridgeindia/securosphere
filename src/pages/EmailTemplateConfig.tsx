@@ -82,7 +82,7 @@ const EmailTemplateEditor: React.FC<EmailTemplateProps> = ({
 
 const EmailTemplateConfig: React.FC = () => {
   const handleSave = (templateType: string, content: string) => {
-    // Save the content to your server or state management
+    
     console.log(`Saved ${templateType} content:`, content);
   };
 
