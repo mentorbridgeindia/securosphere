@@ -16,6 +16,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "./App.scss";
 import { PrivateRoute } from "./routes/PrivateRoute";
+import { SocialLoginButtons } from "./modules/SocialLogin";
 
 function App() {
   const queryClient = new QueryClient();
@@ -34,6 +35,7 @@ function App() {
               <Route path="/change-password" element={<ChangePassword />} />
               <Route path="/reset-password" element={<ResetPassword />} />
               <Route path="/oauth" element={<OAuth />} />
+              <Route path="/check" element={<SocialLoginButtons/>}/>
               <Route element={<PrivateRoute />}>
                 <Route
                   path="/auth-configuration"
