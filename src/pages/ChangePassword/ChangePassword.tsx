@@ -12,8 +12,7 @@ export const ChangePassword = () => {
         <Col
           lg={6}
           className="d-none d-lg-flex justify-content-center align-items-center"
-          style={{ paddingRight: "50px" }}
-        >
+          style={{ paddingRight: "50px" }} >
           <img
             src={changepasswordimg}
             alt="Change Password"
@@ -26,21 +25,18 @@ export const ChangePassword = () => {
           xs={12}
           md={10}
           className="d-flex align-items-center justify-content-center"
-          style={{ height: "100vh" }}
-        >
+          style={{ height: "100vh" }}>
           <Card
             className="p-4 shadow rounded w-100"
-            style={{ maxWidth: "400px" }}
-          >
+            style={{ maxWidth: "400px" }}>
             <div className="d-flex justify-content-center brand-lg">
               <h2>Change Password</h2>
             </div>
             <div className="mt-3">
-              <ChangePasswordForm />
+              <ChangePasswordForm/>
             </div>
           </Card>
         </Col>
       </Row>
     </div>
-  );
-};
+  )};

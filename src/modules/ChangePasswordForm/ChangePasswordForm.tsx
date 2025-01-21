@@ -12,14 +12,12 @@ export const ChangePasswordForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm<ChangePasswordData>({
-    resolver: yupResolver(changePasswordSchema),
+    formState: { errors },} = useForm<ChangePasswordData>({resolver: yupResolver(changePasswordSchema),
   });
 
   const onSubmit = async (data: ChangePasswordData) => {
     console.log("Data being sent to backend:", data);
-
+    
     try {
       const response = await axios.post(
         "http://localhost:8080/change-password",
@@ -36,12 +34,11 @@ export const ChangePasswordForm = () => {
         setSubmitted(true);
       } else {
         toast.error("Failed to change password. Please try again.");
-      }
-    } catch (error) {
+      }} 
+      catch (error) {
       console.error("Error during password change:", error);
       toast.error("Error changing password. Please check the server or your connection.");
-    }
-  };
+    } };
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
@@ -51,13 +48,11 @@ export const ChangePasswordForm = () => {
           type="password"
           {...register("currentPassword")}
           isInvalid={!!errors.currentPassword}
-          placeholder="Enter your current password"
-        />
+          placeholder="Enter your current password"/>
         {errors.currentPassword && (
           <Form.Control.Feedback type="invalid">
             {errors.currentPassword.message}
-          </Form.Control.Feedback>
-        )}
+          </Form.Control.Feedback>)}
       </Form.Group>
 
       <Form.Group className="mt-3">
@@ -70,8 +65,7 @@ export const ChangePasswordForm = () => {
         {errors.newPassword && (
           <Form.Control.Feedback type="invalid">
             {errors.newPassword.message}
-          </Form.Control.Feedback>
-        )}
+          </Form.Control.Feedback>)}
       </Form.Group>
 
       <Form.Group className="mt-3">
@@ -80,13 +74,11 @@ export const ChangePasswordForm = () => {
           type="password"
           {...register("confirmPassword")}
           isInvalid={!!errors.confirmPassword}
-          placeholder="Confirm your new password"
-        />
+          placeholder="Confirm your new password" />
         {errors.confirmPassword && (
           <Form.Control.Feedback type="invalid">
             {errors.confirmPassword.message}
-          </Form.Control.Feedback>
-        )}
+          </Form.Control.Feedback>)}
       </Form.Group>
 
       <div className="center mt-4">
@@ -101,5 +93,4 @@ export const ChangePasswordForm = () => {
         </div>
       )}
     </Form>
-  );
-};
+  )};

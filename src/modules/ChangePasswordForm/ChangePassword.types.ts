@@ -1,5 +1,6 @@
 export interface ChangePasswordData{
-    currentPassword: string;
+    currentPassword:string;
     newPassword:string;
     confirmPassword:string;
+
 }
