@@ -6,11 +6,16 @@ const token = sessionStorage.getItem("accessToken") ?? null;
 
 const baseURL = process.env.REACT_APP_API_URL;
 
+const clientId = sessionStorage.getItem("clientId");
+
+const isMainHost = window.location.hostname.startsWith("securosphere.in") || window.location.hostname.startsWith("localhost");
+
 const axiosParams = {
   baseURL: baseURL,
   headers: {
     Accept: "application/json",
     Authorization: `${tokenType} ${token}`,
+    clientId: isMainHost ? null : clientId,
   },
 };
 
