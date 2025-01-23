@@ -17,6 +17,7 @@ import "./App.scss";
 import { PrivateRoute } from "./routes/PrivateRoute";
 import Settings from "./pages/Settings/Settings";
 import Profile from "./pages/Profile";
+import Information from "./pages/Information/Information";
 
 function App() {
   const queryClient = new QueryClient();
@@ -36,6 +37,7 @@ function App() {
               <Route path="/oauth" element={<OAuth />} />
               <Route path="/settings" element={<Settings />} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/information" element={<Information />} />
               <Route element={<PrivateRoute />}>
                 <Route
                   path="/auth-configuration"
