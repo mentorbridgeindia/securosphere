@@ -15,6 +15,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "./App.scss";
 import { PrivateRoute } from "./routes/PrivateRoute";
+import StripedRowExample from "./pages/team_Management";
+
 
 function App() {
   const queryClient = new QueryClient();
@@ -22,6 +24,7 @@ function App() {
   return (
     <div className="App">
       <AppNavbar />
+      
       <ToastContainer />
       <Container className="well-container">
         <QueryClientProvider client={queryClient}>
@@ -32,6 +35,7 @@ function App() {
               <Route path="/forgot-password" element={<ForgotPassword />} />
               <Route path="/reset-password" element={<ResetPassword />} />
               <Route path="/oauth" element={<OAuth />} />
+              <Route path="/team_Management" element={<StripedRowExample />} />
               <Route element={<PrivateRoute />}>
                 <Route
                   path="/auth-configuration"
