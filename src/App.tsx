@@ -15,12 +15,14 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "./App.scss";
 import { PrivateRoute } from "./routes/PrivateRoute";
+import VerifyEmail from "./modules/VerifyEmail";
 
 function App() {
   const queryClient = new QueryClient();
 
   return (
     <div className="App">
+      <VerifyEmail />
       <AppNavbar />
       <ToastContainer />
       <Container className="well-container">
