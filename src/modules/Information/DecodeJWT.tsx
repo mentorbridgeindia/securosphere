@@ -41,13 +41,17 @@ const DecodeJWT = ({ publicKey }: DecodeJWTProps) => {
               }}
               extensions={[json()]}
               height="50px"
-              onClick={handleCopy}
             />
           </div>
 
-          <div className="copy-container" onClick={handleCopy}>
+          <button
+            type="button"
+            className="copy-container btn btn-light"
+            onClick={handleCopy}
+            aria-label="Copy Public Key"
+          >
             <IconCopy />
-          </div>
+          </button>
         </div>
       </Card.Body>
     </Card>

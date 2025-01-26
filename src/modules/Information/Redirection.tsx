@@ -39,12 +39,16 @@ const Redirection = ({ url }: RedirectionProps) => {
               }}
               extensions={[json()]}
               height="50px"
-              onClick={handleCopy}
             />
           </div>
-          <div className="copy-icon" onClick={handleCopy}>
+          <button
+            type="button"
+            className="copy-icon btn btn-light"
+            onClick={handleCopy}
+            aria-label="Copy URL"
+          >
             <IconCopy />
-          </div>
+          </button>
         </div>
       </Card.Body>
     </Card>
