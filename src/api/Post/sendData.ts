@@ -19,7 +19,6 @@ export const sendData = async <T>(
 
 const handleLoginResponse = (response: any) => {
   if (response) {
-    // TODO: Check if its login URL
     const accessToken = response.headers["authorization"];
     if (accessToken !== undefined && accessToken !== null) {
       console.log("accessToken", accessToken);

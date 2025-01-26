@@ -15,8 +15,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "./App.scss";
 import { PrivateRoute } from "./routes/PrivateRoute";
-import Settings from "./pages/Settings/Settings";
-import Profile from "./pages/Profile";
 import Information from "./pages/Information/Information";
 
 function App() {
@@ -35,8 +33,6 @@ function App() {
               <Route path="/forgot-password" element={<ForgotPassword />} />
               <Route path="/reset-password" element={<ResetPassword />} />
               <Route path="/oauth" element={<OAuth />} />
-              <Route path="/settings" element={<Settings />} />
-              <Route path="/profile" element={<Profile />} />
               <Route path="/information" element={<Information />} />
               <Route element={<PrivateRoute />}>
                 <Route

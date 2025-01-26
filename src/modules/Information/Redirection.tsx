@@ -1,9 +1,10 @@
 import React from "react";
-import { Card, Button } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import CodeMirror from "@uiw/react-codemirror";
 import { vscodeDark } from "@uiw/codemirror-theme-vscode";
 import { json } from "@codemirror/lang-json";
 import { ReactComponent as IconCopy } from "@assets/icons/copy.svg";
+import "./Redirection.scss";
 
 interface RedirectionProps {
   url: string;
@@ -15,28 +16,16 @@ const Redirection = ({ url }: RedirectionProps) => {
   };
 
   return (
-    <Card className=" mb-3 border-0">
-      <Card.Body >
+    <Card className="mb-3 border-0">
+      <Card.Body>
         <Card.Text className="mb-3">
           Redirect your users to the following URL to complete their
           registration and authenticate themselves on the SecuroSphere platform.
           This URL will be the central endpoint for managing user sign-ups and
           logins securely.
         </Card.Text>
-        <div
-          className="d-flex align-items-center gap-2 flex-wrap"
-          style={{
-            maxWidth: "100%",
-          }}
-        >
-          <div
-            style={{
-              flexBasis: "80%",
-              flexGrow: 1,
-              overflow: "hidden",
-              minWidth: "0",
-            }}
-          >
+        <div className="redirection-wrapper d-flex align-items-center gap-2 flex-wrap">
+          <div className="code-container">
             <CodeMirror
               value={url}
               theme={vscodeDark}
@@ -53,17 +42,7 @@ const Redirection = ({ url }: RedirectionProps) => {
               onClick={handleCopy}
             />
           </div>
-          <div
-            style={{
-              flexBasis: "10%",
-              flexGrow: 0,
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              cursor: "pointer",
-            }}
-            onClick={handleCopy}
-          >
+          <div className="copy-icon" onClick={handleCopy}>
             <IconCopy />
           </div>
         </div>

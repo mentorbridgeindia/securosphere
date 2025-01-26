@@ -4,6 +4,7 @@ import CodeMirror from "@uiw/react-codemirror";
 import { vscodeDark } from "@uiw/codemirror-theme-vscode";
 import { json } from "@codemirror/lang-json";
 import { ReactComponent as IconCopy } from "@assets/icons/copy.svg";
+import "./DecodeJWT.scss";
 
 interface DecodeJWTProps {
   publicKey: string;
@@ -15,8 +16,8 @@ const DecodeJWT = ({ publicKey }: DecodeJWTProps) => {
   };
 
   return (
-    <Card className=" mb-3 border-0">
-      <Card.Body >
+    <Card className="mb-3 border-0">
+      <Card.Body>
         <Card.Text className="mb-3">
           Decode the JWT token payload using the public key provided below:
         </Card.Text>
@@ -26,14 +27,7 @@ const DecodeJWT = ({ publicKey }: DecodeJWTProps) => {
             maxWidth: "100%",
           }}
         >
-          <div
-            style={{
-              flexBasis: "80%",
-              flexGrow: 1,
-              overflow: "hidden",
-              minWidth: "0",
-            }}
-          >
+          <div className="code-container">
             <CodeMirror
               value={publicKey}
               theme={vscodeDark}
@@ -51,17 +45,7 @@ const DecodeJWT = ({ publicKey }: DecodeJWTProps) => {
             />
           </div>
 
-          <div
-            style={{
-              flexBasis: "10%",
-              flexGrow: 0,
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              cursor: "pointer",
-            }}
-            onClick={handleCopy}
-          >
+          <div className="copy-container" onClick={handleCopy}>
             <IconCopy />
           </div>
         </div>

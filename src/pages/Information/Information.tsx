@@ -3,6 +3,27 @@ import React, { useEffect, useState } from "react";
 import Redirection from "@/modules/Information/Redirection";
 import DecodeJWT from "@/modules/Information/DecodeJWT";
 
+interface InfoStepProps {
+  step: string;
+  title: string;
+  children: React.ReactNode;
+}
+
+const InfoStep = ({ step, title, children }: InfoStepProps) => (
+  <Row className="mt-4 justify-content-center">
+    <Col xs={12} md={8} lg={7}>
+      <Card className="shadow-sm mb-4">
+        <Card.Body>
+          <FormLabel style={{ color: "#002851", fontWeight: "bold" }}>
+            {step}: {title}
+          </FormLabel>
+          {children}
+        </Card.Body>
+      </Card>
+    </Col>
+  </Row>
+);
+
 const Information = () => {
   const [url, setUrl] = useState<string>("");
   const [publicKey, setPublicKey] = useState<string>("");
@@ -19,17 +40,14 @@ const Information = () => {
       <Row className="justify-content-center">
         <Col xs={12} md={8} lg={7}>
           <h2
-            className="text-center text-primary mb-4 "
+            className="text-center text-primary mb-4"
             style={{ fontWeight: "bold", fontSize: "1.5rem" }}
           >
             APPLICATION INFO
           </h2>
           <p
             className="text-center mb-4"
-            style={{
-              fontWeight: "bold",
-              fontSize: "1.2rem",
-            }}
+            style={{ fontWeight: "bold", fontSize: "1.2rem" }}
           >
             Welcome to SecuroSphere
           </p>
@@ -52,31 +70,14 @@ const Information = () => {
         </Col>
       </Row>
 
-      <Row className="mt-4 justify-content-center">
-        <Col xs={12} md={8} lg={7}>
-          <Card className="shadow-sm mb-4">
-            <Card.Body>
-              <FormLabel style={{ color: "#002851", fontWeight: "bold" }}>
-                STEP 1: REDIRECT DETAILS
-              </FormLabel>
-              <Redirection url={url} />
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
+      <InfoStep step="STEP 1" title="REDIRECT DETAILS">
+        <Redirection url={url} />
+      </InfoStep>
 
-      <Row className="mt-4 justify-content-center">
-        <Col xs={12} md={8} lg={7}>
-          <Card className="shadow-sm mb-4">
-            <Card.Body>
-              <FormLabel style={{ color: "#002851", fontWeight: "bold" }}>
-                STEP 2: DECODE JWT TOKEN
-              </FormLabel>
-              <DecodeJWT publicKey={publicKey} />
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
+      <InfoStep step="STEP 2" title="DECODE JWT TOKEN">
+        <DecodeJWT publicKey={publicKey} />
+      </InfoStep>
+
       <Row>
         <Col className="text-center d-flex justify-content-center">
           <Button variant="primary">Continue</Button>
