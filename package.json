@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@codemirror/lang-javascript": "^6.2.2",
+    "@codemirror/lang-json": "^6.0.1",
+    "@codemirror/theme-one-dark": "^6.1.2",
+    "@codemirror/view": "^6.36.2",
     "@hookform/resolvers": "^3.9.1",
     "@radix-ui/colors": "^3.0.0",
     "@radix-ui/react-avatar": "^1.1.2",
@@ -16,12 +20,16 @@
     "@types/node": "^16.18.121",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
+    "@uiw/codemirror-theme-vscode": "^4.23.7",
+    "@uiw/react-codemirror": "^4.23.7",
     "@vercel/analytics": "^1.4.1",
     "@vercel/speed-insights": "^1.1.0",
     "axios": "^1.7.9",
     "bootstrap": "^5.3.3",
+    "cross-env": "^7.0.3",
     "headless-stepper": "^1.11.0",
     "jotai": "^2.11.0",
+    "lucide-react": "^0.473.0",
     "posthog-js": "^1.205.0",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.6",
@@ -37,7 +45,7 @@
     "yup": "^1.6.1"
   },
   "scripts": {
-    "start": "NODE_ENV=development craco start",
+    "start": "cross-env NODE_ENV=development craco start",
     "build": "craco build && npm run sentry:sourcemaps",
     "test": "craco test",
     "eject": "react-scripts eject",
@@ -63,6 +71,7 @@
   },
   "devDependencies": {
     "@craco/craco": "^7.1.0",
-    "@svgr/webpack": "^8.1.0"
+    "@svgr/webpack": "^8.1.0",
+    "@types/react-bootstrap": "^0.32.37"
   }
 }
