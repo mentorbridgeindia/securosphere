@@ -16,6 +16,7 @@ import { ToastContainer } from "react-toastify";
 import "./App.scss";
 import { PrivateRoute } from "./routes/PrivateRoute";
 import VerifyEmail from "./modules/VerifyEmail";
+import Information from "./pages/Information/Information";
 
 function App() {
   const queryClient = new QueryClient();
@@ -34,6 +35,7 @@ function App() {
               <Route path="/forgot-password" element={<ForgotPassword />} />
               <Route path="/reset-password" element={<ResetPassword />} />
               <Route path="/oauth" element={<OAuth />} />
+              <Route path="/information" element={<Information />} />
               <Route element={<PrivateRoute />}>
                 <Route
                   path="/auth-configuration"
