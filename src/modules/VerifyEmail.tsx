@@ -21,8 +21,6 @@ const VerifyEmail = () => {
       if (value && index < otpRefs.current.length - 1) {
         otpRefs.current[index + 1]?.focus();
       }
-
-    
       if (newOtp.join("").length === 6) {
         verifyOtp(newOtp.join(""));
       }
