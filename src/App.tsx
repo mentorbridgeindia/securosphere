@@ -15,6 +15,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "./App.scss";
 import { PrivateRoute } from "./routes/PrivateRoute";
+import VerifyEmail from "./modules/VerifyEmail";
 import Information from "./pages/Information/Information";
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
 
   return (
     <div className="App">
+      <VerifyEmail />
       <AppNavbar />
       <ToastContainer />
       <Container className="well-container">
