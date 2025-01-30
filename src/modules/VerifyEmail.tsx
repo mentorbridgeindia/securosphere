@@ -17,7 +17,6 @@ const VerifyEmail = () => {
       const newOtp = [...otp];
       newOtp[index] = value;
       setOtp(newOtp);
-
       if (value && index < otpRefs.current.length - 1) {
         otpRefs.current[index + 1]?.focus();
       }
@@ -113,7 +112,7 @@ const VerifyEmail = () => {
         {message && <Alert variant="info" className="mt-3">{message}</Alert>}
 
         <div className="text-center mt-5 d-flex justify-content-center align-items-center gap-2">
-          <p style={{ fontSize: "18px", marginBottom: "0" }}>Didn’t receive the email?</p>
+          <p style={{ fontSize: "18px", marginBottom: "0"}}>Didn’t receive the email?</p>
           <Anchor href="/resend-verification-email" className="text-info fw-bold">
             Resend Verification Email
           </Anchor>
