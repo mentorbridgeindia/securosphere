@@ -9,7 +9,7 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-
+import { useInit } from "@hooks/useInit"; 
 export const Login = () => {
   const navigate = useNavigate();
   const { mutate: loginUser, isPending } = useLogin({
@@ -17,18 +17,22 @@ export const Login = () => {
       toast.success("Login successful! Welcome back!");
       navigate("/");
     },
-    onError: (error) => {
+    onError: () => {
       toast.error("Login failed. Please check your credentials.");
     },
   });
 
+  const { data, loading } = useInit(); 
   useEffect(() => {
     sessionStorage.removeItem("accessToken");
   }, []);
 
+  if (loading) return <Spinner isLoading={true} />; 
+  const clientBaseUrl = data?.callbackUrl || "https://securosphere.in";
+  const loginUrl = `${clientBaseUrl}/login`;
+  const appName = data?.appName || "SecuroSphere"; 
   return (
     <div className="d-flex align-items-center justify-content-center">
-      <Spinner isLoading={isPending} />
       <Row className="w-100 center">
         <Col
           lg={7}
@@ -51,16 +55,22 @@ export const Login = () => {
             <div className="d-flex justify-content-center brand-lg">
               <IconLogo />
             </div>
+            <h4 className="text-center mt-3">Welcome to {appName}</h4>{" "}
             <SocialLoginButtons
-              isGoogleAvailable
-              isLinkedinAvailable
-              isGithubAvailable
+              isGoogleAvailable={data?.socialProviders?.google}
+              isGithubAvailable={data?.socialProviders?.github}
+              isLinkedinAvailable={data?.socialProviders?.linkedIn}
             />
             <div className="mt-3 px-5">
               <hr />
             </div>
             <div className="mt-3">
               <LoginForm loginUser={loginUser} />
+            </div>
+            <div className="mt-3 text-center">
+              <a href={loginUrl} className="btn btn-primary w-100">
+                Go to {appName} Login
+              </a>
             </div>
           </Card>
         </Col>

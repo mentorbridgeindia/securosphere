@@ -5,12 +5,16 @@ import { fetchData } from "@api/Get/fetchData";
 export const useInit = () => {
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [callbackUrl, setCallbackUrl] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchInitData = async () => {
       try {
-        const result = await fetchData(`/${INIT_ENDPOINT}`);
+        const result: { callbackUrl?: string } = await fetchData(`/${INIT_ENDPOINT}`);
         setData(result);
+        if (result?.callbackUrl) {
+          setCallbackUrl(result.callbackUrl);
+        }
       } catch (error) {
         console.error("Error initializing:", error);
       } finally {
@@ -21,5 +25,5 @@ export const useInit = () => {
     fetchInitData();
   }, []);
 
-  return { data, loading };
+  return { data, loading, callbackUrl };
 };
