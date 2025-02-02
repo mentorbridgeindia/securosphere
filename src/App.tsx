@@ -23,7 +23,7 @@ function App() {
 
   return (
     <div className="App">
-      <VerifyEmail />
+    
       <AppNavbar />
       <ToastContainer />
       <Container className="well-container">
@@ -36,6 +36,7 @@ function App() {
               <Route path="/reset-password" element={<ResetPassword />} />
               <Route path="/oauth" element={<OAuth />} />
               <Route path="/information" element={<Information />} />
+              <Route path="/verify-email" element={<VerifyEmail />} />
               <Route element={<PrivateRoute />}>
                 <Route
                   path="/auth-configuration"
