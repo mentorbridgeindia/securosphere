@@ -15,7 +15,7 @@ export const AppNavbar = () => {
       <Container>
         <Navbar.Brand href="/" className="brand">
           <IconLogo />
-          {isValidClient && data && data.applicationName}
+          {isValidClient && data?.applicationName}
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
