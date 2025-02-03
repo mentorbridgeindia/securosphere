@@ -6,12 +6,15 @@ import { RegisterData } from "./RegisterForm.types";
 
 import { Anchor } from "@atoms/Anchor";
 import { IRegisterMutation } from "@entities/Register";
+import { Link } from "react-router-dom";
 import { schema } from "./schema";
 
 export const RegisterForm = ({
   registerUser,
+  termsOfServiceUrl,
 }: {
   registerUser: (data: IRegisterMutation) => void;
+  termsOfServiceUrl: string;
 }) => {
   const {
     register,
@@ -100,7 +103,7 @@ export const RegisterForm = ({
         <Form.Check type="checkbox" />
         <FormLabel className="ms-2 d-flex align-items-center gap-1">
           I agree to the
-          <Anchor className="p-0" href="/">
+          <Anchor className="p-0" href={termsOfServiceUrl}>
             Terms and Conditions
           </Anchor>
         </FormLabel>
@@ -112,7 +115,7 @@ export const RegisterForm = ({
       </div>
       <p className="mt-3 d-flex align-items-center gap-1 justify-content-center">
         Have an account already?
-        <Anchor href="/login">Sign in</Anchor>
+        <Link to="/login">Sign in</Link>
       </p>
     </Form>
   );
