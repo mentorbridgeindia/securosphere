@@ -1,11 +1,12 @@
-import { useQuery } from "@tanstack/react-query";
 import { INIT_ENDPOINT } from "@api/endpoints";
 import { fetchData } from "@api/Get/fetchData";
+import { useQuery } from "@tanstack/react-query";
 
 const QUERY_KEY = ["initData"];
 
 interface InitData {
   applicationName: string;
+  logo?: string;
   socialProviders: {
     google?: boolean;
     linkedIn?: boolean;
@@ -16,7 +17,6 @@ interface InitData {
     instagram?: boolean;
     twitter?: boolean;
     amazon?: boolean;
-
   };
   termsOfServiceUrl?: string;
 }
@@ -32,5 +32,5 @@ export const useInit = () => {
     staleTime: 1000 * 60 * 5,
   });
 
-  return { data, loading: isLoading, error };
+  return { data, isLoading, error };
 };

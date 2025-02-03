@@ -1,6 +1,6 @@
-import { ReactComponent as IconLogo } from "@assets/icons/logo.svg";
 import { Spinner } from "@atoms/Spinner";
 import { useRegister } from "@entities/Register";
+import { useInit } from "@hooks/useInit";
 import { RegisterForm } from "@modules/RegisterForm";
 import { SocialLoginButtons } from "@modules/SocialLogin";
 import { useEffect } from "react";
@@ -9,7 +9,6 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useInit } from "@hooks/useInit";
 
 export const Register = () => {
   const navigate = useNavigate();
@@ -23,16 +22,16 @@ export const Register = () => {
     },
   });
 
-  const { data, loading, error } = useInit();
+  const { data, isLoading } = useInit();
 
   useEffect(() => {
-    if (!loading && !data) {
+    if (!isLoading && !data) {
       window.location.href = "https://securosphere.in";
     }
     sessionStorage.removeItem("accessToken");
-  }, [loading, data]);
+  }, [isLoading, data]);
 
-  if (loading) return <Spinner isLoading />;
+  if (isLoading) return <Spinner isLoading />;
 
   return (
     <div className="d-flex align-items-center justify-content-center my-2 mt-5">
@@ -55,11 +54,15 @@ export const Register = () => {
         >
           <Card className="p-4 shadow rounded w-100">
             <div className="d-flex justify-content-center brand-lg">
-              <IconLogo />
+              {data?.logo && (
+                <img src={data?.logo} alt="logo" className="img-fluid" />
+              )}
             </div>
-            <h5 className="text-center mb-4">
-              Welcome to {data?.applicationName || "SecuroSphere"} register page
-            </h5>
+            {data?.applicationName && (
+              <h5 className="text-center mb-4">
+                Welcome to {data?.applicationName}
+              </h5>
+            )}
             <SocialLoginButtons
               isGoogleAvailable={data?.socialProviders?.google || false}
               isFacebookAvailable={data?.socialProviders?.facebook || false}
@@ -75,17 +78,11 @@ export const Register = () => {
               <hr />
             </div>
             <div className="mt-3">
-              <RegisterForm registerUser={registerUser} />
+              <RegisterForm
+                registerUser={registerUser}
+                termsOfServiceUrl={data?.termsOfServiceUrl ?? ""}
+              />
             </div>
-            {data?.termsOfServiceUrl && (
-              <a
-                href={data.termsOfServiceUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Terms of Service
-              </a>
-            )}
           </Card>
         </Col>
       </Row>
