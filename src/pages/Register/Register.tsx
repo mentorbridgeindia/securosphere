@@ -23,16 +23,19 @@ export const Register = () => {
     },
   });
 
-  const { data, isValidClient } = useInit();
+  const { data, loading, error } = useInit();
 
   useEffect(() => {
+    if (!loading && !data) {
+      window.location.href = "https://securosphere.in";
+    }
     sessionStorage.removeItem("accessToken");
-  }, []);
+  }, [loading, data]);
 
-  // Common JSX layout for the register page
-  const registerPageContent = (
+  if (loading) return <Spinner isLoading />;
+
+  return (
     <div className="d-flex align-items-center justify-content-center my-2 mt-5">
-      <Spinner isLoading={isPending} />
       <Row className="w-100 center">
         <Col
           lg={7}
@@ -55,26 +58,18 @@ export const Register = () => {
               <IconLogo />
             </div>
             <h5 className="text-center mb-4">
-              {isValidClient && data
-                ? `Welcome to ${data.applicationName} register page`
-                : "Welcome to SecuroSphere register page"}
+              Welcome to {data?.applicationName || "SecuroSphere"} register page
             </h5>
             <SocialLoginButtons
-              isGoogleAvailable={
-                isValidClient && data ? data.socialProviders.google : true
-              }
-              isLinkedinAvailable={
-                isValidClient && data ? data.socialProviders.linkedIn : true
-              }
-              isGithubAvailable={
-                isValidClient && data ? data.socialProviders.github : true
-              }
-              isFacebookAvailable={
-                isValidClient && data ? data.socialProviders.facebook : false
-              }
-              isMicrosoftAvailable={
-                isValidClient && data ? data.socialProviders.microsoft : false
-              }
+              isGoogleAvailable={data?.socialProviders?.google || false}
+              isFacebookAvailable={data?.socialProviders?.facebook || false}
+              isMicrosoftAvailable={data?.socialProviders?.microsoft || false}
+              isLinkedinAvailable={data?.socialProviders?.linkedIn || false}
+              isGithubAvailable={data?.socialProviders?.github || false}
+              isTwitterAvailable={data?.socialProviders?.twitter || false}
+              isInstagramAvailable={data?.socialProviders?.instagram || false}
+              isAppleAvailable={data?.socialProviders?.apple || false}
+              isAmazonAvailable={data?.socialProviders?.amazon || false}
             />
             <div className="mt-3 px-5">
               <hr />
@@ -82,7 +77,7 @@ export const Register = () => {
             <div className="mt-3">
               <RegisterForm registerUser={registerUser} />
             </div>
-            {isValidClient && data && (
+            {data?.termsOfServiceUrl && (
               <a
                 href={data.termsOfServiceUrl}
                 target="_blank"
@@ -96,7 +91,4 @@ export const Register = () => {
       </Row>
     </div>
   );
-
-  // Render the register page content
-  return registerPageContent;
 };

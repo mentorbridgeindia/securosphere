@@ -1,36 +1,36 @@
-import { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { INIT_ENDPOINT } from "@api/endpoints";
 import { fetchData } from "@api/Get/fetchData";
 
+const QUERY_KEY = ["initData"];
+
+interface InitData {
+  applicationName: string;
+  socialProviders: {
+    google?: boolean;
+    linkedIn?: boolean;
+    github?: boolean;
+    facebook?: boolean;
+    microsoft?: boolean;
+    apple?: boolean;
+    instagram?: boolean;
+    twitter?: boolean;
+    amazon?: boolean;
+
+  };
+  termsOfServiceUrl?: string;
+}
+
+const getInitData = async () => {
+  return await fetchData<InitData>(INIT_ENDPOINT);
+};
+
 export const useInit = () => {
-  const [data, setData] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
-  const [callbackUrl, setCallbackUrl] = useState<string | null>(null);
-  const [isValidClient, setIsValidClient] = useState(false);
+  const { data, error, isLoading } = useQuery<InitData>({
+    queryKey: QUERY_KEY,
+    queryFn: getInitData,
+    staleTime: 1000 * 60 * 5,
+  });
 
-  useEffect(() => {
-    const fetchInitData = async () => {
-      try {
-        const result: { callbackUrl?: string; website: string; applicationName: string; socialProviders: any } = await fetchData(INIT_ENDPOINT);
-        setData(result);
-        if (result?.callbackUrl) {
-          setCallbackUrl(result.callbackUrl);
-        }
-
-        // Check if the current website matches the client's website
-        const currentHost = window.location.host;
-        if (result?.website && currentHost.includes(result.website.replace("https://", "").replace("http://", ""))) {
-          setIsValidClient(true);
-        }
-      } catch (error) {
-        console.error("Error initializing:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchInitData();
-  }, []);
-
-  return { data, loading, callbackUrl, isValidClient };
+  return { data, loading: isLoading, error };
 };
