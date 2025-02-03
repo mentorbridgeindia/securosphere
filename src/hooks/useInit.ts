@@ -16,7 +16,6 @@ interface InitData {
     instagram?: boolean;
     twitter?: boolean;
     amazon?: boolean;
-
   };
   termsOfServiceUrl?: string;
 }
@@ -24,6 +23,8 @@ interface InitData {
 const getInitData = async () => {
   return await fetchData<InitData>(INIT_ENDPOINT);
 };
+
+console.log(getInitData);
 
 export const useInit = () => {
   const { data, error, isLoading } = useQuery<InitData>({

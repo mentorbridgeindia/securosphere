@@ -61,15 +61,15 @@ export const Register = () => {
               Welcome to {data?.applicationName || "SecuroSphere"} register page
             </h5>
             <SocialLoginButtons
-              isGoogleAvailable={data?.socialProviders?.google || false}
-              isFacebookAvailable={data?.socialProviders?.facebook || false}
-              isMicrosoftAvailable={data?.socialProviders?.microsoft || false}
-              isLinkedinAvailable={data?.socialProviders?.linkedIn || false}
-              isGithubAvailable={data?.socialProviders?.github || false}
-              isTwitterAvailable={data?.socialProviders?.twitter || false}
-              isInstagramAvailable={data?.socialProviders?.instagram || false}
-              isAppleAvailable={data?.socialProviders?.apple || false}
-              isAmazonAvailable={data?.socialProviders?.amazon || false}
+              isGoogleAvailable={data?.socialProviders?.google ?? false}
+              isFacebookAvailable={data?.socialProviders?.facebook ?? false}
+              isMicrosoftAvailable={data?.socialProviders?.microsoft ?? false}
+              isLinkedinAvailable={data?.socialProviders?.linkedIn ?? false}
+              isGithubAvailable={data?.socialProviders?.github ?? false}
+              isTwitterAvailable={data?.socialProviders?.twitter ?? false}
+              isInstagramAvailable={data?.socialProviders?.instagram ?? false}
+              isAppleAvailable={data?.socialProviders?.apple ?? false}
+              isAmazonAvailable={data?.socialProviders?.amazon ?? false}
             />
             <div className="mt-3 px-5">
               <hr />
