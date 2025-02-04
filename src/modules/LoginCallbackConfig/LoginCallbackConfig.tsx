@@ -8,6 +8,8 @@ import { Card, Col, Form, InputGroup, Row } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { loginCallbackConfigAtom } from "./atoms/loginCallbackConfigAtom";
 import { LoginCallbackConfigState } from "./LoginCallbackConfig.types";
+import { ReactComponent as IconCheckCircle } from "@assets/icons/icon-check.svg";
+import { ReactComponent as IconCrossCircle } from "@assets/icons/icon-cross.svg";
 
 export const LoginCallbackConfig = () => {
   const [domainValue, setDomainValue] = useState("");
@@ -73,7 +75,7 @@ export const LoginCallbackConfig = () => {
   const handleWebsiteBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     const validateUrl = async (url: string) => {
       try {
-        const res = await fetch(url, { method: 'HEAD' });
+        const res = await fetch(url, { method: "HEAD" });
         if (res.status === 404) {
           toast.error("Terms & Conditions url not valid");
         }
@@ -148,11 +150,29 @@ export const LoginCallbackConfig = () => {
                     onChange={handleChange}
                     value={setup.subDomain}
                     onBlur={handleBlur}
+                    isInvalid={!!domainValue && !isDomainAvailable}
                   />
                   <InputGroup.Text className="text-small">
                     .securosphere.com
                   </InputGroup.Text>
                 </InputGroup>
+                {domainValue && (
+                  <div
+                    className={`d-flex align-items-center gap-2 text-small fs-8 ${
+                      isDomainAvailable ? "text-success" : "text-danger"
+                    }`}
+                  >
+                    {isDomainAvailable ? (
+                      <>
+                        <IconCheckCircle /> Sub Domain is available
+                      </>
+                    ) : (
+                      <>
+                        <IconCrossCircle /> Sub Domain is not available
+                      </>
+                    )}
+                  </div>
+                )}
               </Form.Group>
               <Form.Group controlId="authorizedOrigins" className="mb-3">
                 <FormLabel className="d-flex align-items-center justify-content-between">

@@ -9,7 +9,7 @@ import { schema } from "./ForgotPasswordSchema";
 import { ForgotPasswordData } from "./ForgotPassword.types";
 
 export const ForgotPasswordForm = () => {
-  const [submitted, setSubmitted] = useState(false); 
+  const [submitted, setSubmitted] = useState(false);
   const {
     register,
     handleSubmit,
@@ -34,7 +34,7 @@ export const ForgotPasswordForm = () => {
 
       if (response.status === 200) {
         toast.success("A password reset link has been sent to your email.");
-        setSubmitted(true); 
+        setSubmitted(true);
       } else {
         toast.error("Failed to send reset link. Please try again.");
       }

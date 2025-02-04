@@ -26,13 +26,13 @@ export const AuthConfiguration = () => {
 
   const [steps, setSteps] = useState<Step[]>([
     {
-      label: "Sign up Configuration",
-      component: <SignUpConfig />,
+      label: "Login Callback Configuration",
+      component: <LoginCallbackConfig />,
       isValid: false,
     },
     {
-      label: "Login Callback Configuration",
-      component: <LoginCallbackConfig />,
+      label: "Sign up Configuration",
+      component: <SignUpConfig />,
       isValid: false,
     },
   ]);
