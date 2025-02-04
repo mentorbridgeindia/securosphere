@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Form, Card, Button, Image } from "react-bootstrap";
-import { AppSettingsProps } from "@modules/settings/types/config";
 import { Settings } from "lucide-react";
+import { AppSettingsProps } from "@modules/settings/types/config";
 
-const AppSettingsComponent: React.FC<
-  AppSettingsProps & { isEditing: boolean }
-> = ({ config, onUpdateConfig, isEditing }) => {
+type AppSettingsComponentProps = AppSettingsProps & { isEditing: boolean };
+
+const AppSettingsComponent = ({ config, onUpdateConfig, isEditing }: AppSettingsComponentProps) => {
   const [logoPreview, setLogoPreview] = useState<string | null>(
     config.applicationLogo || null
   );
