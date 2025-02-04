@@ -1,6 +1,6 @@
-import { Card, Form, Button, ListGroup } from "react-bootstrap";
-import { Shield, Globe, LogOut } from "lucide-react";
-import type { SecuritySettingsProps } from "./types/config";
+import { Card, Form, Button } from "react-bootstrap";
+import { Shield, Globe } from "lucide-react";
+import type { SecuritySettingsProps } from "@modules/settings/types/config";
 
 export const SecuritySettingsComponent = ({
   security,
@@ -29,26 +29,11 @@ export const SecuritySettingsComponent = ({
                 <Form.Check
                   type="switch"
                   id="2fa-toggle"
-                  checked={security.twoFactorEnabled}
-                  onChange={(e) =>
-                    onUpdateSecurity({ twoFactorEnabled: e.target.checked })
-                  }
+                  checked={true} 
+                  disabled 
                 />
               </div>
             </div>
-            {security.twoFactorEnabled && (
-              <Form.Select
-                value={security.twoFactorMethod}
-                onChange={(e) =>
-                  onUpdateSecurity({ twoFactorMethod: e.target.value as any })
-                }
-                className="rounded-pill"
-              >
-                <option value="app">Authenticator App</option>
-                <option value="sms">SMS</option>
-                <option value="email">Email</option>
-              </Form.Select>
-            )}
           </div>
 
           <div className="mb-4">
@@ -70,35 +55,18 @@ export const SecuritySettingsComponent = ({
           </div>
 
           <div>
-            <h6 className="mb-3 text-muted">Active Sessions</h6>
-            <ListGroup variant="flush">
-              {security.activeSessions.map((session) => (
-                <ListGroup.Item
-                  key={session.id}
-                  className="px-4 py-3 bg-light rounded-3 mb-2 border-0"
-                >
-                  <div className="d-flex justify-content-between align-items-center">
-                    <div>
-                      <div className="d-flex align-items-center mb-1">
-                        <Globe size={16} className="me-2 text-primary" />
-                        <h6 className="mb-0">{session.device}</h6>
-                      </div>
-                      <small className="text-muted">
-                        {session.location} • {session.ip}
-                      </small>
-                    </div>
-                    <Button
-                      variant="outline-danger"
-                      size="sm"
-                      className="rounded-pill px-3"
-                    >
-                      <LogOut size={14} className="me-1" />
-                      Terminate
-                    </Button>
-                  </div>
-                </ListGroup.Item>
-              ))}
-            </ListGroup>
+            <h6 className="mb-3 text-muted">Last Login</h6>
+            <div className="bg-light rounded-3 p-4">
+              <div className="d-flex justify-content-between align-items-center">
+                <div>
+                  <h6 className="mb-1">Last Login</h6>
+                  <p className="text-muted mb-0 small">
+                    {security.lastPasswordChange.toLocaleDateString()}{" "}
+                    {security.lastPasswordChange.toLocaleTimeString()}
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </Form>
       </Card.Body>

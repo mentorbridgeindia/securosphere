@@ -17,7 +17,7 @@ import VerifyEmail from "./modules/VerifyEmail";
 import Information from "./pages/Information/Information";
 import { PrivateRoute } from "./routes/PrivateRoute";
 import Settings from "./pages/Settings/Settings";
-import Profile from "./pages/Profile";
+import Profile from "./pages/Profile/Profile";
 
 function App() {
   return (
