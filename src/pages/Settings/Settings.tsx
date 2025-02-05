@@ -1,25 +1,26 @@
 import { useState } from "react";
 import { Container, Row, Col, Nav, Card, Button } from "react-bootstrap";
 import { SecuritySettingsComponent } from "@modules/settings/SecuritySettings";
-import { Shield, Settings as SettingsIcon, Edit } from "lucide-react";
+import { Shield, Settings as SettingsIcon, Edit, Mail } from "lucide-react";
 import type {
   SecuritySettings,
   AppConfig,
+  EmailSettingsProps,
 } from "@modules/settings/types/config";
 import "./settings.scss";
 import AppSettingsComponent from "@/modules/settings/AppSettings";
+import EmailSettingsComponent from "@/modules/settings/EmailSettings";
 
 function Settings() {
   const [activeTab, setActiveTab] = useState("application");
-  const [isEditing, setIsEditing] = useState(false); 
 
   const [security, setSecurity] = useState<SecuritySettings>({
-    twoFactorEnabled: true, 
+    twoFactorEnabled: true,
     lastPasswordChange: new Date(),
   });
 
   const [appConfig, setAppConfig] = useState<AppConfig>({
-    subDomain: "example.securosphere.in", 
+    subDomain: "example.securosphere.in",
     authorizedDomains: ["localhost"],
     callbackUrl: "http://localhost:9000/auth/config",
     applicationName: "Test App",
@@ -28,11 +29,19 @@ function Settings() {
       email: true,
       linkedIn: true,
       google: true,
-      facebook: true, 
+      facebook: true,
       apple: true,
       microsoft: true,
     },
     applicationLogo: null,
+  });
+
+  const [emailConfig, setEmailConfig] = useState<EmailSettingsProps>({
+    serverAddress: "smtp.example.com",
+    port: 587,
+    username: "user@example.com",
+    password: "********",
+    fromEmail: "noreply@example.com",
   });
 
   return (
@@ -41,10 +50,7 @@ function Settings() {
         <h3 className="fw-bold" style={{ color: "#002851" }}>
           Settings
         </h3>
-        <Button variant="primary" onClick={() => setIsEditing(!isEditing)}>
-          <Edit size={18} className="me-2" />
-          {isEditing ? "Save" : "Edit"}
-        </Button>
+     
       </div>
 
       <Row>
@@ -80,16 +86,29 @@ function Settings() {
                     Security
                   </Nav.Link>
                 </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link
+                    active={activeTab === "email"}
+                    onClick={() => setActiveTab("email")}
+                    className="d-flex align-items-center px-4 py-3 border-bottom custom-nav-link"
+                  >
+                    <Mail
+                      size={18}
+                      className="me-2"
+                      style={{ color: "#002851" }}
+                    />
+                    Email
+                  </Nav.Link>
+                </Nav.Item>
               </Nav>
             </Card.Body>
           </Card>
         </Col>
 
         <Col md={9}>
-          {activeTab === "application" && (
+        {activeTab === "application" && (
             <AppSettingsComponent
               config={appConfig}
-              isEditing={isEditing} 
               onUpdateConfig={(updates) =>
                 setAppConfig({ ...appConfig, ...updates })
               }
@@ -100,6 +119,14 @@ function Settings() {
               security={security}
               onUpdateSecurity={(updates) =>
                 setSecurity({ ...security, ...updates })
+              }
+            />
+          )}
+          {activeTab === "email" && (
+            <EmailSettingsComponent
+              config={emailConfig}
+              onUpdateConfig={(updates) =>
+                setEmailConfig({ ...emailConfig, ...updates })
               }
             />
           )}
