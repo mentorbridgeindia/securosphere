@@ -137,7 +137,15 @@ const AppSettingsComponent = ({ config, onUpdateConfig }: AppSettingsProps) => {
               )}
             </div>
           ))}
-          {/* ... */}
+          {isEditing && (
+            <Button
+              variant="outline-primary"
+              onClick={handleAddDomain}
+              className="mt-2"
+            >
+              Add Domain
+            </Button>
+          )}
         </Form.Group>
 
         <Form.Group className="mb-3">
