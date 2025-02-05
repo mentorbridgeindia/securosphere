@@ -16,6 +16,8 @@ import "./App.scss";
 import VerifyEmail from "./modules/VerifyEmail";
 import Information from "./pages/Information/Information";
 import { PrivateRoute } from "./routes/PrivateRoute";
+import Settings from "./pages/Settings/Settings";
+import Profile from "./pages/Profile/Profile";
 
 function App() {
   return (
@@ -32,6 +34,8 @@ function App() {
             <Route path="/oauth" element={<OAuth />} />
             <Route path="/information" element={<Information />} />
             <Route path="/verify-email" element={<VerifyEmail />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/profile" element={<Profile />} />
             <Route element={<PrivateRoute />}>
               <Route
                 path="/auth-configuration"
