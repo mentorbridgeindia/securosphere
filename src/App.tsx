@@ -17,20 +17,23 @@ import "./App.scss";
 import { PrivateRoute } from "./routes/PrivateRoute";
 import VerifyEmail from "./modules/VerifyEmail";
 import Information from "./pages/Information/Information";
+import AdminDashboard from "./pages/AdminDashboard";
 
 function App() {
   const queryClient = new QueryClient();
 
   return (
     <div className="App">
-      <VerifyEmail />
+      
       <AppNavbar />
       <ToastContainer />
       <Container className="well-container">
         <QueryClientProvider client={queryClient}>
           <BrowserRouter>
             <Routes>
+              <Route path="/admin-dashboard" element={<AdminDashboard />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/verifyemail" element={<VerifyEmail />} />
               <Route path="/register" element={<Register />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
               <Route path="/reset-password" element={<ResetPassword />} />
