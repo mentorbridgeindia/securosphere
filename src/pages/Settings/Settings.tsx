@@ -32,6 +32,9 @@ function Settings() {
       facebook: true,
       apple: true,
       microsoft: true,
+      github: true,
+      amazon: true,
+      twitter: true,
     },
     applicationLogo: null,
   });
@@ -50,7 +53,6 @@ function Settings() {
         <h3 className="fw-bold" style={{ color: "#002851" }}>
           Settings
         </h3>
-     
       </div>
 
       <Row>
@@ -106,7 +108,7 @@ function Settings() {
         </Col>
 
         <Col md={9}>
-        {activeTab === "application" && (
+          {activeTab === "application" && (
             <AppSettingsComponent
               config={appConfig}
               onUpdateConfig={(updates) =>
