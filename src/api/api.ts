@@ -4,11 +4,25 @@ const tokenType = "Bearer";
 
 const token = sessionStorage.getItem("accessToken") ?? null;
 
-const baseURL = process.env.REACT_APP_API_URL;
-
 const clientId = sessionStorage.getItem("clientId");
 
-const isMainHost = window.location.hostname.startsWith("securosphere.in") || window.location.hostname.startsWith("localhost");
+const isMainHost = window.location.hostname.startsWith("www.securosphere.in");
+
+const subDomain = window.location.hostname.split(".")[0];
+
+const isLocalHost = window.location.hostname.includes("localhost");
+
+let baseURL = isMainHost
+  ? "http://api.securosphere.in"
+  : `http://${subDomain}.api.securosphere.in`;
+
+if (isLocalHost) {
+  if (subDomain === "" || subDomain === "localhost") {
+    baseURL = "http://api.localhost:8080";
+  } else {
+    baseURL = `http://${subDomain}.api.localhost:8080`;
+  }
+}
 
 const axiosParams = {
   baseURL: baseURL,
