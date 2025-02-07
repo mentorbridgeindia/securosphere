@@ -1,9 +1,8 @@
-import React from "react";
-import { Card } from "react-bootstrap";
-import CodeMirror from "@uiw/react-codemirror";
-import { vscodeDark } from "@uiw/codemirror-theme-vscode";
-import { json } from "@codemirror/lang-json";
 import { ReactComponent as IconCopy } from "@assets/icons/copy.svg";
+import { json } from "@codemirror/lang-json";
+import { vscodeDark } from "@uiw/codemirror-theme-vscode";
+import CodeMirror from "@uiw/react-codemirror";
+import { Button, Card } from "react-bootstrap";
 import "./DecodeJWT.scss";
 
 interface DecodeJWTProps {
@@ -40,18 +39,18 @@ const DecodeJWT = ({ publicKey }: DecodeJWTProps) => {
                 syntaxHighlighting: true,
               }}
               extensions={[json()]}
-              height="50px"
             />
           </div>
 
-          <button
+          <Button
             type="button"
-            className="copy-container btn btn-light"
+            variant="outline-dark"
+            className="copy-container"
             onClick={handleCopy}
             aria-label="Copy Public Key"
           >
             <IconCopy />
-          </button>
+          </Button>
         </div>
       </Card.Body>
     </Card>

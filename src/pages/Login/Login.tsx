@@ -1,6 +1,6 @@
 import { Spinner } from "@atoms/Spinner";
+import { useInit } from "@entities/Domain";
 import { useLogin } from "@entities/Login";
-import { useInit } from "@hooks/useInit";
 import { LoginForm } from "@modules/LoginForm";
 import { SocialLoginButtons } from "@modules/SocialLogin";
 import { useEffect } from "react";
@@ -22,7 +22,7 @@ export const Login = () => {
     },
   });
 
-  const { data, isLoading, error } = useInit();
+  const { data, isLoading } = useInit();
 
   useEffect(() => {
     if (!isLoading && !data) {
@@ -31,7 +31,7 @@ export const Login = () => {
     sessionStorage.removeItem("accessToken");
   }, [isLoading, data]);
 
-  if (isLoading) return <Spinner isLoading />;
+  if (isLoading || isPending) return <Spinner isLoading />;
 
   return (
     <div className="d-flex align-items-center justify-content-center">

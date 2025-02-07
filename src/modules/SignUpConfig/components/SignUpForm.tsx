@@ -8,23 +8,13 @@ const SignUpForm = () => {
         <Col>
           <Form.Group>
             <FormLabel>First Name</FormLabel>
-            <Form.Control
-              className="mt-2"
-              type="text"
-              placeholder="First Name"
-              readOnly
-            />
+            <Form.Control type="text" placeholder="First Name" readOnly />
           </Form.Group>
         </Col>
         <Col>
           <Form.Group>
             <FormLabel>Last Name</FormLabel>
-            <Form.Control
-              className="mt-2"
-              type="text"
-              placeholder="Last Name"
-              readOnly
-            />
+            <Form.Control type="text" placeholder="Last Name" readOnly />
           </Form.Group>
         </Col>
       </Row>
@@ -32,7 +22,6 @@ const SignUpForm = () => {
       <Form.Group className="mb-3">
         <FormLabel>Email</FormLabel>
         <Form.Control
-          className="mt-2"
           type="email"
           placeholder="Email Address"
           readOnly
@@ -41,7 +30,7 @@ const SignUpForm = () => {
 
       <Form.Group className="position-relative mb-3">
         <FormLabel>Password</FormLabel>
-        <Form.Control className="mt-2" placeholder="Password" readOnly />
+        <Form.Control placeholder="Password" readOnly />
         <button
           type="button"
           className="password-toggle-icon empty-btn"
@@ -54,7 +43,6 @@ const SignUpForm = () => {
       <Form.Group className="position-relative mb-3">
         <FormLabel>Confirm Password</FormLabel>
         <Form.Control
-          className="mt-2"
           placeholder="Confirm Password"
           readOnly
         />

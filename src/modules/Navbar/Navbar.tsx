@@ -2,7 +2,7 @@ import { useAuth } from "@hooks/useAuth";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import { useInit } from "../../hooks/useInit";
+import { useInit } from "../../entities/Domain/useInit";
 import "./Navbar.scss";
 
 export const AppNavbar = () => {

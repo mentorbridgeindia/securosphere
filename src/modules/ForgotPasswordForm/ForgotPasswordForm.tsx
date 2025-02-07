@@ -1,12 +1,13 @@
-import { useState } from "react"; // Import useState
-import { useForm } from "react-hook-form";
-import { Button, Form } from "react-bootstrap";
-import { toast } from "react-toastify";
-import axios from "axios";
 import { FormLabel } from "@atoms/FormLabel";
+import { Spinner } from "@atoms/Spinner";
+import { useForgotPassword } from "@entities/Password/useForgotPassword";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { schema } from "./ForgotPasswordSchema";
+import { useState } from "react"; // Import useState
+import { Button, Form } from "react-bootstrap";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import { ForgotPasswordData } from "./ForgotPassword.types";
+import { schema } from "./ForgotPasswordSchema";
 
 export const ForgotPasswordForm = () => {
   const [submitted, setSubmitted] = useState(false);
@@ -18,32 +19,18 @@ export const ForgotPasswordForm = () => {
     resolver: yupResolver(schema),
   });
 
+  const { mutate: submitForgotPassword, isPending } = useForgotPassword({
+    onSuccess: () => {
+      toast.success("A password reset link has been sent to your email.");
+      setSubmitted(true);
+    },
+    onError: () => {
+      toast.error("Error sending reset link. Please try again.");
+    },
+  });
+
   const onSubmit = async (data: ForgotPasswordData) => {
-    console.log("Data being sent to backend:", data);
-
-    try {
-      const response = await axios.post(
-        "http://localhost:8080/forgot-password",
-        { email: data.email },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      if (response.status === 200) {
-        toast.success("A password reset link has been sent to your email.");
-        setSubmitted(true);
-      } else {
-        toast.error("Failed to send reset link. Please try again.");
-      }
-    } catch (error) {
-      console.error("Error during password reset:", error);
-      toast.error(
-        "Error sending reset link. Please check the server or your connection."
-      );
-    }
+    submitForgotPassword(data);
   };
 
   return (
@@ -51,7 +38,6 @@ export const ForgotPasswordForm = () => {
       <Form.Group>
         <FormLabel>Email</FormLabel>
         <Form.Control
-          className="mt-2"
           type="email"
           {...register("email")}
           isInvalid={!!errors.email}
@@ -78,6 +64,8 @@ export const ForgotPasswordForm = () => {
           </p>
         </div>
       )}
+
+      <Spinner isLoading={isPending} />
     </Form>
   );
 };

@@ -25,8 +25,6 @@ const getInitData = async () => {
   return await fetchData<InitData>(INIT_ENDPOINT);
 };
 
-console.log(getInitData);
-
 export const useInit = () => {
   const { data, error, isLoading } = useQuery<InitData>({
     queryKey: QUERY_KEY,
