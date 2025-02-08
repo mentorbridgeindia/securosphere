@@ -12,9 +12,10 @@ const subDomain = window.location.hostname.split(".")[0];
 
 const isLocalHost = window.location.hostname.includes("localhost");
 
-let baseURL = isMainHost
-  ? "http://api.securosphere.in"
-  : `http://${subDomain}.api.securosphere.in`;
+let baseURL =
+  window.location.protocol +
+  "//" +
+  (isMainHost ? "api.securosphere.in" : `api.${subDomain}.securosphere.in`);
 
 if (isLocalHost) {
   if (subDomain === "" || subDomain === "localhost") {
