@@ -6,7 +6,7 @@ const token = sessionStorage.getItem("accessToken") ?? null;
 
 const clientId = sessionStorage.getItem("clientId");
 
-const isMainHost = window.location.hostname.startsWith("www.securosphere.in");
+const isMainHost = window.location.hostname.startsWith("app.securosphere.in");
 
 const subDomain = window.location.hostname.split(".")[0];
 
@@ -15,15 +15,7 @@ const isLocalHost = window.location.hostname.includes("localhost");
 let baseURL =
   window.location.protocol +
   "//" +
-  (isMainHost ? "api.securosphere.in" : `api.${subDomain}.securosphere.in`);
-
-if (isLocalHost) {
-  if (subDomain === "" || subDomain === "localhost") {
-    baseURL = "http://api.localhost:8080";
-  } else {
-    baseURL = `http://${subDomain}.api.localhost:8080`;
-  }
-}
+  (isLocalHost ? "app.api.localhost:8080" : `${subDomain}.api.localhost:8080`);
 
 const axiosParams = {
   baseURL: baseURL,

@@ -7,8 +7,11 @@ import "./Navbar.scss";
 
 export const AppNavbar = () => {
   const { isAuthenticated } = useAuth();
-  const { data } = useInit();
+  const { data } = useInit({ enabled: isAuthenticated });
   const pathname = window.location.pathname;
+
+  if (!isAuthenticated) return null;
+
   return (
     <Navbar expand="lg" className="navbar-dark shadow-lg bg-primary">
       <Container>

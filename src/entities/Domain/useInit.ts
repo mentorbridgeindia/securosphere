@@ -25,11 +25,12 @@ const getInitData = async () => {
   return await fetchData<InitData>(INIT_ENDPOINT);
 };
 
-export const useInit = () => {
+export const useInit = (config: { enabled?: boolean } = { enabled: true }) => {
   const { data, error, isLoading } = useQuery<InitData>({
     queryKey: QUERY_KEY,
     queryFn: getInitData,
     staleTime: 1000 * 60 * 5,
+    enabled: config?.enabled,
   });
 
   return { data, isLoading, error };
