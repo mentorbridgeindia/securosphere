@@ -28,7 +28,6 @@ export const Login = () => {
     if (!isLoading && !data) {
       window.location.href = "https://securosphere.in";
     }
-    sessionStorage.removeItem("accessToken");
   }, [isLoading, data]);
 
   if (isLoading || isPending) return <Spinner isLoading />;

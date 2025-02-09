@@ -177,7 +177,7 @@ export const LoginCallbackForm = ({ isReadOnly }: { isReadOnly: boolean }) => {
           </button>
         </FormLabel>
         {setup.authorizedOrigins.map((origin, index) => (
-          <div className="d-flex align-items-center" key={index}>
+          <div className="d-flex align-items-center mb-2" key={index}>
             <Form.Control
               type="url"
               name="origin"

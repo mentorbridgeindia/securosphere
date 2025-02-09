@@ -12,7 +12,6 @@ import {
 } from "@assets/icons/microsoft.svg";
 import { ReactComponent as IconTwitter } from "@assets/icons/twitter.svg";
 
-import { useNavigate } from "react-router-dom";
 import { SocialProvider } from "../../pages/OAuth/OAuth.types";
 import { ISocialLoginButtonsProps } from "./SocialLogin.types";
 export const SocialLoginButtons = ({
@@ -26,9 +25,6 @@ export const SocialLoginButtons = ({
   isGithubAvailable,
   isTwitterAvailable,
 }: ISocialLoginButtonsProps) => {
-  const navigate = useNavigate();
-  const path = window.location.pathname;
-
   const handleClick = (provider: string) => {
     const providerMap = {
       facebook: isFacebookAvailable,
@@ -43,7 +39,26 @@ export const SocialLoginButtons = ({
     };
 
     if (providerMap[provider as SocialProvider]) {
-      navigate("/oauth", { state: { provider, path } });
+      const { hostname, protocol } = window.location;
+      const isMainHost =
+        hostname.startsWith("www.securosphere.in") ||
+        hostname.startsWith("api.securosphere.in");
+      const subDomain = hostname.split(".")[0];
+      const isLocalHost = hostname.includes("localhost");
+
+      const getApiDomain = () => {
+        if (isLocalHost) {
+          return subDomain === "" || subDomain === "localhost"
+            ? "api.localhost:8080"
+            : `${subDomain}.api.localhost:8080`;
+        }
+        return isMainHost
+          ? "api.securosphere.in"
+          : `api.${subDomain}.securosphere.in`;
+      };
+
+      const baseURL = `${isLocalHost ? "http" : protocol}//${getApiDomain()}`;
+      window.location.href = `${baseURL}/oauth2/authorization/${provider}`;
     }
   };
 

@@ -12,6 +12,7 @@ export const useGetOrganization = (config: IQueryConfig, isAdmin = false) => {
   const { data, isLoading, error } = useQuery<IOrganizationEntity>({
     queryKey: ["organization"],
     queryFn: () => getOrganization(isAdmin),
+    staleTime: 1000 * 60 * 5,
     ...config,
   });
 
