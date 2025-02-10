@@ -1,12 +1,18 @@
+import { Spinner } from "@atoms/Spinner";
+import { useResetPassword } from "@entities/Password";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { FormActionButtons } from "@molecules/FormActionButtons";
+import { Col, Form, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import { Form, Button } from "react-bootstrap";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import { ResetPasswordData } from "./ResetPasswordForm.types";
 import { schema } from "./resetPasswordSchema";
-import { toast } from "react-toastify";
-import axios from "axios";
 
-export const ResetPasswordForm = () => {
+export const ResetPasswordForm = ({ otp }: { otp: string }) => {
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const email = searchParams.get("email");
   const {
     register,
     handleSubmit,
@@ -15,72 +21,78 @@ export const ResetPasswordForm = () => {
     resolver: yupResolver(schema),
   });
 
+  const { mutate: resetPassword, isPending: isResettingPassword } =
+    useResetPassword({
+      onSuccess: () => {
+        toast.success("Password reset successful! You can now log in.");
+        navigate("/login");
+      },
+      onError: (error: any) => {
+        toast.error(
+          error.response?.data?.message ||
+            "Password reset failed. Please check your connection."
+        );
+      },
+    });
+
+  if (!email) {
+    return null;
+  }
+
   const onSubmit = async (data: ResetPasswordData) => {
     console.log("Data being sent to backend:", data);
-
-    try {
-      const response = await axios.post(
-        "http://localhost:8080/reset-password",
-        {
-          newPassword: data.newPassword,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      if (response.status === 200) {
-        toast.success("Password reset successful! You can now log in.");
-      } else {
-        toast.error("Password reset failed. Please try again.");
-      }
-    } catch (error) {
-      console.error("Error during password reset:", error);
-      toast.error("Password reset failed. Please check your connection.");
-    }
+    resetPassword({
+      newPassword: data.newPassword,
+      otp,
+      email,
+    });
   };
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
-      <Form.Group>
-        <Form.Label>New Password</Form.Label>
-        <Form.Control
-          className="mt-2"
-          type="password"
-          {...register("newPassword")}
-          isInvalid={!!errors.newPassword}
-          placeholder="Enter new password"
-        />
-        {errors.newPassword && (
-          <Form.Control.Feedback type="invalid">
-            {errors.newPassword.message}
-          </Form.Control.Feedback>
-        )}
-      </Form.Group>
-      <br />
-      <Form.Group>
-        <Form.Label>Re-enter New Password</Form.Label>
-        <Form.Control
-          className="mt-2"
-          type="password"
-          {...register("confirmPassword")}
-          isInvalid={!!errors.confirmPassword}
-          placeholder="Re-enter new password"
-        />
-        {errors.confirmPassword && (
-          <Form.Control.Feedback type="invalid">
-            {errors.confirmPassword.message}
-          </Form.Control.Feedback>
-        )}
-      </Form.Group>
+    <Row className="justify-content-center">
+      <Col xs={12} md={12} lg={8}>
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <Form.Group>
+            <Form.Label>New Password</Form.Label>
+            <Form.Control
+              type="password"
+              {...register("newPassword")}
+              isInvalid={!!errors.newPassword}
+              placeholder="Enter new password"
+            />
+            {errors.newPassword && (
+              <Form.Control.Feedback type="invalid">
+                {errors.newPassword.message}
+              </Form.Control.Feedback>
+            )}
+          </Form.Group>
+          <br />
+          <Form.Group>
+            <Form.Label>Re-enter New Password</Form.Label>
+            <Form.Control
+              type="password"
+              {...register("confirmPassword")}
+              isInvalid={!!errors.confirmPassword}
+              placeholder="Re-enter new password"
+            />
+            {errors.confirmPassword && (
+              <Form.Control.Feedback type="invalid">
+                {errors.confirmPassword.message}
+              </Form.Control.Feedback>
+            )}
+          </Form.Group>
 
-      <div className="center mt-3">
-        <Button variant="primary" type="submit" className="w-50 my-3">
-          Reset Password
-        </Button>
-      </div>
-    </Form>
+          <div className="center mt-5">
+            <FormActionButtons
+              secondaryLabel="Cancel"
+              primaryLabel="Reset Password"
+              onCancel={() => navigate("/login")}
+              onSubmit={handleSubmit(onSubmit)}
+            />
+          </div>
+        </Form>
+      </Col>
+      <Spinner isLoading={isResettingPassword} />
+    </Row>
   );
 };

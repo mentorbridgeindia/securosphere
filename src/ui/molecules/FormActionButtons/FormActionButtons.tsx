@@ -1,5 +1,4 @@
 import { Button } from "react-bootstrap";
-import "./FormActionButtons.scss";
 import { IFormActionButtons } from "./FormActionButtons.types";
 
 export const FormActionButtons = (props: IFormActionButtons) => {
@@ -12,13 +11,18 @@ export const FormActionButtons = (props: IFormActionButtons) => {
   } = props;
 
   return (
-    <div className="form-action">
-      <Button type="button" className="cancel-btn" onClick={onCancel}>
+    <div className="form-action d-flex gap-3">
+      <Button
+        type="button"
+        variant="outline-secondary"
+        className="cancel-btn"
+        onClick={onCancel}
+      >
         {secondaryLabel}
       </Button>
       <Button
         type="submit"
-        className="submit-btn"
+        variant="primary"
         disabled={isPrimaryDisabled}
         onClick={onSubmit}
       >

@@ -57,7 +57,6 @@ const SignUpOptionsCard = () => {
           <Form.Group className="mb-4">
             <FormLabel>Application Name</FormLabel>
             <Form.Control
-              className="mt-2"
               type="text"
               placeholder="Enter application name"
               value={signUpConfig?.appName}

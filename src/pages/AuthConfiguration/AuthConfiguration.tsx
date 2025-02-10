@@ -57,7 +57,7 @@ export const AuthConfiguration = () => {
       { ...prev[0], isValid: validateSignUpConfig },
       { ...prev[1], isValid: validateLoginCallbackConfig },
     ]);
-  }, [signUpConfig, loginCallbackConfig]);
+  }, [signUpConfig, loginCallbackConfig, validateSignUpConfig, validateLoginCallbackConfig]);
 
   const onFinalSubmit = () => {
     const configurationData = {

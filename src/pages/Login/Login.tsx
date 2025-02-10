@@ -1,5 +1,5 @@
-import { ReactComponent as IconLogo } from "@assets/icons/logo.svg";
 import { Spinner } from "@atoms/Spinner";
+import { useInit } from "@entities/Domain";
 import { useLogin } from "@entities/Login";
 import { LoginForm } from "@modules/LoginForm";
 import { SocialLoginButtons } from "@modules/SocialLogin";
@@ -17,18 +17,23 @@ export const Login = () => {
       toast.success("Login successful! Welcome back!");
       navigate("/");
     },
-    onError: (error) => {
+    onError: () => {
       toast.error("Login failed. Please check your credentials.");
     },
   });
 
+  const { data, isLoading } = useInit();
+
   useEffect(() => {
-    sessionStorage.removeItem("accessToken");
-  }, []);
+    if (!isLoading && !data) {
+      window.location.href = "https://securosphere.in";
+    }
+  }, [isLoading, data]);
+
+  if (isLoading || isPending) return <Spinner isLoading />;
 
   return (
     <div className="d-flex align-items-center justify-content-center">
-      <Spinner isLoading={isPending} />
       <Row className="w-100 center">
         <Col
           lg={7}
@@ -49,12 +54,25 @@ export const Login = () => {
         >
           <Card className="p-4 shadow rounded w-100">
             <div className="d-flex justify-content-center brand-lg">
-              <IconLogo />
+              {data?.logo && (
+                <img src={data?.logo} alt="logo" className="img-fluid" />
+              )}
             </div>
+            {data?.applicationName && (
+              <h5 className="text-center mb-4">
+                Welcome to {data?.applicationName}
+              </h5>
+            )}
             <SocialLoginButtons
-              isGoogleAvailable
-              isLinkedinAvailable
-              isGithubAvailable
+              isGoogleAvailable={data?.socialProviders?.google ?? false}
+              isFacebookAvailable={data?.socialProviders?.facebook ?? false}
+              isMicrosoftAvailable={data?.socialProviders?.microsoft ?? false}
+              isLinkedinAvailable={data?.socialProviders?.linkedIn ?? false}
+              isGithubAvailable={data?.socialProviders?.github ?? false}
+              isTwitterAvailable={data?.socialProviders?.twitter ?? false}
+              isInstagramAvailable={data?.socialProviders?.instagram ?? false}
+              isAppleAvailable={data?.socialProviders?.apple ?? false}
+              isAmazonAvailable={data?.socialProviders?.amazon ?? false}
             />
             <div className="mt-3 px-5">
               <hr />

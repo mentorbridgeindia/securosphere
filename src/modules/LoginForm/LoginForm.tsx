@@ -1,13 +1,11 @@
+import { ILoginMutation } from "@/entities/Login";
 import { FormLabel } from "@atoms/FormLabel";
 import { yupResolver } from "@hookform/resolvers/yup";
-import axios from "axios";
 import { Button, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
 import { LoginData } from "./LoginForm.types";
 import { schema } from "./loginSchema";
-import { ILoginMutation } from "@/entities/Login";
 
 export const LoginForm = ({
   loginUser,
@@ -38,7 +36,6 @@ export const LoginForm = ({
       <Form.Group>
         <FormLabel>Email</FormLabel>
         <Form.Control
-          className="mt-2"
           type="email"
           {...register("email")}
           isInvalid={!!errors.email}
@@ -57,7 +54,6 @@ export const LoginForm = ({
           <Link to="/forgot-password">Forgot Password?</Link>
         </FormLabel>
         <Form.Control
-          className="mt-2"
           type="password"
           {...register("password")}
           isInvalid={!!errors.password}

@@ -1,88 +1,65 @@
-import { Container, Row, Col, Card, FormLabel, Button } from "react-bootstrap";
-import React, { useEffect, useState } from "react";
-import Redirection from "@/modules/Information/Redirection";
 import DecodeJWT from "@/modules/Information/DecodeJWT";
-
-interface InfoStepProps {
-  step: string;
-  title: string;
-  children: React.ReactNode;
-}
-
-const InfoStep = ({ step, title, children }: InfoStepProps) => (
-  <Row className="mt-4 justify-content-center">
-    <Col xs={12} md={8} lg={7}>
-      <Card className="shadow-sm mb-4">
-        <Card.Body>
-          <FormLabel style={{ color: "#002851", fontWeight: "bold" }}>
-            {step}: {title}
-          </FormLabel>
-          {children}
-        </Card.Body>
-      </Card>
-    </Col>
-  </Row>
-);
+import Redirection from "@/modules/Information/Redirection";
+import { Spinner } from "@atoms/Spinner";
+import { useGetOrganization } from "@entities/Organization";
+import { useEffect } from "react";
+import { Alert, Button, Col, Container, Row } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { InfoStep } from "./components/InfoStep";
 
 const Information = () => {
-  const [url, setUrl] = useState<string>("");
-  const [publicKey, setPublicKey] = useState<string>("");
+  const navigate = useNavigate();
+
+  const { data, isLoading, error } = useGetOrganization(
+    {
+      queryConfig: {
+        enabled: sessionStorage.getItem("accessToken") !== null,
+      },
+    },
+    true
+  );
 
   useEffect(() => {
-    setTimeout(() => {
-      setUrl("https://dynamic-url.securosphere.in");
-      setPublicKey("FFGHBD67HJBDFVI3435HJWB27RN349O");
-    }, 1000);
-  }, []);
+    if (error) {
+      navigate("/");
+    }
+  }, [error, navigate]);
+
+  if (isLoading) {
+    return <Spinner isLoading={isLoading} />;
+  }
 
   return (
     <Container className="mt-4">
       <Row className="justify-content-center">
         <Col xs={12} md={8} lg={7}>
-          <h2
-            className="text-center text-primary mb-4"
-            style={{ fontWeight: "bold", fontSize: "1.5rem" }}
-          >
-            APPLICATION INFO
-          </h2>
-          <p
-            className="text-center mb-4"
-            style={{ fontWeight: "bold", fontSize: "1.2rem" }}
-          >
+          <h3 className="text-center text-primary mb-4 fw-bold">
             Welcome to SecuroSphere
-          </p>
-          <p
-            className="p-3 mb-4"
-            style={{
-              backgroundColor: "#d1ecf1",
-              border: "1px solid #236671",
-              borderRadius: "8px",
-              fontWeight: "500",
-              maxWidth: "800px",
-              margin: "auto",
-            }}
-          >
-            Below are the
-            <strong> step-by-step instructions</strong> to help you configure
-            and use the platform effectively. Enjoy seamless security and an
-            intuitive experience.
-          </p>
+          </h3>
+          <Alert variant="success" className="p-3 mb-4">
+            Below are the <strong>step-by-step instructions</strong> to help you
+            configure and use the platform effectively. Enjoy seamless security
+            and an intuitive experience.
+          </Alert>
         </Col>
       </Row>
 
-      <InfoStep step="STEP 1" title="REDIRECT DETAILS">
-        <Redirection url={url} />
-      </InfoStep>
+      {data && (
+        <>
+          <InfoStep step="STEP 1" title="REDIRECT DETAILS">
+            <Redirection subDomain={data.subDomain} />
+          </InfoStep>
+          <InfoStep step="STEP 2" title="DECODE JWT TOKEN">
+            <DecodeJWT publicKey={data?.publicKey ?? ""} />
+          </InfoStep>
+        </>
+      )}
 
-      <InfoStep step="STEP 2" title="DECODE JWT TOKEN">
-        <DecodeJWT publicKey={publicKey} />
-      </InfoStep>
-
-      <Row>
-        <Col className="text-center d-flex justify-content-center">
-          <Button variant="primary">Continue</Button>
-        </Col>
-      </Row>
+      <div className="center">
+        <Button variant="primary" onClick={() => navigate("/")}>
+          Continue
+        </Button>
+      </div>
     </Container>
   );
 };
