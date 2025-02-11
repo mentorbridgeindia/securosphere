@@ -13,7 +13,7 @@ const subDomain = window.location.hostname.split(".")[0];
 const isLocalHost = window.location.hostname.includes("localhost");
 
 let baseURL =
-  window.location.protocol + "//" + subDomain + ".api.localhost:8080";
+  window.location.protocol + "//" + subDomain + ".api.securosphere.in:8080";
 
 if (isLocalHost) {
   baseURL = "http://localhost:8080";
