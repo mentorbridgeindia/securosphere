@@ -21,8 +21,8 @@ const handleLoginResponse = (response: any) => {
   if (response) {
     const accessToken = response.headers["authorization"];
     if (accessToken !== undefined && accessToken !== null) {
-      console.log("accessToken", accessToken);
       sessionStorage.setItem("accessToken", accessToken.split(" ")[1]);
     }
+    return response.data;
   }
 };

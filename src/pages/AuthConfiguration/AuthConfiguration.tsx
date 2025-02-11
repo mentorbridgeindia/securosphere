@@ -17,7 +17,7 @@ export const AuthConfiguration = () => {
   const { mutate: saveConfig } = useConfiguration({
     onSuccess: () => {
       toast.success("Configuration saved successfully!");
-      navigate("/");
+      navigate("/information");
     },
     onError: () => {
       toast.error("Failed to save configuration. Please try again.");
@@ -54,10 +54,11 @@ export const AuthConfiguration = () => {
 
   useEffect(() => {
     setSteps((prev) => [
-      { ...prev[0], isValid: validateSignUpConfig },
-      { ...prev[1], isValid: validateLoginCallbackConfig },
+      { ...prev[0], isValid: validateLoginCallbackConfig },
+      { ...prev[1], isValid: validateSignUpConfig },
     ]);
-  }, [signUpConfig, loginCallbackConfig, validateSignUpConfig, validateLoginCallbackConfig]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [signUpConfig, loginCallbackConfig]);
 
   const onFinalSubmit = () => {
     const configurationData = {

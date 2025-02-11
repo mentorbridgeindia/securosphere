@@ -1,14 +1,15 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Spinner } from "@atoms/Spinner";
 import { useGetOrganization } from "@entities/Organization";
-import { Spinner } from "../../ui/atoms/Spinner";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const Home = () => {
   const navigate = useNavigate();
+  const [isPending, setIsPending] = useState(true);
 
-  const { data, isLoading, error } = useGetOrganization({
+  const { data, isLoading } = useGetOrganization({
     queryConfig: {
-      enabled: sessionStorage.getItem("accessToken") !== null,
+      enabled: !isPending && sessionStorage.getItem("accessToken") !== null,
     },
   });
 
@@ -16,12 +17,16 @@ export const Home = () => {
     if (data && data?.organizationName === null) {
       navigate("auth-configuration");
     }
+
+    setTimeout(() => {
+      setIsPending(false);
+    }, 2000);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   return (
     <div className="d-flex align-items-center justify-content-center">
-      <Spinner isLoading={isLoading} />
+      <Spinner isLoading={isLoading || isPending} />
       {/* TODO: Add Dashboard details */}
       {!isLoading && (
         <h2 className="text-center mt-5">

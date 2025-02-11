@@ -13,9 +13,11 @@ const subDomain = window.location.hostname.split(".")[0];
 const isLocalHost = window.location.hostname.includes("localhost");
 
 let baseURL =
-  window.location.protocol +
-  "//" +
-  (isLocalHost ? "app.api.localhost:8080" : `${subDomain}.api.localhost:8080`);
+  window.location.protocol + "//" + subDomain + ".api.localhost:8080";
+
+if (isLocalHost) {
+  baseURL = "http://localhost:8080";
+}
 
 const axiosParams = {
   baseURL: baseURL,

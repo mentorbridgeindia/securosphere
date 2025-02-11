@@ -1,7 +1,10 @@
+import { Spinner } from "@atoms/Spinner";
+import { useGetOrganization } from "@entities/Organization";
 import { AppSettings } from "@modules/settings/AppSettings";
 import { SecuritySettingsComponent } from "@modules/settings/SecuritySettings";
 import { SecuritySettings } from "@modules/settings/SecuritySettings.types";
-import { Edit, Settings as SettingsIcon, Shield, X } from "lucide-react";
+import SignUpOptionsCard from "@modules/SignUpConfig/components/SignUpOptionsCard";
+import { Edit, Settings as SettingsIcon, X } from "lucide-react";
 import { useState } from "react";
 import { Button, Card, Col, Container, Nav, Row } from "react-bootstrap";
 import "./settings.scss";
@@ -10,10 +13,16 @@ function Settings() {
   const [activeTab, setActiveTab] = useState("application");
   const [isEditing, setIsEditing] = useState(false);
 
+  const { isLoading } = useGetOrganization({
+    queryConfig: { enabled: true },
+  });
+
   const [security, setSecurity] = useState<SecuritySettings>({
     twoFactorEnabled: true,
     lastPasswordChange: new Date(),
   });
+
+  if (isLoading) return <Spinner isLoading />;
 
   return (
     <Container className="py-5">
@@ -58,6 +67,16 @@ function Settings() {
                 </Nav.Item>
                 <Nav.Item>
                   <Nav.Link
+                    active={activeTab === "signup"}
+                    onClick={() => setActiveTab("signup")}
+                    className="d-flex align-items-center px-4 py-3 border-bottom custom-nav-link"
+                  >
+                    <SettingsIcon size={18} className="me-2" />
+                    Sign Up
+                  </Nav.Link>
+                </Nav.Item>
+                {/* <Nav.Item>
+                  <Nav.Link
                     active={activeTab === "security"}
                     onClick={() => setActiveTab("security")}
                     className="d-flex align-items-center px-4 py-3 border-bottom custom-nav-link"
@@ -65,7 +84,7 @@ function Settings() {
                     <Shield size={18} className="me-2" />
                     Security
                   </Nav.Link>
-                </Nav.Item>
+                </Nav.Item> */}
               </Nav>
             </Card.Body>
           </Card>
@@ -75,6 +94,7 @@ function Settings() {
           {activeTab === "application" && (
             <AppSettings config={null} isEditing={isEditing} />
           )}
+          {activeTab === "signup" && <SignUpOptionsCard />}
           {activeTab === "security" && (
             <SecuritySettingsComponent
               security={security}
