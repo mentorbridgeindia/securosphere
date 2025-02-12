@@ -1,5 +1,4 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
-import { useMemo } from "react";
 
 const tokenType = "Bearer";
 
@@ -13,36 +12,56 @@ if (isLocalHost) {
   baseURL = "http://localhost:8080";
 }
 
-const api = () => {
-  const token = sessionStorage.getItem("accessToken") ?? null;
+const token = sessionStorage.getItem("accessToken") ?? null;
 
-  const clientId = sessionStorage.getItem("clientId");
+const clientId = sessionStorage.getItem("clientId");
 
-  const axiosParams = {
-    baseURL: baseURL,
-    headers: {
-      Accept: "application/json",
-        Authorization: `${tokenType} ${token}`,
-        ClientId: isMainHost ? undefined : clientId ?? undefined,
-      },
-  };
+const axiosParams = {
+  baseURL: baseURL,
+  headers: {
+    Accept: "application/json",
+    Authorization: `${tokenType} ${token}`,
+    ClientId: isMainHost ? undefined : clientId ?? undefined,
+  },
+};
 
-  const axiosInstance = axios.create(axiosParams);
+const axiosInstance = axios.create(axiosParams);
 
+axiosInstance.interceptors.request.use(
+  (config) => {
+    const token = sessionStorage.getItem("accessToken");
+    const clientId = sessionStorage.getItem("clientId");
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    if (clientId) {
+      config.headers.ClientId = isMainHost
+        ? undefined
+        : clientId ?? undefined;
+    }
+    return config;
+  },
+  (error) => {
+    console.error("Request error:", error);
+    return Promise.reject(error);
+  }
+);
+
+const api = (axios: AxiosInstance) => {
   console.log(axiosParams);
 
   return {
     get: <T>(url: string, config: AxiosRequestConfig = {}) =>
-      axiosInstance.get<T>(url, config),
+      axios.get<T>(url, config),
     delete: <T>(url: string, config: AxiosRequestConfig = {}) =>
-      axiosInstance.delete<T>(url, config),
+      axios.delete<T>(url, config),
     post: <T>(url: string, body: unknown, config: AxiosRequestConfig = {}) =>
-      axiosInstance.post<T>(url, body, config),
+      axios.post<T>(url, body, config),
     patch: <T>(url: string, body: unknown, config: AxiosRequestConfig = {}) =>
-      axiosInstance.patch<T>(url, body, config),
+      axios.patch<T>(url, body, config),
     put: <T>(url: string, body: unknown, config: AxiosRequestConfig = {}) =>
-      axiosInstance.put<T>(url, body, config),
+      axios.put<T>(url, body, config),
   };
 };
 
-export default api();
+export default api(axiosInstance);
