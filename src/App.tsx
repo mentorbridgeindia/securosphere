@@ -18,6 +18,7 @@ import Information from "./pages/Information/Information";
 import { PrivateRoute } from "./routes/PrivateRoute";
 import Settings from "./pages/Settings/Settings";
 import Profile from "./pages/Profile/Profile";
+import Dashboard from "./pages/Dashboard/Dashboard";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
             <Route path="/verify-email" element={<VerifyEmail />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route element={<PrivateRoute />}>
               <Route
                 path="/auth-configuration"
