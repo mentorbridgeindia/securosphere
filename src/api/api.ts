@@ -21,11 +21,13 @@ const axiosParams = {
   headers: {
     Accept: "application/json",
     Authorization: `${tokenType} ${token}`,
-    clientId: isMainHost ? null : clientId,
+    ClientId: isMainHost ? undefined : clientId ?? undefined,
   },
 };
 
 const axiosInstance = axios.create(axiosParams);
+
+console.log(axiosParams);
 
 const api = (axios: AxiosInstance) => {
   return {
