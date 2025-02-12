@@ -47,6 +47,25 @@ axiosInstance.interceptors.request.use(
   }
 );
 
+// Response Interceptor
+axiosInstance.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    console.error("Error in response:", error);
+    if (
+      error.response.status === 401 &&
+      error.response.data.error === "JWT_EXPIRED"
+    ) {
+      // sessionStorage.removeItem("accessToken");
+      // sessionStorage.removeItem("clientId");
+      window.location.href = window.location.origin + "/login";
+    }
+    return Promise.reject(error);
+  }
+);
+
 const api = (axios: AxiosInstance) => {
   console.log(axiosParams);
 
