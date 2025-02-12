@@ -128,7 +128,15 @@ export const LoginCallbackForm = ({ isReadOnly }: { isReadOnly: boolean }) => {
 
   useEffect(() => {
     updateLoginCallbackConfig();
-  }, [watch("orgName"), watch("subDomain"), watch("authorizedOrigins"), watch("callbackUrl"), watch("orgLogo"), watch("website"), watch("termsOfServiceUrl")]);
+  }, [
+    watch("orgName"),
+    watch("subDomain"),
+    watch("authorizedOrigins"),
+    watch("callbackUrl"),
+    watch("orgLogo"),
+    watch("website"),
+    watch("termsOfServiceUrl"),
+  ]);
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)} noValidate>
@@ -216,7 +224,7 @@ export const LoginCallbackForm = ({ isReadOnly }: { isReadOnly: boolean }) => {
             <IconPlus />
           </button>
         </FormLabel>
-        {watch("authorizedOrigins").map((origin, index) => (
+        {watch("authorizedOrigins")?.map((origin, index) => (
           <div className="d-flex align-items-center mb-2" key={index}>
             <Controller
               name={`authorizedOrigins.${index}`}
