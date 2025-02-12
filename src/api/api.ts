@@ -8,12 +8,9 @@ const clientId = sessionStorage.getItem("clientId");
 
 const isMainHost = window.location.hostname.startsWith("app.securosphere.in");
 
-const subDomain = window.location.hostname.split(".")[0];
-
 const isLocalHost = window.location.hostname.includes("localhost");
 
-let baseURL =
-  window.location.protocol + "//" + subDomain + ".api.securosphere.in";
+let baseURL = "https://api.securosphere.in";
 
 if (isLocalHost) {
   baseURL = "http://localhost:8080";
