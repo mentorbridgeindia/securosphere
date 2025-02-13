@@ -6,25 +6,37 @@ import {ReactComponent as IconPlus} from '@assets/icons/icon-plus.svg'
 import {ReactComponent as IconTrash} from '@assets/icons/icon-trash.svg'
 import{ReactComponent as IconEdit}from '@assets/icons/icon-edit.svg'
 import Alert from 'react-bootstrap/Alert';
+import { toast } from 'react-toastify';
+import { sendData } from '@api/Post/sendData';
 
+
+ const USERS_ENDPOINT = '/api/users/invite'; 
+
+interface InviteUserProps {
+    show: boolean;
+    handleClose: () => void;
+}
   
 
 
 export const InviteUser = ({show, handleClose}: {show: boolean, handleClose: () => void}) => {
     const [emailList, setEmailList] = useState([""]);
     const [errors, setErrors] = useState<string[]>([]);
-
+    const[showSuccess, setShowSuccess] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const handleAdd = () => {
         if(emailList.length < 5 ){
             setEmailList([...emailList, ""]);
             setErrors([...errors, ""]);
         }
     };
-    const handleRemove = (removedEmail: string) => {
-      console.log(emailList.filter(email => email !== removedEmail));
-        setEmailList(emailList.filter(email => email !== removedEmail));
-    }
+    const handleRemove = (index: number) => {
+      setEmailList(emailList.filter((_, i) => i !== index));
+      setErrors(errors.filter((_, i) => i !== index));
+  };
+  
     
+  
     const [validated, setValidated] = useState(false);
 
     const validateEmail = (email: string) => {
@@ -40,7 +52,8 @@ export const InviteUser = ({show, handleClose}: {show: boolean, handleClose: () 
         setEmailList([...emailList.slice(0, index), email, ...emailList.slice(index + 1)]);
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
+        setIsLoading(true);
       const newErrors = new Array(emailList.length).fill("");
 
       
@@ -50,7 +63,9 @@ export const InviteUser = ({show, handleClose}: {show: boolean, handleClose: () 
               newErrors[index] = "Duplicate emails are not allowed.";
           } else {
               emailSet.add(email);
+              
           }
+         
       });
 
      
@@ -65,8 +80,37 @@ export const InviteUser = ({show, handleClose}: {show: boolean, handleClose: () 
       if (newErrors.some(error => error !== "")) {
           return; 
       }
-
+     
       // TODO: API Call
+      try {
+        // Filter out empty emails
+        const validEmails = emailList.filter(email => email.trim() !== "");
+        
+        // Prepare the data to be sent
+        const data = {
+            emails: validEmails
+        };
+
+        // Make the API call
+        const response = await sendData(USERS_ENDPOINT, data);
+        
+        if (response) {
+            toast.success("Invitations sent successfully!");
+            handleClose();
+            setEmailList([""]);
+            setErrors([]);
+        }
+    } catch (error) {
+        toast.error("Failed to send invitations. Please try again.");
+    } finally {
+        setIsLoading(false);
+    }
+
+
+
+
+
+      
   };
   return (
 
@@ -90,8 +134,10 @@ export const InviteUser = ({show, handleClose}: {show: boolean, handleClose: () 
                         aria-describedby="emailHelp"
                     />
                     {emailList.length > 1 && (
-                        <Button className="btn btn-light p-1 border-0" onClick={() => handleRemove(email)}>
+                        <Button className="btn btn-light p-1 border-0" onClick={() => handleRemove(index)}>
+                         
                             <IconTrash />
+                            
                         </Button>
                     )}
                     {validateEmail(email) && emailList.length - 1 === index && index !== 4 && (
@@ -107,11 +153,13 @@ export const InviteUser = ({show, handleClose}: {show: boolean, handleClose: () 
 </form>
         </Modal.Body>
         <Modal.Footer className=' d-flex justify-content-center'>
-          <Button variant="secondary"  onClick={handleClose}>
+          <Button variant="secondary"  onClick={handleClose} disabled={isLoading} >
             Cancel
           </Button>
-          <Button variant="primary" onClick={handleSubmit}>
-            Invite
+          <Button variant="primary" onClick={handleSubmit} disabled={isLoading}>
+          
+            
+            {isLoading ? 'Sending...' : 'Invite'}
           </Button>
         </Modal.Footer>
       </Modal>

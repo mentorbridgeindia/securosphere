@@ -12,4 +12,5 @@ export interface IOrganizationEntity {
   applicationName: string;
   termsOfServiceUrl: string;
   socialProviders: SocialProvider;
+  
 }

@@ -17,7 +17,7 @@ import "./App.scss";
 import { PrivateRoute } from "./routes/PrivateRoute";
 import {TeamManagement} from "@pages/TeamManagement/TeamManagement";
 import {InviteUser} from "@pages/TeamManagement/InviteUser";
-
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const queryClient = new QueryClient();
