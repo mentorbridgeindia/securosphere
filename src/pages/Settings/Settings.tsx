@@ -9,7 +9,7 @@ import { useState } from "react";
 import { Button, Card, Col, Container, Nav, Row } from "react-bootstrap";
 import "./settings.scss";
 
-function Settings() {
+export const Settings = () => {
   const [activeTab, setActiveTab] = useState("application");
   const [isEditing, setIsEditing] = useState(false);
 
@@ -108,5 +108,3 @@ function Settings() {
     </Container>
   );
 }
-
-export default Settings;

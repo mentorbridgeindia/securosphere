@@ -17,7 +17,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-function Profile() {
+export const Profile = () => {
   const navigate = useNavigate();
   const [profile, setProfile] = useState<Partial<IProfileEntity>>({
     firstName: "Raj",
@@ -165,6 +165,5 @@ function Profile() {
       )}
     </Container>
   );
-}
+};
 
-export default Profile;
