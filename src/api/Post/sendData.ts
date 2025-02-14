@@ -31,8 +31,8 @@ const handleLoginResponse = (response: any) => {
         window.location.href
       );
 
-    if (isClientIdAvailable && isNotSecurosphere && location) {
-      window.location.href = location + "?token=" + accessToken;
+    if (isClientIdAvailable && isNotSecurosphere && location && accessToken) {
+      window.location.href = location + "?token=" + accessToken.split(" ")[1];
     }
     if (accessToken !== undefined && accessToken !== null) {
       sessionStorage.setItem("accessToken", accessToken.split(" ")[1]);
