@@ -20,6 +20,17 @@ export const sendData = async <T>(
 const handleLoginResponse = (response: any) => {
   if (response) {
     const accessToken = response.headers["authorization"];
+    const isClientIdAvailable =
+      response.headers["clientid"] ?? response.headers["X-Client-Id"];
+    const location = response.headers["location"];
+    const isNotSecurosphere =
+      !/^(?!.*app\.securosphere\.in).*\.securosphere\.in$/.test(
+        window.location.href
+      );
+
+    if (isClientIdAvailable && isNotSecurosphere && location) {
+      window.location.href = location + "?token=" + accessToken;
+    }
     if (accessToken !== undefined && accessToken !== null) {
       sessionStorage.setItem("accessToken", accessToken.split(" ")[1]);
     }
