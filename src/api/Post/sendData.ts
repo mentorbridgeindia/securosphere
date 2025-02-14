@@ -6,7 +6,11 @@ export const sendData = async <T>(
 ): Promise<T | null> => {
   try {
     const response = await api.post<T>(url, body);
-    if (response.status === 200 || response.status === 201) {
+    if (
+      response.status === 200 ||
+      response.status === 201 ||
+      response.status === 204
+    ) {
       if (url.includes("signin")) handleLoginResponse(response);
       return response.data;
     }
