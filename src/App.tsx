@@ -1,4 +1,3 @@
-import { useHandleJWT } from "@hooks/useHandleJWT";
 import { AppNavbar } from "@modules/Navbar";
 import VerifyEmail from "@modules/VerifyEmail";
 import { AuthConfiguration } from "@pages/AuthConfiguration";
@@ -21,7 +20,6 @@ import "./App.scss";
 import { PrivateRoute } from "./routes/PrivateRoute";
 
 function App() {
-  useHandleJWT();
   return (
     <div className="App">
       <AppNavbar />
