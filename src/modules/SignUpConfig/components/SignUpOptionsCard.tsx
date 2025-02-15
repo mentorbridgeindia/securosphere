@@ -1,24 +1,18 @@
+import { SocialProvider } from "@/types/auth";
 import { FormLabel } from "@atoms/FormLabel";
+import { SocialProvidersObject, useGetOrganization } from "@entities/Organization";
 import { useAtom } from "jotai";
-import React from "react";
+import { useEffect } from "react";
 import { Card, Form, Stack } from "react-bootstrap";
-import { SocialProvider } from "../../../types/auth";
 import { signUpConfigAtom } from "../atoms/signUpConfigAtom";
 import { SocialLoginIcons } from "./SocialLoginIcons";
 
-interface SignUpOptionsCardProps {
-  appName: string;
-  setAppName: React.Dispatch<React.SetStateAction<string>>;
-  signupOptions: Record<string, boolean>;
-  setSignupOptions: React.Dispatch<
-    React.SetStateAction<Record<string, boolean>>
-  >;
-  errorMessage: string;
-  setErrorMessage: React.Dispatch<React.SetStateAction<string>>;
-}
-
 const SignUpOptionsCard = () => {
   const [signUpConfig, setSignUpConfig] = useAtom(signUpConfigAtom);
+
+  const { data } = useGetOrganization({
+    queryConfig: { enabled: true },
+  });
 
   const signUpOptions = [
     "Email",
@@ -30,20 +24,30 @@ const SignUpOptionsCard = () => {
     "LinkedIn",
   ];
 
-  const updateSocialProvider = (checked: boolean, option: SocialProvider) => {
-    if (checked) {
+  useEffect(() => {
+    if (data) {
+      const socialProviders = Object.keys(data.socialProviders).map(
+        (provider) => {
+          if (data.socialProviders[provider as keyof SocialProvidersObject]) {
+            return provider.toLowerCase() as SocialProvider;
+          }
+      }) as SocialProvider[];
       setSignUpConfig({
-        ...signUpConfig,
-        socialProviders: [...signUpConfig.socialProviders, option],
-      });
-    } else {
-      setSignUpConfig({
-        ...signUpConfig,
-        socialProviders: signUpConfig.socialProviders.filter(
-          (p) => p !== option
-        ),
+        appName: data.applicationName,
+        socialProviders: socialProviders,
       });
     }
+  }, [data]);
+
+  console.log(signUpConfig);
+
+  const updateSocialProvider = (isChecked: boolean, option: SocialProvider) => {
+    setSignUpConfig((prevConfig) => ({
+      ...prevConfig,
+      socialProviders: isChecked
+        ? [...prevConfig.socialProviders, option]
+        : prevConfig.socialProviders.filter((p) => p !== option),
+    }));
   };
   return (
     <Card className="shadow-sm px-2">
@@ -57,7 +61,6 @@ const SignUpOptionsCard = () => {
           <Form.Group className="mb-4">
             <FormLabel>Application Name</FormLabel>
             <Form.Control
-              className="mt-2"
               type="text"
               placeholder="Enter application name"
               value={signUpConfig?.appName}

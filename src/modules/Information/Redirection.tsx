@@ -1,16 +1,17 @@
-import React from "react";
-import { Card } from "react-bootstrap";
-import CodeMirror from "@uiw/react-codemirror";
-import { vscodeDark } from "@uiw/codemirror-theme-vscode";
-import { json } from "@codemirror/lang-json";
 import { ReactComponent as IconCopy } from "@assets/icons/copy.svg";
+import { json } from "@codemirror/lang-json";
+import { vscodeDark } from "@uiw/codemirror-theme-vscode";
+import CodeMirror from "@uiw/react-codemirror";
+import { Button, Card } from "react-bootstrap";
 import "./Redirection.scss";
 
 interface RedirectionProps {
-  url: string;
+  subDomain: string;
 }
 
-const Redirection = ({ url }: RedirectionProps) => {
+const Redirection = ({ subDomain }: RedirectionProps) => {
+  const url = "https://" + subDomain + ".securosphere.in/auth/callback";
+
   const handleCopy = () => {
     navigator.clipboard.writeText(url);
   };
@@ -18,7 +19,7 @@ const Redirection = ({ url }: RedirectionProps) => {
   return (
     <Card className="mb-3 border-0">
       <Card.Body>
-        <Card.Text className="mb-3">
+        <Card.Text className="mb-3 lh-2">
           Redirect your users to the following URL to complete their
           registration and authenticate themselves on the SecuroSphere platform.
           This URL will be the central endpoint for managing user sign-ups and
@@ -38,17 +39,17 @@ const Redirection = ({ url }: RedirectionProps) => {
                 syntaxHighlighting: true,
               }}
               extensions={[json()]}
-              height="50px"
             />
           </div>
-          <button
+          <Button
             type="button"
-            className="copy-icon btn btn-light"
+            variant="outline-dark"
+            className="copy-icon"
             onClick={handleCopy}
             aria-label="Copy URL"
           >
             <IconCopy />
-          </button>
+          </Button>
         </div>
       </Card.Body>
     </Card>

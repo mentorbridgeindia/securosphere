@@ -1,95 +1,72 @@
-import React, { useState } from "react";
+import React from "react";
 import { Form, Card, Button } from "react-bootstrap";
-import { Edit, Mail } from "lucide-react";
-import { EmailSettingsComponentProps } from "./types/config";
+import { Mail } from "lucide-react";
+import { EmailSettingsComponentProps } from "./EmailSettings.types";
 
-const EmailSettings = ({
+export const EmailSettingsComponent = ({
   config,
   onUpdateConfig,
 }: EmailSettingsComponentProps) => {
-  const [isEditing, setIsEditing] = useState(false);
-  const [emailConfig, setEmailConfig] = useState(config);
-
-  const handleChange = (
-    field: keyof typeof emailConfig,
-    value: string | number
-  ) => {
-    setEmailConfig({ ...emailConfig, [field]: value });
-  };
-
-  const handleSave = () => {
-    onUpdateConfig(emailConfig);
-    setIsEditing(false);
-  };
-
   return (
     <Card className="mb-4">
-      <Card.Header className="d-flex justify-content-between align-items-center">
-      <div className="d-flex align-items-center">
+      <Card.Header className="d-flex align-items-center">
+        <div className="d-flex align-items-center">
           <Mail className="me-2 text-primary" size={24} />
           <h5 className="mb-0 fw-bold">Email Settings</h5>
         </div>
-        <Button
-          variant="outline-primary"
-          size="sm"
-          onClick={() => setIsEditing(!isEditing)}
-        >
-          {isEditing ? "Save" : <Edit size={16} />}
-        </Button>
       </Card.Header>
-      <Form className="p-4">
-        <Form.Group className="mb-3">
-          <Form.Label>Server Address</Form.Label>
-          <Form.Control
-            type="text"
-            value={emailConfig.serverAddress}
-            onChange={(e) => handleChange("serverAddress", e.target.value)}
-            disabled={!isEditing}
-          />
-        </Form.Group>
+      <Card.Body className="py-4">
+        <Form>
+          <div className="mb-4">
+            <h6 className="mb-3 text-muted">Server Configuration</h6>
+            <div className="bg-light rounded-3 p-4 mb-3">
+              <div className="mb-3">
+                <h6 className="mb-2">Server Address</h6>
+                <p className="text-muted mb-0 small">{config.serverAddress}</p>
+              </div>
+              <div className="mb-3">
+                <h6 className="mb-2">Port</h6>
+                <p className="text-muted mb-0 small">{config.port}</p>
+              </div>
+            </div>
+          </div>
 
-        <Form.Group className="mb-3">
-          <Form.Label>Port</Form.Label>
-          <Form.Control
-            type="number"
-            value={emailConfig.port}
-            onChange={(e) => handleChange("port", Number(e.target.value))}
-            disabled={!isEditing}
-          />
-        </Form.Group>
+          <div className="mb-4">
+            <h6 className="mb-3 text-muted">Authentication</h6>
+            <div className="bg-light rounded-3 p-4">
+              <div className="d-flex justify-content-between align-items-center">
+                <div>
+                  <h6 className="mb-1">Credentials</h6>
+                  <p className="text-muted mb-0 small">
+                    Username: {config.username}
+                  </p>
+                  <p className="text-muted mb-0 small">Password: ••••••••</p>
+                </div>
+                <Button variant="primary" className="rounded-pill px-4">
+                  Update
+                </Button>
+              </div>
+            </div>
+          </div>
 
-        <Form.Group className="mb-3">
-          <Form.Label>Username</Form.Label>
-          <Form.Control
-            type="text"
-            value={emailConfig.username}
-            onChange={(e) => handleChange("username", e.target.value)}
-            disabled={!isEditing}
-          />
-        </Form.Group>
-
-        <Form.Group className="mb-3">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            value={emailConfig.password}
-            onChange={(e) => handleChange("password", e.target.value)}
-            disabled={!isEditing}
-          />
-        </Form.Group>
-
-        <Form.Group className="mb-3">
-          <Form.Label>From Email</Form.Label>
-          <Form.Control
-            type="email"
-            value={emailConfig.fromEmail}
-            onChange={(e) => handleChange("fromEmail", e.target.value)}
-            disabled={!isEditing}
-          />
-        </Form.Group>
-      </Form>
+          <div>
+            <h6 className="mb-3 text-muted">Email Configuration</h6>
+            <div className="bg-light rounded-3 p-4">
+              <div className="d-flex justify-content-between align-items-center">
+                <div>
+                  <h6 className="mb-1">From Email</h6>
+                  <p className="text-muted mb-0 small">{config.fromEmail}</p>
+                </div>
+                <Button variant="primary" className="rounded-pill px-4">
+                  Update
+                </Button>
+              </div>
+            </div>
+          </div>
+        </Form>
+      </Card.Body>
     </Card>
   );
 };
 
-export default EmailSettings;
+export default EmailSettingsComponent;

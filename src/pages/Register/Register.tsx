@@ -1,27 +1,13 @@
 import { Spinner } from "@atoms/Spinner";
-import { useRegister } from "@entities/Register";
-import { useInit } from "@hooks/useInit";
+import { useInit } from "@entities/Domain";
 import { RegisterForm } from "@modules/RegisterForm";
 import { SocialLoginButtons } from "@modules/SocialLogin";
 import { useEffect } from "react";
 import { Card } from "react-bootstrap";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 
 export const Register = () => {
-  const navigate = useNavigate();
-  const { mutate: registerUser, isPending } = useRegister({
-    onSuccess: () => {
-      toast.success("Registration successful");
-      navigate("/login");
-    },
-    onError: () => {
-      toast.error("Registration failed! Something went wrong");
-    },
-  });
-
   const { data, isLoading } = useInit();
 
   useEffect(() => {
@@ -79,7 +65,6 @@ export const Register = () => {
             </div>
             <div className="mt-3">
               <RegisterForm
-                registerUser={registerUser}
                 termsOfServiceUrl={data?.termsOfServiceUrl ?? ""}
               />
             </div>

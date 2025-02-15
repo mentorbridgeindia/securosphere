@@ -2,13 +2,16 @@ import { useAuth } from "@hooks/useAuth";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import { useInit } from "../../hooks/useInit";
+import { useInit } from "../../entities/Domain/useInit";
 import "./Navbar.scss";
 
 export const AppNavbar = () => {
   const { isAuthenticated } = useAuth();
-  const { data } = useInit();
+  const { data } = useInit({ enabled: isAuthenticated });
   const pathname = window.location.pathname;
+
+  if (!isAuthenticated) return null;
+
   return (
     <Navbar expand="lg" className="navbar-dark shadow-lg bg-primary">
       <Container>

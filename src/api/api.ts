@@ -2,40 +2,73 @@ import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
 
 const tokenType = "Bearer";
 
-const token = sessionStorage.getItem("accessToken") ?? null;
-
-const clientId = sessionStorage.getItem("clientId");
-
-const isMainHost = window.location.hostname.startsWith("www.securosphere.in");
-
-const subDomain = window.location.hostname.split(".")[0];
+const isMainHost = window.location.hostname.startsWith("app.securosphere.in");
 
 const isLocalHost = window.location.hostname.includes("localhost");
 
-let baseURL = isMainHost
-  ? "http://api.securosphere.in"
-  : `http://${subDomain}.api.securosphere.in`;
+let baseURL = "https://api.securosphere.in";
 
 if (isLocalHost) {
-  if (subDomain === "" || subDomain === "localhost") {
-    baseURL = "http://api.localhost:8080";
-  } else {
-    baseURL = `http://${subDomain}.api.localhost:8080`;
-  }
+  baseURL = "http://localhost:8080";
 }
+
+const token = sessionStorage.getItem("accessToken") ?? null;
+
+const clientId = sessionStorage.getItem("clientId");
 
 const axiosParams = {
   baseURL: baseURL,
   headers: {
     Accept: "application/json",
     Authorization: `${tokenType} ${token}`,
-    clientId: isMainHost ? null : clientId,
+    ClientId: isMainHost ? undefined : clientId ?? undefined,
   },
 };
 
 const axiosInstance = axios.create(axiosParams);
 
+axiosInstance.interceptors.request.use(
+  (config) => {
+    const token = sessionStorage.getItem("accessToken");
+    const clientId = sessionStorage.getItem("clientId");
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    if (clientId) {
+      config.headers.ClientId = isMainHost
+        ? undefined
+        : clientId ?? undefined;
+    }
+    return config;
+  },
+  (error) => {
+    console.error("Request error:", error);
+    return Promise.reject(error);
+  }
+);
+
+// Response Interceptor
+axiosInstance.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    console.error("Error in response:", error);
+    if (
+      error.response.status === 401 &&
+      error.response.data.error === "JWT_EXPIRED"
+    ) {
+      // sessionStorage.removeItem("accessToken");
+      // sessionStorage.removeItem("clientId");
+      window.location.href = window.location.origin + "/login";
+    }
+    return Promise.reject(error);
+  }
+);
+
 const api = (axios: AxiosInstance) => {
+  console.log(axiosParams);
+
   return {
     get: <T>(url: string, config: AxiosRequestConfig = {}) =>
       axios.get<T>(url, config),

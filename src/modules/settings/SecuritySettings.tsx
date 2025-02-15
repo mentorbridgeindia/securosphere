@@ -1,6 +1,6 @@
-import { Card, Form, Button } from "react-bootstrap";
-import { Shield, Globe } from "lucide-react";
-import type { SecuritySettingsProps } from "@modules/settings/types/config";
+import { Shield } from "lucide-react";
+import { Button, Card, Form } from "react-bootstrap";
+import { SecuritySettingsProps } from "./SecuritySettings.types";
 
 export const SecuritySettingsComponent = ({
   security,
@@ -29,8 +29,8 @@ export const SecuritySettingsComponent = ({
                 <Form.Check
                   type="switch"
                   id="2fa-toggle"
-                  checked={true} 
-                  disabled 
+                  checked={true}
+                  disabled
                 />
               </div>
             </div>

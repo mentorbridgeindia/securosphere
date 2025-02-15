@@ -5,23 +5,35 @@ import { useForm } from "react-hook-form";
 import { RegisterData } from "./RegisterForm.types";
 
 import { Anchor } from "@atoms/Anchor";
-import { IRegisterMutation } from "@entities/Register";
-import { Link } from "react-router-dom";
+import { Spinner } from "@atoms/Spinner";
+import { IRegisterMutation, useRegister } from "@entities/Register";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { schema } from "./schema";
 
 export const RegisterForm = ({
-  registerUser,
   termsOfServiceUrl,
 }: {
-  registerUser: (data: IRegisterMutation) => void;
   termsOfServiceUrl: string;
 }) => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors, isValid },
   } = useForm<RegisterData>({
     resolver: yupResolver(schema),
+  });
+
+  const { mutate: registerUser, isPending } = useRegister({
+    onSuccess: () => {
+      toast.success("Registration successful");
+      navigate("/verify-email?email=" + watch("email"));
+    },
+    onError: () => {
+      toast.error("Registration failed! Something went wrong");
+    },
   });
 
   const onSubmit = async (data: RegisterData) => {
@@ -45,7 +57,6 @@ export const RegisterForm = ({
             <FormLabel>First Name</FormLabel>
 
             <Form.Control
-              className="mt-2"
               type="text"
               {...register("firstName")}
             />
@@ -58,7 +69,6 @@ export const RegisterForm = ({
           <Form.Group>
             <FormLabel>Last Name</FormLabel>
             <Form.Control
-              className="mt-2"
               type="text"
               {...register("lastName")}
             />
@@ -71,14 +81,13 @@ export const RegisterForm = ({
 
       <Form.Group className="mb-2">
         <FormLabel>Email</FormLabel>
-        <Form.Control className="mt-2" type="email" {...register("email")} />
+        <Form.Control type="email" {...register("email")} />
         {errors.email && <p className="text-danger">{errors.email.message}</p>}
       </Form.Group>
 
       <Form.Group className="mb-2">
         <FormLabel>Password</FormLabel>
         <Form.Control
-          className="mt-2"
           type="password"
           {...register("password")}
         />
@@ -90,7 +99,6 @@ export const RegisterForm = ({
       <Form.Group className="mb-2">
         <FormLabel>Confirm Password</FormLabel>
         <Form.Control
-          className="mt-2"
           type="password"
           {...register("confirmPassword")}
         />
@@ -117,6 +125,7 @@ export const RegisterForm = ({
         Have an account already?
         <Link to="/login">Sign in</Link>
       </p>
+      <Spinner isLoading={isPending} />
     </Form>
   );
 };
