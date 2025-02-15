@@ -35,9 +35,7 @@ axiosInstance.interceptors.request.use(
       config.headers.Authorization = `Bearer ${token}`;
     }
     if (clientId) {
-      config.headers.ClientId = isMainHost
-        ? undefined
-        : clientId ?? undefined;
+      config.headers.ClientId = isMainHost ? undefined : clientId ?? undefined;
     }
     return config;
   },
@@ -60,7 +58,12 @@ axiosInstance.interceptors.response.use(
     ) {
       // sessionStorage.removeItem("accessToken");
       // sessionStorage.removeItem("clientId");
-      window.location.href = window.location.origin + "/login";
+      if (
+        window.location.pathname !== "/login" &&
+        window.location.pathname !== "/register"
+      ) {
+        window.location.href = window.location.origin + "/login";
+      }
     }
     return Promise.reject(error);
   }
