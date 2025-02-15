@@ -58,7 +58,6 @@
   }
 }
 
-// Responsive adjustments
 @media (max-width: 768px) {
   .social-login-card {
     .social-login-bars {
@@ -98,19 +97,11 @@
         width: 100%;
         height: 100%;
         border-radius: 50%;
-        clip: rect(0, 60px, 120px, 0);
         transform: rotate(var(--offset));
-
-        &::before {
-          content: "";
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          border-radius: 50%;
-          clip: rect(0, 60px, 120px, 0);
-          background: var(--bg-color);
-          transform: rotate(var(--value));
-        }
+        background: conic-gradient(
+          var(--bg-color) var(--value),
+          transparent var(--value)
+        );
       }
 
       &::after {
@@ -173,20 +164,20 @@
 
   .activity-chart {
     display: flex;
-    height: 250px; // Reduced height for smaller card
-    padding: 15px 5px; // Adjusted padding
+    height: 250px;
+    padding: 15px 5px;
     position: relative;
 
     .chart-labels {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding-right: 8px; // Reduced padding
+      padding-right: 8px;
       color: #64748b;
-      min-width: 35px; // Ensure minimum width for labels
+      min-width: 35px;
 
       span {
-        font-size: 0.65rem; // Smaller font for y-axis labels
+        font-size: 0.65rem;
         font-weight: 500;
         white-space: nowrap;
       }
@@ -212,7 +203,7 @@
           stroke-dasharray: 1000;
           stroke-dashoffset: 1000;
           animation: drawLine 2s ease forwards;
-          stroke-width: 0.8; // Slightly thicker line for better visibility
+          stroke-width: 0.8;
         }
 
         .area-path {
@@ -225,13 +216,13 @@
         display: flex;
         justify-content: space-between;
         position: absolute;
-        bottom: -20px; // Adjusted position
+        bottom: -20px;
         left: 0;
         right: 0;
         color: #64748b;
 
         span {
-          font-size: 0.65rem; // Smaller font for x-axis labels
+          font-size: 0.65rem;
           font-weight: 500;
           transform: translateX(-50%);
           transition: color 0.3s ease;
@@ -253,7 +244,6 @@
   }
 }
 
-// Media queries for better responsiveness
 @media screen and (max-width: 1400px) {
   .activity-chart-card {
     .activity-chart {
@@ -273,7 +263,7 @@
 @media screen and (max-width: 992px) {
   .activity-chart-card {
     .activity-chart {
-      height: 280px; // Larger height for full width on medium screens
+      height: 280px;
 
       .chart-labels span {
         font-size: 0.7rem;
@@ -313,7 +303,6 @@
   }
 }
 
-// Animations remain the same
 @keyframes drawLine {
   to {
     stroke-dashoffset: 0;
@@ -359,10 +348,10 @@
         &::after {
           content: "";
           position: absolute;
-          top: 8px; // height of dot
+          top: 8px;
           left: 50%;
           transform: translateX(-50%);
-          height: calc(100% + 24px); // adjust based on your padding
+          height: calc(100% + 24px);
           width: 2px;
           background-color: #e0e6ed;
           z-index: 1;
@@ -375,7 +364,6 @@
       }
     }
 
-    // Remove the line from the last dot
     &:last-child {
       .timeline-dot::after {
         display: none;

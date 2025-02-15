@@ -18,6 +18,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "./App.scss";
 import { PrivateRoute } from "./routes/PrivateRoute";
+import Dashboard from "./pages/Dashboard/Dashboard";
 
 function App() {
   return (
@@ -33,6 +34,8 @@ function App() {
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/oauth" element={<OAuth />} />
             <Route path="/verify-email" element={<VerifyEmail />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+
             <Route element={<PrivateRoute />}>
               <Route
                 path="/auth-configuration"

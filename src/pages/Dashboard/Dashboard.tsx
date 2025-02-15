@@ -1,5 +1,4 @@
 import "./Dashboard.scss";
-import WorldMap from "./WorldMap";
 import { Card, Col, Row, Image, Container, ProgressBar } from "react-bootstrap";
 
 //---------------------------------------------
@@ -72,7 +71,7 @@ const SocialLoginBar = ({
 // ------------------------------------------
 
 const browserStats = [
-  { name: "Chrome", value: 20, color: "#4318FF" },
+  { name: "Chrome", value: 70, color: "#4318FF" },
   { name: "Firefox", value: 10, color: "#1DA1F2" },
   { name: "Safari", value: 10, color: "#24292E" },
   { name: "Edge", value: 10, color: "#1877F2" },
@@ -113,7 +112,6 @@ const DonutChart = ({ data }: { data: typeof browserStats }) => {
     </div>
   );
 };
-
 //------------------------------------------
 
 const ActivityLineChart = () => {
@@ -361,21 +359,6 @@ const Dashboard = () => {
                 <h5 className="card-title mb-0">User Activity Hours</h5>
               </div>
               <ActivityLineChart />
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
-      <Row>
-        <Col xs={12}>
-          <Card
-            className="world-map-card rounded-4 border-0 shadow-sm"
-            style={{ backgroundColor: "#eef3ff" }}
-          >
-            <Card.Body className="p-4">
-              <div className="d-flex justify-content-between align-items-center mb-4">
-                <h5 className="card-title mb-0">World Map</h5>
-              </div>
-              <WorldMap />
             </Card.Body>
           </Card>
         </Col>
