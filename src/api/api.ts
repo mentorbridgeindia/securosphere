@@ -20,8 +20,8 @@ const axiosParams = {
   baseURL: baseURL,
   headers: {
     Accept: "application/json",
-    Authorization: `${tokenType} ${token}`,
     ClientId: isMainHost ? undefined : clientId ?? undefined,
+    ...(token ? { Authorization: `${tokenType} ${token}` } : {}),
   },
 };
 
