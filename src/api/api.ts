@@ -20,8 +20,8 @@ const axiosParams = {
   baseURL: baseURL,
   headers: {
     Accept: "application/json",
-    Authorization: `${tokenType} ${token}`,
-    ClientId: isMainHost ? undefined : clientId ?? undefined,
+    "X-Client-Id": isMainHost ? undefined : clientId ?? undefined,
+    ...(token ? { Authorization: `${tokenType} ${token}` } : {}),
   },
 };
 
@@ -32,10 +32,12 @@ axiosInstance.interceptors.request.use(
     const token = sessionStorage.getItem("accessToken");
     const clientId = sessionStorage.getItem("clientId");
     if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+      config.headers["Authorization"] = `Bearer ${token}`;
     }
     if (clientId) {
-      config.headers.ClientId = isMainHost ? undefined : clientId ?? undefined;
+      config.headers["x-client-id"] = isMainHost
+        ? undefined
+        : clientId ?? undefined;
     }
     return config;
   },
