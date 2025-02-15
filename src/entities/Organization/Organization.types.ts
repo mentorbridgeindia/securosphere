@@ -1,5 +1,3 @@
-import { SocialProvider } from "@/types/auth";
-
 export type SocialProvidersObject = {
   email: boolean;
   google: boolean;

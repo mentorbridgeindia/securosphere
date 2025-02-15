@@ -32,17 +32,14 @@ const SignUpOptionsCard = () => {
   useEffect(() => {
     if (data?.socialProviders) {
       const socialProviders = Object.keys(data?.socialProviders).map(
-        (provider) => {
-          if (data?.socialProviders[provider as keyof SocialProvidersObject]) {
-            return provider.toLowerCase() as SocialProvider;
-          }
-        }
+        (provider) => data?.socialProviders[provider as keyof SocialProvidersObject] ? provider.toLowerCase() as SocialProvider : undefined
       ) as SocialProvider[];
       setSignUpConfig({
         appName: data?.applicationName,
         socialProviders: socialProviders,
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   console.log(signUpConfig);
@@ -79,7 +76,7 @@ const SignUpOptionsCard = () => {
           <div className="signup-options-container">
             <h6 className="mb-3">Select Sign Up Methods</h6>
             <Stack>
-              {signUpOptions.map((option) => (
+              {signUpOptions?.map((option) => (
                 <div
                   key={option}
                   className="d-flex justify-content-between align-items-center p-2 rounded hover-bg-light mb-2"
