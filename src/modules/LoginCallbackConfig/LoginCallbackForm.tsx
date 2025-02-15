@@ -3,104 +3,92 @@ import { ReactComponent as IconCrossCircle } from "@assets/icons/icon-cross.svg"
 import { ReactComponent as IconPlus } from "@assets/icons/icon-plus.svg";
 import { ReactComponent as IconTrash } from "@assets/icons/icon-trash.svg";
 import { useCheckDomain } from "@entities/Domain";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { useAtom } from "jotai";
 import { useEffect, useState } from "react";
 import { Form, FormLabel, InputGroup } from "react-bootstrap";
+import { Controller, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import { useGetOrganization } from "../../entities/Organization";
 import { loginCallbackConfigAtom } from "./atoms/loginCallbackConfigAtom";
 import { LoginCallbackConfigState } from "./LoginCallbackConfig.types";
+import { loginCallbackSchema } from "./loginCallbackSchema";
 
 export const LoginCallbackForm = ({ isReadOnly }: { isReadOnly: boolean }) => {
-  const [domainValue, setDomainValue] = useState("");
   const [isDomainAvailable, setIsDomainAvailable] = useState(false);
   const [loginCallbackConfig, setLoginCallbackConfig] = useAtom(
     loginCallbackConfigAtom
   );
+
+  const { data } = useGetOrganization({
+    queryConfig: { enabled: true },
+  });
+
+  const {
+    control,
+    handleSubmit,
+    setValue,
+    watch,
+    reset,
+    formState: { errors, isDirty },
+  } = useForm<LoginCallbackConfigState>({
+    resolver: yupResolver(loginCallbackSchema as any),
+    defaultValues: {
+      orgName: loginCallbackConfig?.orgName || "",
+      website: loginCallbackConfig?.website || "",
+      orgLogo: loginCallbackConfig?.orgLogo || "",
+      authorizedOrigins: loginCallbackConfig?.authorizedOrigins || [""],
+      callbackUrl: loginCallbackConfig?.callbackUrl || "",
+      subDomain: loginCallbackConfig?.subDomain || "",
+      termsOfServiceUrl: loginCallbackConfig?.termsOfServiceUrl || "",
+    },
+    mode: "onBlur",
+  });
+
+  const values = watch();
+
+  useEffect(() => {
+    if (data) {
+      reset({
+        authorizedOrigins: data.authorizedDomains,
+        orgLogo: data.logo,
+        orgName: data.organizationName,
+        callbackUrl: data.callbackUrl,
+        website: data.website,
+        subDomain: data.subDomain,
+        termsOfServiceUrl: data.termsOfServiceUrl,
+      });
+    }
+  }, [data]);
+
   const {
     data: domainData,
     isLoading: domainLoading,
     error: domainError,
-  } = useCheckDomain(domainValue);
+  } = useCheckDomain(watch("subDomain"));
 
   useEffect(() => {
-    if (!domainLoading && !domainError && !!loginCallbackConfig?.subDomain) {
-      setDomainValue("");
+    if (!domainLoading && !domainError && !!watch("subDomain")) {
       setIsDomainAvailable(true);
     } else {
       setIsDomainAvailable(false);
     }
-  }, [domainData, domainLoading, domainError, loginCallbackConfig?.subDomain]);
-
-  const [setup, setSetup] = useState<LoginCallbackConfigState>({
-    orgName: loginCallbackConfig?.orgName || "",
-    website: loginCallbackConfig?.website || "",
-    orgLogo: loginCallbackConfig?.orgLogo || "",
-    authorizedOrigins: loginCallbackConfig?.authorizedOrigins || [""],
-    callbackUrl: loginCallbackConfig?.callbackUrl || "",
-    subDomain: loginCallbackConfig?.subDomain || "",
-    termsOfServiceUrl: loginCallbackConfig?.termsOfServiceUrl || "",
-  });
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-
-    setSetup((prev) => ({ ...prev, [name]: value }));
-    setLoginCallbackConfig(setup);
-  };
-
-  const handleUpdateOrigins = (index: number, value: string) => {
-    setSetup((prev) => ({
-      ...prev,
-      authorizedOrigins: prev.authorizedOrigins.map((origin, i) =>
-        i === index ? value : origin
-      ),
-    }));
-    setLoginCallbackConfig(setup);
-  };
+  }, [domainData, domainLoading, domainError, watch]);
 
   const handleAddOrigin = () => {
-    const isFilled = setup.authorizedOrigins.every(
-      (origin) => origin.trim() !== ""
-    );
+    const authorizedOrigins = watch("authorizedOrigins");
+    const isFilled = authorizedOrigins.every((origin) => origin.trim() !== "");
     if (isFilled) {
-      setSetup((prev) => ({
-        ...prev,
-        authorizedOrigins: [...prev.authorizedOrigins, ""],
-      }));
-      setLoginCallbackConfig(setup);
+      setValue("authorizedOrigins", [...authorizedOrigins, ""]);
     }
   };
 
-  const handleWebsiteBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-    const validateUrl = async (url: string) => {
-      try {
-        const res = await fetch(url, { method: "HEAD" });
-        if (res.status === 404) {
-          toast.error("Terms & Conditions url not valid");
-        }
-      } catch {
-        toast.error("Terms & Conditions url not valid");
-      }
-    };
-
-    validateUrl(e.target.value);
-  };
-
   const handleRemoveOrigin = (index: number) => {
-    setSetup((prev) => ({
-      ...prev,
-      authorizedOrigins: prev.authorizedOrigins.filter((_, i) => i !== index),
-    }));
-    setLoginCallbackConfig(setup);
-  };
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setLoginCallbackConfig(setup);
-  };
-
-  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-    setDomainValue(e.target.value);
+    const authorizedOrigins = watch("authorizedOrigins");
+    setValue(
+      "authorizedOrigins",
+      authorizedOrigins.filter((_, i) => i !== index)
+    );
   };
 
   const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -116,42 +104,98 @@ export const LoginCallbackForm = ({ isReadOnly }: { isReadOnly: boolean }) => {
       }
       const reader = new FileReader();
       reader.onloadend = () => {
-        setSetup((prev) => ({ ...prev, [name]: reader.result }));
-        setLoginCallbackConfig(setup);
+        setValue(name as any, reader.result);
       };
       reader.readAsDataURL(file);
     }
   };
 
+  const onSubmit = (data: LoginCallbackConfigState) => {
+    setLoginCallbackConfig(data);
+  };
+
+  const updateLoginCallbackConfig = () => {
+    setLoginCallbackConfig({
+      orgName: watch("orgName"),
+      subDomain: watch("subDomain"),
+      authorizedOrigins: watch("authorizedOrigins"),
+      callbackUrl: watch("callbackUrl"),
+      orgLogo: watch("orgLogo"),
+      website: watch("website"),
+      termsOfServiceUrl: watch("termsOfServiceUrl"),
+    });
+  };
+
+  useEffect(() => {
+    updateLoginCallbackConfig();
+  }, [
+    watch("orgName"),
+    watch("subDomain"),
+    watch("authorizedOrigins"),
+    watch("callbackUrl"),
+    watch("orgLogo"),
+    watch("website"),
+    watch("termsOfServiceUrl"),
+  ]);
+
   return (
-    <Form onSubmit={handleSubmit} noValidate>
+    <Form onSubmit={handleSubmit(onSubmit)} noValidate>
       <Form.Group controlId="domain" className="mb-3">
         <FormLabel>Organization Name</FormLabel>
-        <Form.Control
-          type="text"
+        <Controller
           name="orgName"
-          onChange={handleChange}
-          disabled={isReadOnly}
-          value={setup.orgName}
+          control={control}
+          render={({ field }) => (
+            <Form.Control
+              type="text"
+              {...field}
+              disabled={isReadOnly}
+              isValid={!!watch("orgName")}
+              isInvalid={!!errors.orgName}
+              autoFocus
+            />
+          )}
         />
       </Form.Group>
       <Form.Group controlId="subDomain" className="mb-3">
         <FormLabel>Sub Domain</FormLabel>
-        <InputGroup className="mb-3">
-          <Form.Control
-            type="text"
-            name="subDomain"
-            onChange={handleChange}
-            disabled={isReadOnly}
-            value={setup.subDomain}
-            onBlur={handleBlur}
-            isInvalid={!!domainValue && !isDomainAvailable}
-          />
-          <InputGroup.Text className="text-small">
-            .securosphere.com
-          </InputGroup.Text>
-        </InputGroup>
-        {domainValue && (
+        {data?.organizationName && (
+          <InputGroup className="mb-3">
+            <Form.Control
+              type="text"
+              value={data?.subDomain}
+              disabled
+              name="your subdomain"
+            />
+            <InputGroup.Text className="text-small">
+              .securosphere.com
+            </InputGroup.Text>
+          </InputGroup>
+        )}
+        {!data?.organizationName && (
+          <InputGroup className="mb-3">
+            <Controller
+              name="subDomain"
+              control={control}
+              render={({ field }) => (
+                <Form.Control
+                  type="text"
+                  {...field}
+                  disabled={!!data?.organizationName}
+                  isValid={!!watch("subDomain") && isDomainAvailable}
+                  isInvalid={
+                    !!errors.subDomain ||
+                    (!isDomainAvailable && errors.subDomain)
+                  }
+                />
+              )}
+            />
+            <InputGroup.Text className="text-small">
+              .securosphere.com
+            </InputGroup.Text>
+          </InputGroup>
+        )}
+        {!data?.organizationName && watch("subDomain") && (
           <div
             className={`d-flex align-items-center gap-2 text-small fs-8 ${
               isDomainAvailable ? "text-success" : "text-danger"
@@ -172,23 +216,34 @@ export const LoginCallbackForm = ({ isReadOnly }: { isReadOnly: boolean }) => {
       <Form.Group controlId="authorizedOrigins" className="mb-3">
         <FormLabel className="d-flex align-items-center justify-content-between">
           <div>Authorized Origins</div>
-          <button className="ms-2 empty-btn" onClick={handleAddOrigin}>
+          <button
+            type="button"
+            className="ms-2 empty-btn"
+            onClick={handleAddOrigin}
+          >
             <IconPlus />
           </button>
         </FormLabel>
-        {setup.authorizedOrigins.map((origin, index) => (
+        {watch("authorizedOrigins")?.map((origin, index) => (
           <div className="d-flex align-items-center mb-2" key={index}>
-            <Form.Control
-              type="url"
-              name="origin"
-              autoComplete="off"
-              placeholder="localhost,stublab.in"
-              value={origin}
-              onChange={(e) => handleUpdateOrigins(index, e.target.value)}
-              disabled={isReadOnly}
+            <Controller
+              name={`authorizedOrigins.${index}`}
+              control={control}
+              render={({ field }) => (
+                <Form.Control
+                  type="url"
+                  isInvalid={!!errors.authorizedOrigins?.[index]}
+                  {...field}
+                  autoComplete="off"
+                  isValid={!!watch(`authorizedOrigins.${index}`)}
+                  placeholder="localhost,stublab.in"
+                  disabled={isReadOnly}
+                />
+              )}
             />
-            {setup.authorizedOrigins.length > 1 && (
+            {watch("authorizedOrigins").length > 1 && (
               <button
+                type="button"
                 className="ms-2 empty-btn text-danger"
                 onClick={() => handleRemoveOrigin(index)}
               >
@@ -202,13 +257,19 @@ export const LoginCallbackForm = ({ isReadOnly }: { isReadOnly: boolean }) => {
         <FormLabel className="d-flex align-items-center justify-content-start">
           Callback URL
         </FormLabel>
-        <Form.Control
-          type="text"
+        <Controller
           name="callbackUrl"
-          placeholder="https://example.com/oauth/success"
-          value={setup.callbackUrl}
-          onChange={handleChange}
-          disabled={isReadOnly}
+          control={control}
+          render={({ field }) => (
+            <Form.Control
+              type="text"
+              isInvalid={!!errors.callbackUrl}
+              isValid={!!watch("callbackUrl")}
+              {...field}
+              placeholder="https://example.com/oauth/success"
+              disabled={isReadOnly}
+            />
+          )}
         />
       </Form.Group>
       <Form.Group controlId="orgLogo" className="mb-3">
@@ -217,23 +278,36 @@ export const LoginCallbackForm = ({ isReadOnly }: { isReadOnly: boolean }) => {
       </Form.Group>
       <Form.Group controlId="website" className="mb-3">
         <FormLabel>Organization Website</FormLabel>
-        <Form.Control
-          type="url"
+        <Controller
           name="website"
-          onChange={handleChange}
-          value={setup.website}
-          disabled={isReadOnly}
+          control={control}
+          render={({ field }) => (
+            <Form.Control
+              type="url"
+              {...field}
+              isInvalid={!!errors.website}
+              isValid={!!watch("website")}
+              disabled={isReadOnly}
+              placeholder="https://example.com"
+            />
+          )}
         />
       </Form.Group>
       <Form.Group controlId="termsOfServiceUrl" className="mb-3">
         <FormLabel>Terms of Service URL</FormLabel>
-        <Form.Control
-          type="url"
+        <Controller
           name="termsOfServiceUrl"
-          onChange={handleChange}
-          value={setup.termsOfServiceUrl}
-          onBlur={handleWebsiteBlur}
-          disabled={isReadOnly}
+          control={control}
+          render={({ field }) => (
+            <Form.Control
+              type="url"
+              isValid={!!watch("termsOfServiceUrl")}
+              {...field}
+              isInvalid={!!errors.termsOfServiceUrl}
+              disabled={isReadOnly}
+              placeholder="https://example.com/terms-of-service"
+            />
+          )}
         />
       </Form.Group>
     </Form>

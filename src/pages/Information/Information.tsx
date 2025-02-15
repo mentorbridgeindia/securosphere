@@ -7,7 +7,7 @@ import { Alert, Button, Col, Container, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { InfoStep } from "./components/InfoStep";
 
-const Information = () => {
+export const Information = () => {
   const navigate = useNavigate();
 
   const { data, isLoading, error } = useGetOrganization(
@@ -63,5 +63,3 @@ const Information = () => {
     </Container>
   );
 };
-
-export default Information;

@@ -3,7 +3,6 @@ import { useInit } from "@entities/Domain";
 import { useLogin } from "@entities/Login";
 import { LoginForm } from "@modules/LoginForm";
 import { SocialLoginButtons } from "@modules/SocialLogin";
-import { useEffect } from "react";
 import { Card } from "react-bootstrap";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
@@ -15,6 +14,9 @@ export const Login = () => {
   const { mutate: loginUser, isPending } = useLogin({
     onSuccess: () => {
       toast.success("Login successful! Welcome back!");
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
       navigate("/");
     },
     onError: () => {
@@ -24,13 +26,7 @@ export const Login = () => {
 
   const { data, isLoading } = useInit();
 
-  useEffect(() => {
-    if (!isLoading && !data) {
-      window.location.href = "https://securosphere.in";
-    }
-  }, [isLoading, data]);
-
-  if (isLoading || isPending) return <Spinner isLoading />;
+  if (isLoading) return <Spinner isLoading />;
 
   return (
     <div className="d-flex align-items-center justify-content-center">
@@ -81,6 +77,7 @@ export const Login = () => {
               <LoginForm loginUser={loginUser} />
             </div>
           </Card>
+          <Spinner isLoading={isPending} />
         </Col>
       </Row>
     </div>

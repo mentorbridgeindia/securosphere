@@ -1,447 +1,386 @@
-import React, { useEffect, useState } from "react";
-import {
-  CCard,
-  CCardBody,
-  CCardHeader,
-  CCol,
-  CRow,
-  CContainer,
-} from "@coreui/react";
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  Tooltip,
-  ResponsiveContainer,
-  LineChart,
-  Line,
-  CartesianGrid,
-  Legend,
-  PieChart,
-  Pie,
-  Cell,
-} from "recharts";
 import "./Dashboard.scss";
 import WorldMap from "./WorldMap";
+import { Card, Col, Row, Image, Container, ProgressBar } from "react-bootstrap";
 
-interface BrowserData {
-  browser: "Chrome" | "Firefox" | "Edge" | "Safari";
-  count: number;
-}
+//---------------------------------------------
 
-interface GenderData {
-  gender: "Male" | "Female";
-  count: number;
-}
+const stats1 = [
+  {
+    title: "Reports",
+    value: 59,
+    img: "https://bootstrapdemos.adminmart.com/modernize/dist/assets/images/svgs/icon-connect.svg",
+    color: "info",
+  },
+  {
+    title: "Total Users",
+    value: 1200,
+    img: "https://bootstrapdemos.adminmart.com/modernize/dist/assets/images/svgs/icon-briefcase.svg",
+    color: "primary",
+  },
+  {
+    title: "Active Users",
+    value: 850,
+    img: "https://bootstrapdemos.adminmart.com/modernize/dist/assets/images/svgs/icon-mailbox.svg",
+    color: "success",
+  },
+  {
+    title: "Sign Ups",
+    value: 300,
+    img: "https://bootstrapdemos.adminmart.com/modernize/dist/assets/images/svgs/icon-user-male.svg",
+    color: "warning",
+  },
+];
 
-const GENDER_COLORS: Record<string, string> = {
-  Male: "#4C78D0",
-  Female: "#F2668B",
-};
-
-const BROWSER_COLORS: Record<string, string> = {
-  Chrome: "#36A2EB",
-  Firefox: "#FF6384",
-  Edge: "#4BC0C0",
-  Safari: "#FFCE56",
-};
-
-const COLORS = ["#FF6384", "#36A2EB", "#FFCE56"];
+// ------------------------------------------
 
 const stats = {
+  UserName: "Mathew Anderson",
   TotalUsers: 1200,
   ActiveUsers: 850,
-  SignUps: 300,
-  SignIns: 700,
 };
-const genderData: GenderData[] = [
-  { gender: "Male", count: 700 },
-  { gender: "Female", count: 500 },
-];
 
-const browserUsage: BrowserData[] = [
-  { browser: "Chrome", count: 600 },
-  { browser: "Firefox", count: 300 },
-  { browser: "Edge", count: 200 },
-  { browser: "Safari", count: 100 },
-];
-
-const weeklyActivity = [
-  { day: "Mon", logins: 40 },
-  { day: "Tue", logins: 60 },
-  { day: "Wed", logins: 80 },
-  { day: "Thu", logins: 30 },
-  { day: "Fri", logins: 90 },
-  { day: "Sat", logins: 50 },
-  { day: "Sun", logins: 20 },
-];
-
+// ------------------------------------------
 const socialLogins = [
-  { type: "Google", value: 50 },
+  { type: "Google", value: 90 },
   { type: "Facebook", value: 30 },
   { type: "Github", value: 20 },
   { type: "Twitter", value: 10 },
   { type: "Linkedin", value: 5 },
 ];
 
-const loginDetails = [
-  {
-    name: "John Doe",
-    date: "2024-02-10",
-    country: "USA",
-    method: "Google",
-    activity: "Sign-in",
-    profileImage:
-      "https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?&w=128&h=128&dpr=2&q=80",
-  },
-  {
-    name: "Jane Smith",
-    date: "2024-02-09",
-    country: "UK",
-    method: "Facebook",
-    activity: "Sign-up",
-    profileImage:
-      "https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?&w=128&h=128&dpr=2&q=80",
-  },
-  {
-    name: "Alice Johnson",
-    date: "2024-02-08",
-    country: "Canada",
-    method: "Github",
-    activity: "Sign-in",
-    profileImage:
-      "https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-1.2.1&w=128&h=128&dpr=2&q=80",
-  },
-  {
-    name: "Bob Brown",
-    date: "2024-02-07",
-    country: "Australia",
-    method: "Google",
-    activity: "Sign-up",
-    profileImage:
-      "https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-1.2.1&w=128&h=128&dpr=2&q=80",
-  },
-];
-
-const activeTimeData = [
-  { hour: "00:00", users: 120 },
-  { hour: "03:00", users: 80 },
-  { hour: "06:00", users: 150 },
-  { hour: "09:00", users: 300 },
-  { hour: "12:00", users: 400 },
-  { hour: "15:00", users: 350 },
-  { hour: "18:00", users: 250 },
-  { hour: "21:00", users: 180 },
-];
-
-const ScrollIndicator = () => (
-  <div className="d-block d-md-none text-muted text-center py-2">
-    <small>← Scroll horizontally to view more →</small>
+const SocialLoginBar = ({
+  type,
+  value,
+  color,
+}: {
+  type: string;
+  value: number;
+  color: string;
+}) => (
+  <div className="social-login-bar mb-3">
+    <div className="d-flex justify-content-between align-items-center mb-1">
+      <span className="login-type">
+        <i className={`bi bi-${type.toLowerCase()}`}></i>
+        {type}
+      </span>
+      <span className="login-value">{value}%</span>
+    </div>
+    <ProgressBar now={value} variant={color} className="custom-progress" />
   </div>
 );
 
-const Dashboard = () => {
-  return (
-    <CContainer fluid className="pt-4" >
-      <CRow>
-        {Object.entries(stats).map(([key, value], index) => (
-          <CCol xs={12} sm={6} md={3} lg={3} key={key} className="mb-3">
-            <CCard
-              className={`dashboard-card dashboard-card-${key.toLowerCase()}`}
-            >
-              <CCardHeader className="border-0 bg-transparent">
-                {key.replace(/([A-Z])/g, " $1").trim()}
-              </CCardHeader>
-              <CCardBody>
-                <h3>{value}</h3>
-              </CCardBody>
-            </CCard>
-          </CCol>
-        ))}
-      </CRow>
-      <CRow className="mt-3 mb-4">
-        <CCol xs={12} sm={12} md={4} lg={4}>
-          <CCard className="dashboard-chart-card">
-            <CCardHeader>Gender Distribution</CCardHeader>
-            <CCardBody>
-              <ResponsiveContainer width="80%" height={300}>
-                <BarChart data={genderData}>
-                  <XAxis dataKey="gender" />
-                  <YAxis />
-                  <Tooltip />
-                  <Bar dataKey="count" barSize={30}>
-                    {genderData.map((entry, index) => (
-                      <Cell
-                        key={`cell-${index}`}
-                        fill={GENDER_COLORS[entry.gender]}
-                      />
-                    ))}
-                  </Bar>
-                </BarChart>
-              </ResponsiveContainer>
-            </CCardBody>
-          </CCard>
-        </CCol>
+// ------------------------------------------
 
-        <CCol xs={12} sm={12} md={8} lg={8} className="mt-4 mt-md-0">
-          <CCard className="dashboard-chart-card">
-            <CCardHeader>Weekly Logins</CCardHeader>
-            <CCardBody>
-              <ResponsiveContainer width="100%" height={300}>
-                <LineChart data={weeklyActivity}>
-                  <XAxis dataKey="day" />
-                  <YAxis />
-                  <Tooltip />
-                  <Legend />
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <Line type="monotone" dataKey="logins" stroke="#002851" />
-                </LineChart>
-              </ResponsiveContainer>
-            </CCardBody>
-          </CCard>
-        </CCol>
-      </CRow>
-      <CRow className="mt-4 mb-4">
-        <CCol xs={12} sm={12} md={6} lg={6}>
-          <CCard className="dashboard-chart-card">
-            <CCardHeader>Social Login Methods</CCardHeader>
-            <CCardBody>
-              <ResponsiveContainer width="100%" height={300}>
-                <PieChart>
-                  <Pie
-                    data={socialLogins}
-                    cx="50%"
-                    cy="50%"
-                    outerRadius="70%"
-                    innerRadius="0%"
-                    fill="#8884d8"
-                    dataKey="value"
-                    nameKey="type"
-                  >
-                    {socialLogins.map((entry, index) => (
-                      <Cell
-                        key={`cell-${index}`}
-                        fill={COLORS[index % COLORS.length]}
-                      />
-                    ))}
-                  </Pie>
-                  <Tooltip
-                    formatter={(value, name, props) => [
-                      `${value}%`,
-                      `${props.payload.type} Login`,
-                    ]}
-                  />
-                  <Legend
-                    layout="horizontal"
-                    align="center"
-                    verticalAlign="bottom"
-                    iconType="circle"
-                    iconSize={4}
-                    wrapperStyle={{
-                      fontSize: "12px",
-                      padding: "10px",
-                      width: "100%",
-                      bottom: 0,
-                      left: "50%",
-                      transform: "translateX(-50%)",
-                    }}
-                    formatter={(value, entry, index) => (
-                      <span
-                        style={{
-                          color: "#666",
-                          marginLeft: "4px",
-                          padding: "0 8px",
-                        }}
-                      >
-                        {value}
-                      </span>
-                    )}
-                  />
-                </PieChart>
-              </ResponsiveContainer>
-            </CCardBody>
-          </CCard>
-        </CCol>
-        <CCol xs={12} sm={12} md={6} lg={6} className="mt-4 mt-md-0">
-          <CCard className="dashboard-chart-card">
-            <CCardHeader>Browser Usage </CCardHeader>
-            <CCardBody>
-              <ResponsiveContainer width="100%" height={300}>
-                <BarChart data={browserUsage}>
-                  <XAxis dataKey="browser" />
-                  <YAxis />
-                  <Tooltip />
-                  <Bar dataKey="count" barSize={24}>
-                    {browserUsage.map((entry, index) => (
-                      <Cell
-                        key={`cell-${index}`}
-                        fill={BROWSER_COLORS[entry.browser]}
-                      />
-                    ))}
-                  </Bar>
-                </BarChart>
-              </ResponsiveContainer>
-            </CCardBody>
-          </CCard>
-        </CCol>
-      </CRow>
-      <CCol xs={12} sm={12} md={12} lg={12} className="mt-4">
-        <CCard className="dashboard-chart-card">
-          <CCardHeader>Most Active Hours</CCardHeader>
-          <CCardBody>
-            <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={activeTimeData}>
-                <XAxis dataKey="hour" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <CartesianGrid strokeDasharray="3 3" />
-                <Line
-                  type="monotone"
-                  dataKey="users"
-                  stroke="#4C78D0"
-                  strokeWidth={2}
-                  dot={{ fill: "#4C78D0" }}
-                />
-              </LineChart>
-            </ResponsiveContainer>
-          </CCardBody>
-        </CCard>
-      </CCol>
-      <CRow className="mt-3 mb-4">
-        <CCol lg={12} md={12} sm={12} xs={12}>
-          <CCard className="dashboard-chart-card">
-            <CCardHeader>Global User Distribution</CCardHeader>
-            <CCardBody>
-              <WorldMap />
-            </CCardBody>
-          </CCard>
-        </CCol>
-      </CRow>
-      <CRow className="mt-3 mb-4">
-        <CCol xs={12} sm={12} md={12} lg={12}>
-          <CCard className="dashboard-chart-card">
-            <CCardHeader>User Login Details</CCardHeader>
-            <CCardBody>
-              <ScrollIndicator />
-              <div className="responsive-table-wrapper">
-                <table className="table table-hover">
-                  <thead>
-                    <tr>
-                      <th>User</th>
-                      <th>Date</th>
-                      <th>Country</th>
-                      <th>Method</th>
-                      <th>Activity</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {loginDetails.map((user, index) => (
-                      <tr key={index}>
-                        <td className="user-info-cell">
-                          <div className="d-flex align-items-center">
-                            <img
-                              src={user.profileImage}
-                              alt={user.name}
-                              className="user-profile-image"
-                              style={{
-                                width: "32px",
-                                height: "32px",
-                                borderRadius: "50%",
-                                marginRight: "10px",
-                                objectFit: "cover",
-                              }}
-                            />
-                            <span>{user.name}</span>
-                          </div>
-                        </td>
-                        <td>{user.date}</td>
-                        <td>{user.country}</td>
-                        <td>
-                          <span
-                            title={`Logged in using ${user.method}`}
-                            style={{ cursor: "pointer" }}
-                          >
-                            {user.method}
-                          </span>
-                        </td>
-                        <td>{user.activity}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </CCardBody>
-          </CCard>
-        </CCol>
-      </CRow>
-      <CRow>
-        <div className="card text-bg-primary border-0 w-100">
-          <div className="card-body pb-0">
-            <h4 className="fw-semibold mb-1 text-white card-title">
-              Best Selling Products
-            </h4>
-            <p className="fs-3 mb-3 text-white">Overview 2024</p>
-            <div className="text-center mt-3">
-              <img
-                src="https://bootstrapdemos.adminmart.com/modernize/dist/assets/images/backgrounds/piggy.png"
-                className="img-fluid"
-                alt="modernize-img"
-              />
-            </div>
+const browserStats = [
+  { name: "Chrome", value: 20, color: "#4318FF" },
+  { name: "Firefox", value: 10, color: "#1DA1F2" },
+  { name: "Safari", value: 10, color: "#24292E" },
+  { name: "Edge", value: 10, color: "#1877F2" },
+];
+
+const DonutChart = ({ data }: { data: typeof browserStats }) => {
+  const total = data.reduce((sum, item) => sum + item.value, 0);
+  let rotateOffset = 0;
+
+  return (
+    <div className="donut-chart-container">
+      <div className="donut-chart">
+        {data.map((item, index) => {
+          const degrees = (item.value / total) * 360;
+          const style = {
+            "--offset": `${rotateOffset}deg`,
+            "--value": `${degrees}deg`,
+            "--bg-color": item.color,
+          } as React.CSSProperties;
+          rotateOffset += degrees;
+          return (
+            <div key={item.name} className="donut-segment" style={style} />
+          );
+        })}
+      </div>
+      <div className="donut-legend">
+        {data.map((item) => (
+          <div key={item.name} className="legend-item">
+            <span
+              className="legend-dot"
+              style={{ backgroundColor: item.color }}
+            />
+            <span className="legend-label">{item.name}</span>
+            <span className="legend-value">{item.value}%</span>
           </div>
-          <div className="card mx-2 mb-2 mt-n2">
-            <div className="card-body">
-              <div className="mb-7 pb-1">
-                <div className="d-flex justify-content-between align-items-center mb-6">
-                  <div>
-                    <h6 className="mb-1 fs-4 fw-semibold">MaterialPro</h6>
-                    <p className="fs-3 mb-0">$23,568</p>
-                  </div>
-                  <div>
-                    <span className="badge bg-primary-subtle text-primary fw-semibold fs-3">
-                      55%
-                    </span>
-                  </div>
-                </div>
-                <div className="progress bg-primary-subtle h-4">
-                  <div
-                    className="progress-bar w-50"
-                    role="progressbar"
-                    aria-valuenow={75}
-                    aria-valuemin={0}
-                    aria-valuemax={100}
-                  ></div>
-                </div>
-              </div>
-              <div>
-                <div className="d-flex justify-content-between align-items-center mb-6">
-                  <div>
-                    <h6 className="mb-1 fs-4 fw-semibold">Flexy Admin</h6>
-                    <p className="fs-3 mb-0">$23,568</p>
-                  </div>
-                  <div>
-                    <span className="badge bg-secondary-subtle text-secondary fw-bold fs-3">
-                      20%
-                    </span>
-                  </div>
-                </div>
-                <div className="progress bg-secondary-subtle h-4">
-                  <div
-                    className="progress-bar text-bg-secondary w-25"
-                    role="progressbar"
-                    aria-valuenow={75}
-                    aria-valuemin={0}
-                    aria-valuemax={100}
-                  ></div>
-                </div>
-              </div>
-            </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+//------------------------------------------
+
+const ActivityLineChart = () => {
+  const hours = ["12am", "3am", "6am", "9am", "12pm", "3pm", "6pm", "9pm"];
+  const values = [30, 20, 25, 85, 90, 70, 95, 60];
+
+  const maxValue = Math.max(...values);
+  const points = values
+    .map((value, index) => {
+      const x = (index / (values.length - 1)) * 100;
+      const y = 100 - (value / maxValue) * 100;
+      return `${x},${y}`;
+    })
+    .join(" ");
+
+  return (
+    <div className="activity-chart">
+      <div className="chart-labels y-labels">
+        {[maxValue, maxValue * 0.75, maxValue * 0.5, maxValue * 0.25, 0].map(
+          (label, index) => (
+            <span key={index}>{Math.round(label)}</span>
+          )
+        )}
+      </div>
+      <div className="chart-container">
+        <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#4318FF" />
+              <stop offset="100%" stopColor="#9F7AEA" />
+            </linearGradient>
+            <linearGradient id="areaGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#4318FF" stopOpacity="0.3" />
+              <stop offset="100%" stopColor="#4318FF" stopOpacity="0.02" />
+            </linearGradient>
+          </defs>
+
+          <path
+            d={`M0,100 L${points} L100,100 Z`}
+            fill="url(#areaGradient)"
+            className="area-path"
+          />
+
+          <polyline
+            points={points}
+            fill="none"
+            stroke="url(#lineGradient)"
+            strokeWidth="0."
+            className="main-line"
+          />
+        </svg>
+        <div className="x-labels">
+          {hours.map((hour, index) => (
+            <span key={index}>{hour}</span>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+//----------------------------------------
+
+const recentUsers = [
+  {
+    date: "11.2.2021",
+    name: "John Smith",
+  },
+  {
+    date: "11.2.2021",
+    name: "Sarah Johnson",
+  },
+  {
+    date: "11.2.2021",
+    name: "Michael Brown",
+  },
+  {
+    date: "11.2.2021",
+    name: "Emma Wilson",
+  },
+  {
+    date: "11.2.2021",
+    name: "James Davis",
+  },
+  {
+    date: "11.2.2021",
+    name: "James Davis",
+  },
+];
+
+const RecentUsers = () => {
+  return (
+    <div className="recent-users-list px-5">
+      {recentUsers.map((user, index) => (
+        <div key={index} className="user-timeline-item">
+          <div className="time-stamp">{user.date}</div>
+          <div className="user-info">
+            <div className="timeline-dot"></div>
+            <div className="user-name">{user.name}</div>
           </div>
         </div>
-      </CRow>{" "}
-    </CContainer>
+      ))}
+    </div>
+  );
+};
+const Dashboard = () => {
+  return (
+    <Container fluid className="pt-4">
+      <Row className="mb-4 ">
+        <Col xs={12}>
+          <Card
+            className="welcome-card rounded-4 border-0 shadow-sm"
+            style={{ backgroundColor: "#eef3ff" }}
+          >
+            <Card.Body className="p-0 px-2">
+              <Row className="align-items-center">
+                <Col xs={12} md={7} className="welcome-content  p-md-5 ">
+                  <div className="welcome-header mb">
+                    <h5 className="fw-semibold text-dark mb-3 fs-2">
+                      Welcome back, {stats.UserName}!
+                    </h5>
+                  </div>
+                  <div className="stats-container d-flex flex-column flex-md-row">
+                    <div className="stat-item text-center mb-3 mb-md-0  ">
+                      <h3 className="mt-3 fw-bold text-dark fs-5 d-flex align-items-center justify-content-center">
+                        {stats.TotalUsers}
+                      </h3>
+                      <p className="mb-0 text-secondary fw-medium ">
+                        Total users
+                      </p>
+                    </div>
+                    <div className="stat-item text-center ps-md-5">
+                      <h3 className="mt-3 fw-bold text-dark fs-5 d-flex align-items-center justify-content-center">
+                        {stats.ActiveUsers}
+                      </h3>
+                      <p className="mb-0 text-secondary fw-medium">
+                        Active users
+                      </p>
+                    </div>
+                  </div>
+                </Col>
+                <Col
+                  xs={12}
+                  md={5}
+                  className="welcome-illustration text-center"
+                >
+                  <Image
+                    src="https://bootstrapdemos.adminmart.com/modernize/dist/assets/images/backgrounds/welcome-bg.svg"
+                    alt="Welcome Illustration"
+                    className="img-fluid"
+                  />
+                </Col>
+              </Row>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
+
+      <Row className="mb-4">
+        {Object.entries(stats1).map(([key, value], index) => (
+          <Col xs={12} sm={6} md={3} lg={3} key={index} className="mb-3">
+            <Card
+              className={`dashboard-stat-card border-0 shadow-sm bg-light-${value.color}`}
+            >
+              <Card.Body>
+                <div className="text-center">
+                  <div className={`icon-circle mb-3 `}>
+                    <Image
+                      src={value.img}
+                      className={`bi bi-person fs-4 text-${value.color}`}
+                    />
+                  </div>
+                  <p className={`fw-semibold fs-5 text-${value.color} mb-1`}>
+                    {value.title}
+                  </p>
+                  <h5 className={`fw-semibold fs-5 text-${value.color} mb-0`}>
+                    {value.value}
+                  </h5>
+                </div>
+              </Card.Body>
+            </Card>
+          </Col>
+        ))}
+      </Row>
+
+      <Row>
+        <Col xs={12} md={8} className="mb-2">
+          <Card
+            className="social-login-card border-0 shadow-sm"
+            style={{ backgroundColor: "#eef3ff" }}
+          >
+            <Card.Body className="px-5">
+              <div className="d-flex align-items-center mb-2">
+                <h5 className="card-title mt-2 ">Social Login Statistics</h5>
+              </div>
+
+              <div className="social-login-bars">
+                {socialLogins.map((login, index) => (
+                  <SocialLoginBar
+                    key={login.type}
+                    type={login.type}
+                    value={login.value}
+                    color={`custom-${index}`}
+                  />
+                ))}
+              </div>
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col xs={12} md={4}>
+          <Card
+            className="browser-stats-card border-0 shadow-sm  "
+            style={{ backgroundColor: "#eef3ff" }}
+          >
+            <Card.Body>
+              <div className="d-flex align-items-center">
+                <h5 className="card-title mb-0">Browser Statistics</h5>
+              </div>
+              <DonutChart data={browserStats} />
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
+      <Row className="mb-4">
+        <Col lg={4} xs={12} md={12}>
+          <Card
+            className="recent-users rounded-4 border-0 shadow-sm mt-4"
+            style={{ backgroundColor: "#eef3ff" }}
+          >
+            <Card.Body className="px-4">
+              <div className="d-flex justify-content-between align-items-center">
+                <h5 className="card-title mb-0">Recent Users</h5>
+              </div>
+              <RecentUsers />
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col lg={8} xs={12} md={12}>
+          <Card
+            className="activity-chart-card rounded-4 border-0 shadow-sm mt-4"
+            style={{ backgroundColor: "#eef3ff" }}
+          >
+            <Card.Body className="p-4">
+              <div className="d-flex justify-content-between align-items-center mb-4">
+                <h5 className="card-title mb-0">User Activity Hours</h5>
+              </div>
+              <ActivityLineChart />
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
+      <Row>
+        <Col xs={12}>
+          <Card
+            className="world-map-card rounded-4 border-0 shadow-sm"
+            style={{ backgroundColor: "#eef3ff" }}
+          >
+            <Card.Body className="p-4">
+              <div className="d-flex justify-content-between align-items-center mb-4">
+                <h5 className="card-title mb-0">World Map</h5>
+              </div>
+              <WorldMap />
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

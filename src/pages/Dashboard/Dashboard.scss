@@ -1,170 +1,385 @@
-$primary: #002851;
-$secondary: #6c757d;
-$warning: #856404;
-$success: #155724;
-$info: #0c5460;
-$danger: #dc3545;
-$content-color: #000000;
+.bg-light-info {
+  background-color: rgba(0, 123, 255, 0.1) !important;
+}
 
-$primary-gradient: linear-gradient(135deg, #d9e8ff 50%, #b0d1ff 100%);
-$info-gradient: linear-gradient(135deg, #c1e0e5 50%, #a5d5dd 100%);
-$warning-gradient: linear-gradient(135deg, #ffe7b3 50%, #ffd980 100%);
-$success-gradient: linear-gradient(135deg, #c3e6cb 50%, #a3d9b0 100%);
-$secondary-gradient: linear-gradient(135deg, #f8f9fa 50%, #e9ecef 100%);
+.bg-light-primary {
+  background-color: #fef5e5 !important;
+}
 
-.dashboard-card {
-  border-radius: 8px;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.bg-light-success {
+  background-color: rgba(40, 167, 69, 0.1) !important;
+}
 
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  }
+.bg-light-warning {
+  background-color: rgba(255, 193, 7, 0.1) !important;
+}
 
-  &.dashboard-card-totalusers {
-    background: $primary-gradient;
-    border: 1px solid rgba($primary, 0.2);
-  }
+// -------------------------------------------
 
-  &.dashboard-card-activeusers {
-    background: $info-gradient;
-    border: 1px solid rgba($info, 0.2);
-  }
-
-  &.dashboard-card-signups {
-    background: $warning-gradient;
-    border: 1px solid rgba($warning, 0.2);
-  }
-
-  &.dashboard-card-signins {
-    background: $success-gradient;
-    border: 1px solid rgba($success, 0.2);
-  }
-
-  .card-header {
-    background: transparent;
-    border-bottom: 1px solid rgba($secondary, 0.2);
+.social-login-card {
+  .card-title {
+    color: #2c3e50;
+    font-size: 1.1rem;
     font-weight: 600;
   }
-}
 
-.dashboard-chart-card {
-  background: $secondary-gradient;
-  border: 1px solid rgba($secondary, 0.2);
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+  .social-login-bars {
+    padding: 1rem 0;
 
-  &:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  }
+    .social-login-bar {
+      .login-type {
+        color: #64748b;
+        font-size: 0.875rem;
+        font-weight: 500;
 
-  .card-header {
-    background: transparent;
-    border-bottom: 1px solid rgba($secondary, 0.2);
-    color: $content-color;
-    font-weight: 600;
-  }
-}
+        i {
+          margin-right: 8px;
+          font-size: 1rem;
+        }
+      }
 
-.dashboard-table-card {
-  background: $secondary-gradient;
-  border: 1px solid rgba($secondary, 0.2);
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+      .login-value {
+        color: #1e293b;
+        font-weight: 600;
+        font-size: 0.875rem;
+      }
 
-  &:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  }
+      .custom-progress {
+        height: 8px;
+        border-radius: 4px;
+        background-color: #f7fafc;
+        overflow: hidden;
 
-  .card-header {
-    background: transparent;
-    border-bottom: 1px solid rgba($secondary, 0.2);
-    color: $content-color;
-    font-weight: 600;
-  }
-}
-
-.responsive-table-wrapper {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  margin: 0 -1rem;
-  padding: 0 1rem;
-
-  @media (max-width: 768px) {
-    .table {
-      min-width: 800px;
-    }
-  }
-}
-
-.responsive-table-wrapper::-webkit-scrollbar {
-  height: 6px;
-}
-
-.responsive-table-wrapper::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-
-.responsive-table-wrapper::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 3px;
-}
-
-.table {
-  thead {
-    th {
-      font-weight: 700;
-      font-size: 1rem;
-      color: $primary;
-      background-color: rgba($primary, 0.05);
-    }
-  }
-}
-
-.user-info-cell {
-  min-width: 100px;
-  @media (max-width: 768px) {
-    min-width: 80px;
-  }
-}
-.dashboard-chart-card {
-  .map-container {
-    border-radius: 8px;
-    overflow: hidden;
-    background-color: #f8f9fa;
-
-    svg {
-      display: block;
-      margin: 0 auto;
-
-      path {
-        transition: all 0.3s ease;
-
-        &:hover {
-          opacity: 0.8;
+        .progress-bar {
+          transition: width 0.6s ease;
         }
       }
     }
   }
 }
 
-// Custom tooltip styles
-.world-map-tooltip {
-  background-color: white;
-  padding: 8px 12px;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  font-size: 14px;
+// Responsive adjustments
+@media (max-width: 768px) {
+  .social-login-card {
+    .social-login-bars {
+      padding: 0.5rem 0;
+    }
+  }
+}
 
-  strong {
-    display: block;
-    margin-bottom: 4px;
+//--------------------------------------------------------
+.browser-stats-card {
+  background-color: #eef3ff;
+  width: auto;
+  height: 100%;
+
+  .card-title {
+    color: #2c3e50;
+    font-size: 1.1rem;
+    font-weight: 600;
   }
 
-  span {
-    color: #666;
+  .donut-chart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 3rem;
+
+    .donut-chart {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      margin-bottom: 1rem;
+      border-radius: 50%;
+      background: #fff;
+
+      .donut-segment {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        clip: rect(0, 60px, 120px, 0);
+        transform: rotate(var(--offset));
+
+        &::before {
+          content: "";
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+          clip: rect(0, 60px, 120px, 0);
+          background: var(--bg-color);
+          transform: rotate(var(--value));
+        }
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        width: 80%;
+        height: 80%;
+        background: #eef3ff;
+        border-radius: 50%;
+        top: 10%;
+        left: 10%;
+      }
+    }
+
+    .donut-legend {
+      width: 100%;
+
+      .legend-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0.25rem;
+        padding: 0.15rem 0;
+
+        .legend-dot {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          margin-right: 8px;
+        }
+
+        .legend-label {
+          flex: 1;
+          color: #64748b;
+          font-size: 0.875rem;
+        }
+
+        .legend-value {
+          color: #1e293b;
+          font-weight: 600;
+          font-size: 0.875rem;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .browser-stats-card {
+    margin-top: 1rem;
+  }
+}
+
+// -------------------------------------------
+.activity-chart-card {
+  .card-title {
+    color: #2c3e50;
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+
+  .activity-chart {
+    display: flex;
+    height: 250px; // Reduced height for smaller card
+    padding: 15px 5px; // Adjusted padding
+    position: relative;
+
+    .chart-labels {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding-right: 8px; // Reduced padding
+      color: #64748b;
+      min-width: 35px; // Ensure minimum width for labels
+
+      span {
+        font-size: 0.65rem; // Smaller font for y-axis labels
+        font-weight: 500;
+        white-space: nowrap;
+      }
+    }
+
+    .chart-container {
+      flex-grow: 1;
+      position: relative;
+
+      svg {
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          to bottom,
+          rgba(203, 213, 225, 0.2) 1px,
+          transparent 1px
+        );
+        background-size: 100% 25%;
+        filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+
+        .main-line {
+          vector-effect: non-scaling-stroke;
+          stroke-dasharray: 1000;
+          stroke-dashoffset: 1000;
+          animation: drawLine 2s ease forwards;
+          stroke-width: 0.8; // Slightly thicker line for better visibility
+        }
+
+        .area-path {
+          opacity: 0;
+          animation: fadeIn 1s ease forwards 0.5s;
+        }
+      }
+
+      .x-labels {
+        display: flex;
+        justify-content: space-between;
+        position: absolute;
+        bottom: -20px; // Adjusted position
+        left: 0;
+        right: 0;
+        color: #64748b;
+
+        span {
+          font-size: 0.65rem; // Smaller font for x-axis labels
+          font-weight: 500;
+          transform: translateX(-50%);
+          transition: color 0.3s ease;
+
+          &:hover {
+            color: #4318ff;
+          }
+
+          &:first-child {
+            transform: translateX(0);
+          }
+
+          &:last-child {
+            transform: translateX(-100%);
+          }
+        }
+      }
+    }
+  }
+}
+
+// Media queries for better responsiveness
+@media screen and (max-width: 1400px) {
+  .activity-chart-card {
+    .activity-chart {
+      height: 220px;
+
+      .chart-labels span {
+        font-size: 0.6rem;
+      }
+
+      .chart-container .x-labels span {
+        font-size: 0.6rem;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .activity-chart-card {
+    .activity-chart {
+      height: 280px; // Larger height for full width on medium screens
+
+      .chart-labels span {
+        font-size: 0.7rem;
+      }
+
+      .chart-container .x-labels span {
+        font-size: 0.7rem;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .activity-chart-card {
+    .activity-chart {
+      height: 200px;
+      padding: 10px 5px;
+
+      .chart-labels {
+        padding-right: 5px;
+
+        span {
+          font-size: 0.6rem;
+        }
+      }
+
+      .chart-container {
+        .x-labels {
+          bottom: -15px;
+
+          span {
+            font-size: 0.6rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Animations remain the same
+@keyframes drawLine {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+//---------------------------------------
+.recent-users-list {
+  .user-timeline-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 12px 0;
+    position: relative;
+
+    .time-stamp {
+      min-width: 70px;
+      color: #64748b;
+      font-size: 0.875rem;
+      padding-top: 2px;
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      flex-grow: 1;
+      position: relative;
+
+      .timeline-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        margin: 0 15px;
+        background-color: #0d6efd;
+        position: relative;
+        z-index: 2;
+
+        &::after {
+          content: "";
+          position: absolute;
+          top: 8px; // height of dot
+          left: 50%;
+          transform: translateX(-50%);
+          height: calc(100% + 24px); // adjust based on your padding
+          width: 2px;
+          background-color: #e0e6ed;
+          z-index: 1;
+        }
+      }
+
+      .user-name {
+        font-size: 0.875rem;
+        color: #1e293b;
+      }
+    }
+
+    // Remove the line from the last dot
+    &:last-child {
+      .timeline-dot::after {
+        display: none;
+      }
+    }
   }
 }

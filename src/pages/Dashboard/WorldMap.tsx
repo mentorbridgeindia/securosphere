@@ -59,7 +59,10 @@ const WorldMap = () => {
   };
 
   return (
-    <div style={{ height: "400px", width: "100%", position: "relative" }}>
+    <div
+      style={{ height: "400px", width: "100%", position: "relative" }}
+      className=" rounded-4 border-0 shadow-sm"
+    >
       <Map
         defaultCenter={[20, 0]}
         defaultZoom={2}
@@ -69,7 +72,7 @@ const WorldMap = () => {
       >
         {userLocations.map((location) => {
           const coordinates = countryCoordinates[location.country];
-          if (!coordinates) return null; 
+          if (!coordinates) return null;
 
           return (
             <Marker
