@@ -1,6 +1,9 @@
 import { SocialProvider } from "@/types/auth";
 import { FormLabel } from "@atoms/FormLabel";
-import { SocialProvidersObject, useGetOrganization } from "@entities/Organization";
+import {
+  SocialProvidersObject,
+  useGetOrganization,
+} from "@entities/Organization";
 import { useAtom } from "jotai";
 import { useEffect } from "react";
 import { Card, Form, Stack } from "react-bootstrap";
@@ -14,6 +17,8 @@ const SignUpOptionsCard = () => {
     queryConfig: { enabled: true },
   });
 
+  console.log(data);
+
   const signUpOptions = [
     "Email",
     "Google",
@@ -25,15 +30,16 @@ const SignUpOptionsCard = () => {
   ];
 
   useEffect(() => {
-    if (data) {
-      const socialProviders = Object.keys(data.socialProviders).map(
+    if (data?.socialProviders) {
+      const socialProviders = Object.keys(data?.socialProviders).map(
         (provider) => {
-          if (data.socialProviders[provider as keyof SocialProvidersObject]) {
+          if (data?.socialProviders[provider as keyof SocialProvidersObject]) {
             return provider.toLowerCase() as SocialProvider;
           }
-      }) as SocialProvider[];
+        }
+      ) as SocialProvider[];
       setSignUpConfig({
-        appName: data.applicationName,
+        appName: data?.applicationName,
         socialProviders: socialProviders,
       });
     }

@@ -50,7 +50,7 @@ export const LoginCallbackForm = ({ isReadOnly }: { isReadOnly: boolean }) => {
   useEffect(() => {
     if (data) {
       reset({
-        authorizedOrigins: data.authorizedDomains,
+        authorizedOrigins: data.authorizedDomains ?? [""],
         orgLogo: data.logo,
         orgName: data.organizationName,
         callbackUrl: data.callbackUrl,
@@ -118,7 +118,7 @@ export const LoginCallbackForm = ({ isReadOnly }: { isReadOnly: boolean }) => {
     setLoginCallbackConfig({
       orgName: watch("orgName"),
       subDomain: watch("subDomain"),
-      authorizedOrigins: watch("authorizedOrigins"),
+      authorizedOrigins: watch("authorizedOrigins") ?? [""],
       callbackUrl: watch("callbackUrl"),
       orgLogo: watch("orgLogo"),
       website: watch("website"),
