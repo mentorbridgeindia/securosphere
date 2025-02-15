@@ -15,11 +15,14 @@ export const fetchData = async <T>(url: string): Promise<T> => {
   }
 };
 
-
 const handleInitData = (response: AxiosResponse<any>) => {
   if (response) {
     const clientId = response.headers["clientid"];
-    if (clientId !== undefined && clientId !== null) {
+    if (
+      clientId !== undefined &&
+      clientId !== null &&
+      window.location.hostname !== "app.securosphere.in"
+    ) {
       sessionStorage.setItem("clientId", clientId);
     }
   }
