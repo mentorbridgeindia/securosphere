@@ -314,7 +314,6 @@
     opacity: 1;
   }
 }
-
 //---------------------------------------
 .recent-users-list {
   .user-timeline-item {
@@ -371,3 +370,67 @@
     }
   }
 }
+
+@media (max-width: 767px) {
+  .recent-users-list {
+    .user-timeline-item {
+      flex-direction: column;
+      align-items: flex-start;
+
+      .time-stamp {
+        min-width: auto;
+        margin-bottom: 8px;
+      }
+
+      .user-info {
+        flex-direction: row;
+        align-items: center;
+
+        .timeline-dot {
+          margin: 0 8px 0 0;
+
+          &::after {
+            display: none;
+          }
+        }
+
+        .user-name {
+          font-size: 0.875rem;
+        }
+      }
+    }
+  }
+}
+
+// ---------------------------------------
+.world-map-card {
+  .card-title {
+    color: #2c3e50;
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+
+  .map-container {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .rsm-geography {
+    fill: #002851;
+    stroke: #65a8e6;
+    stroke-width: 0.5;
+    outline: none;
+
+    &:hover {
+      fill: #97c5ef;
+      cursor: pointer;
+    }
+  }
+
+  .rsm-marker circle {
+    fill: #f07057;
+  }
+}
+
+

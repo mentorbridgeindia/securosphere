@@ -1,5 +1,6 @@
 import "./Dashboard.scss";
 import { Card, Col, Row, Image, Container, ProgressBar } from "react-bootstrap";
+import WorldMapComponent from "./WorldMapComponent";
 
 //---------------------------------------------
 
@@ -342,7 +343,7 @@ const Dashboard = () => {
             style={{ backgroundColor: "#eef3ff" }}
           >
             <Card.Body className="px-4">
-              <div className="d-flex justify-content-between align-items-center">
+              <div className="d-flex align-items-center">
                 <h5 className="card-title mb-0">Recent Users</h5>
               </div>
               <RecentUsers />
@@ -361,6 +362,12 @@ const Dashboard = () => {
               <ActivityLineChart />
             </Card.Body>
           </Card>
+        </Col>
+      </Row>
+
+      <Row className="mb-4">
+        <Col xs={12} md={12} lg={12}>
+          <WorldMapComponent />
         </Col>
       </Row>
     </Container>
