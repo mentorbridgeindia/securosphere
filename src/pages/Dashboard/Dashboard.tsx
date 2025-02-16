@@ -71,11 +71,11 @@ const activityData = {
 };
 
 const users = [
-  { coordinates: [10, 50] as [number, number] },
-  { coordinates: [-122.4194, 37.7749] as [number, number] },
-  { coordinates: [-74.006, 40.7128] as [number, number] },
-  { coordinates: [139.6917, 35.6895] as [number, number] },
-  { coordinates: [77.209, 28.6139] as [number, number] },
+  { id: "1", coordinates: [10, 50] as [number, number] },
+  { id: "2", coordinates: [-122.4194, 37.7749] as [number, number] },
+  { id: "3", coordinates: [-74.006, 40.7128] as [number, number] },
+  { id: "4", coordinates: [139.6917, 35.6895] as [number, number] },
+  { id: "5", coordinates: [77.209, 28.6139] as [number, number] },
 ];
 
 const Dashboard = () => {

@@ -9,7 +9,7 @@ import worldMapData from "world-atlas/countries-110m.json";
 import "./WorldMapComponent.scss";
 
 interface WorldMapProps {
-  users: { coordinates: [number, number] }[];
+  users: { id: string; coordinates: [number, number] }[];
 }
 
 const WorldMapComponent = ({ users }: WorldMapProps) => {
@@ -42,9 +42,9 @@ const WorldMapComponent = ({ users }: WorldMapProps) => {
                 ))
               }
             </Geographies>
-            {users.map((user, index) => (
+            {users.map((user) => (
               <Marker
-                key={index}
+                key={user.id}
                 coordinates={user.coordinates as [number, number]}
               >
                 <circle r={window.innerWidth < 768 ? 3 : 5} fill="#FF5533" />

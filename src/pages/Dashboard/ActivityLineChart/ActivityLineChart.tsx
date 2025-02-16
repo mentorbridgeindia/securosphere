@@ -20,8 +20,8 @@ const ActivityLineChart = ({ hours, values }: ActivityLineChartProps) => {
     <div className="activity-chart">
       <div className="chart-labels y-labels">
         {[maxValue, maxValue * 0.75, maxValue * 0.5, maxValue * 0.25, 0].map(
-          (label, index) => (
-            <span key={index}>{Math.round(label)}</span>
+          (label) => (
+            <span key={label.toString()}>{Math.round(label)}</span>
           )
         )}
       </div>
@@ -53,8 +53,8 @@ const ActivityLineChart = ({ hours, values }: ActivityLineChartProps) => {
           />
         </svg>
         <div className="x-labels">
-          {hours.map((hour, index) => (
-            <span key={index}>{hour}</span>
+          {hours.map((hour) => (
+            <span key={hour}>{hour}</span>
           ))}
         </div>
       </div>

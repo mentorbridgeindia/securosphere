@@ -8,8 +8,8 @@ interface RecentUsersProps {
 const RecentUsers = ({ users }: RecentUsersProps) => {
   return (
     <div className="recent-users-list px-5">
-      {users.map((user, index) => (
-        <div key={index} className="user-timeline-item">
+      {users.map((user) => (
+        <div key={`${user.name}-${user.date}`} className="user-timeline-item">
           <div className="time-stamp">{user.date}</div>
           <div className="user-info">
             <div className="timeline-dot"></div>
