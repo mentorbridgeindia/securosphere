@@ -88,7 +88,7 @@ const Dashboard = () => {
       <Row className="mb-4">
         {stats1.map((stat, index) => (
           <DashboardStatCard
-            key={index}
+            key={stat.title}
             title={stat.title}
             value={stat.value}
             img={stat.img}

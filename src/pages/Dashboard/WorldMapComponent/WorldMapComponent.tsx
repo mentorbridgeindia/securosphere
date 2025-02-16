@@ -1,18 +1,23 @@
+import React from "react";
+import { Card } from "react-bootstrap";
 import {
   ComposableMap,
   Geographies,
   Geography,
   Marker,
 } from "react-simple-maps";
-import { Card } from "react-bootstrap";
 import worldMapData from "world-atlas/countries-110m.json";
 import "./WorldMapComponent.scss";
 
-interface WorldMapProps {
-  users: { id: string; coordinates: [number, number] }[];
+interface UserLocation {
+  coordinates: [number, number];
 }
 
-const WorldMapComponent = ({ users }: WorldMapProps) => {
+interface WorldMapComponentProps {
+  users: UserLocation[];
+}
+
+const WorldMapComponent = ({ users }: WorldMapComponentProps) => {
   return (
     <Card
       className="world-map-card border-0 shadow-sm"
@@ -42,11 +47,8 @@ const WorldMapComponent = ({ users }: WorldMapProps) => {
                 ))
               }
             </Geographies>
-            {users.map((user) => (
-              <Marker
-                key={user.id}
-                coordinates={user.coordinates as [number, number]}
-              >
+            {users.map((user, index) => (
+              <Marker key={index} coordinates={user.coordinates}>
                 <circle r={window.innerWidth < 768 ? 3 : 5} fill="#FF5533" />
               </Marker>
             ))}
