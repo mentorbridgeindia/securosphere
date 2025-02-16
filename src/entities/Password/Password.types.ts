@@ -6,6 +6,12 @@ export interface IForgotPasswordData {
   email: string;
 }
 
+export interface IChangePasswordData {
+  currentPassword: string;
+  newPassword: string;
+  confirmPassword: string;
+}
+
 export interface IVerifyOTPMutation {
   otp: string;
   email: string;
@@ -19,5 +25,10 @@ export interface IResendOTPMutation {
 export interface IResetPasswordMutation {
   otp: string;
   email: string;
+  newPassword: string;
+}
+
+export interface IChangePasswordMutation {
+  currentPassword: string;
   newPassword: string;
 }

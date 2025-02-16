@@ -1,11 +1,18 @@
 import { Shield } from "lucide-react";
 import { Button, Card, Form } from "react-bootstrap";
 import { SecuritySettingsProps } from "./SecuritySettings.types";
+import { useNavigate } from "react-router-dom";
 
 export const SecuritySettingsComponent = ({
   security,
   onUpdateSecurity,
 }: SecuritySettingsProps) => {
+  const navigate = useNavigate();
+
+  const handleUpdatePassword = () => {
+    navigate("/change-password");
+  };
+
   return (
     <Card className="mb-4">
       <Card.Header className="d-flex align-items-center">
@@ -47,7 +54,11 @@ export const SecuritySettingsComponent = ({
                     {security.lastPasswordChange.toLocaleDateString()}
                   </p>
                 </div>
-                <Button variant="primary" className="rounded-pill px-4">
+                <Button
+                  variant="primary"
+                  className="rounded-pill px-4"
+                  onClick={handleUpdatePassword}
+                >
                   Update
                 </Button>
               </div>
