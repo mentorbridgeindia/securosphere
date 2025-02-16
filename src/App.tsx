@@ -19,6 +19,8 @@ import { ToastContainer } from "react-toastify";
 import "./App.scss";
 import { PrivateRoute } from "./routes/PrivateRoute";
 import { ChangePassword } from "./pages/ChangePassword/ChangePassword";
+import TermsAndContiditions from "./pages/TermsAndContiditions/TermsAndContiditions";
+import PrivacyPolicy from "./pages/PrivacyPolicy/PrivacyPolicy";
 
 function App() {
   return (
@@ -37,6 +39,8 @@ function App() {
             <Route path="/verify-email" element={<VerifyEmail />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/terms" element={<TermsAndContiditions />} />
+            <Route path="/policy" element={<PrivacyPolicy />} />
             <Route element={<PrivateRoute />}>
               <Route
                 path="/auth-configuration"
