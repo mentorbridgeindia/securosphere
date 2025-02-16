@@ -32,6 +32,7 @@ const handleLoginResponse = (response: any) => {
       );
 
     if (isClientIdAvailable && isNotSecurosphere && location && accessToken) {
+      sessionStorage.clear();
       window.location.href = location + "?token=" + accessToken.split(" ")[1];
     }
     if (accessToken !== undefined && accessToken !== null) {

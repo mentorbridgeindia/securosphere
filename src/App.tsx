@@ -34,8 +34,9 @@ function App() {
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/oauth" element={<OAuth />} />
             <Route path="/verify-email" element={<VerifyEmail />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/profile" element={<Profile />} />
             <Route path="/dashboard" element={<Dashboard />} />
-
             <Route element={<PrivateRoute />}>
               <Route
                 path="/auth-configuration"
