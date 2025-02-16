@@ -18,6 +18,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "./App.scss";
 import { PrivateRoute } from "./routes/PrivateRoute";
+import Swagger from "./pages/Swagger";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/oauth" element={<OAuth />} />
+            <Route path="/swagger" element={<Swagger />}/>
             <Route path="/verify-email" element={<VerifyEmail />} />
             <Route element={<PrivateRoute />}>
               <Route
