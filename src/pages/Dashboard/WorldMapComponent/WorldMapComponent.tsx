@@ -5,18 +5,14 @@ import {
   Marker,
 } from "react-simple-maps";
 import { Card } from "react-bootstrap";
-import "./Dashboard.scss";
 import worldMapData from "world-atlas/countries-110m.json";
+import "./WorldMapComponent.scss";
 
-const WorldMapComponent = () => {
-  const users = [
-    { coordinates: [10, 50] as [number, number] },
-    { coordinates: [-122.4194, 37.7749] },
-    { coordinates: [-74.006, 40.7128] },
-    { coordinates: [139.6917, 35.6895] },
-    { coordinates: [77.209, 28.6139] },
-  ];
+interface WorldMapProps {
+  users: { coordinates: [number, number] }[];
+}
 
+const WorldMapComponent = ({ users }: WorldMapProps) => {
   return (
     <Card
       className="world-map-card border-0 shadow-sm"
@@ -42,11 +38,7 @@ const WorldMapComponent = () => {
             <Geographies geography={worldMapData}>
               {({ geographies }) =>
                 geographies.map((geo) => (
-                  <Geography
-                    key={geo.rsmKey}
-                    geography={geo}
-             
-                  />
+                  <Geography key={geo.rsmKey} geography={geo} />
                 ))
               }
             </Geographies>
