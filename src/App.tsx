@@ -2,7 +2,6 @@ import { AppNavbar } from "@modules/Navbar";
 import VerifyEmail from "@modules/VerifyEmail";
 import { AuthConfiguration } from "@pages/AuthConfiguration";
 import { ChangePassword } from "@pages/ChangePassword/ChangePassword";
-import Dashboard from "@pages/Dashboard/Dashboard";
 import { ErrorPage } from "@pages/Error";
 import { ForgotPassword } from "@pages/ForgotPassword";
 import { Home } from "@pages/Home";
@@ -24,9 +23,8 @@ import "react-toastify/dist/ReactToastify.css";
 import "./App.scss";
 import { PrivateRoute } from "./routes/PrivateRoute";
 
+import PrivacyPolicy from "@pages/PrivacyPolicy/PrivacyPolicy";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import PrivacyPolicy from "./pages/PrivacyPolicy/PrivacyPolicy";
-import Swagger from "./pages/Swagger";
 import TermsAndContiditions from "./pages/TermsAndContiditions/TermsAndContiditions";
 
 const queryClient = new QueryClient();
@@ -47,9 +45,7 @@ function App() {
               <Route path="/change-password" element={<ChangePassword />} />
               <Route path="/oauth" element={<OAuth />} />
               <Route path="/team-management" element={<TeamManagement />} />
-              <Route path="/swagger" element={<Swagger />} />
               <Route path="/verify-email" element={<VerifyEmail />} />
-              <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/mfa" element={<Mfa />} />
               <Route path="/terms" element={<TermsAndContiditions />} />
               <Route path="/policy" element={<PrivacyPolicy />} />

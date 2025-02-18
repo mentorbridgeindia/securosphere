@@ -13,7 +13,7 @@ export const Information = () => {
   const { data, isLoading, error } = useGetOrganization(
     {
       queryConfig: {
-        enabled: sessionStorage.getItem("accessToken") !== null,
+        enabled: true,
       },
     },
     true

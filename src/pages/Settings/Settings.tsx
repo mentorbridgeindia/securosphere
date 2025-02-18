@@ -7,6 +7,7 @@ import SignUpOptionsCard from "@modules/SignUpConfig/components/SignUpOptionsCar
 import { Edit, Settings as SettingsIcon, X } from "lucide-react";
 import { useState } from "react";
 import { Button, Card, Col, Container, Nav, Row } from "react-bootstrap";
+import Swagger from "../Swagger";
 import "./settings.scss";
 
 export const Settings = () => {
@@ -75,6 +76,16 @@ export const Settings = () => {
                     Sign Up
                   </Nav.Link>
                 </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link
+                    active={activeTab === "swagger"}
+                    onClick={() => setActiveTab("swagger")}
+                    className="d-flex align-items-center px-4 py-3 border-bottom custom-nav-link"
+                  >
+                    <SettingsIcon size={18} className="me-2" />
+                    Open API
+                  </Nav.Link>
+                </Nav.Item>
                 {/* <Nav.Item>
                   <Nav.Link
                     active={activeTab === "security"}
@@ -103,8 +114,9 @@ export const Settings = () => {
               }
             />
           )}
+          {activeTab === "swagger" && <Swagger />}
         </Col>
       </Row>
     </Container>
   );
-}
+};

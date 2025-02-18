@@ -6,7 +6,7 @@ import "swagger-ui-react/swagger-ui.css";
 const SwaggerPage: React.FC = () => {
   const [showSwagger, setShowSwagger] = useState(false);
 
-  const swagger = 
+  const swagger =
     {
       "openapi": "3.0.1",
       "info": {
@@ -1778,8 +1778,7 @@ const SwaggerPage: React.FC = () => {
     </div>
   );
 };
-  
+
 export default SwaggerPage;
-  
 
 
