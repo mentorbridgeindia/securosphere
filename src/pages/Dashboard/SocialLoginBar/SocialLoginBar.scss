@@ -1,0 +1,25 @@
+.social-login-bar {
+  .login-type {
+    color: #64748b;
+    font-size: 0.875rem;
+    font-weight: 500;
+    i {
+      margin-right: 8px;
+      font-size: 1rem;
+    }
+  }
+  .login-value {
+    color: #1e293b;
+    font-weight: 600;
+    font-size: 0.875rem;
+  }
+  .custom-progress {
+    height: 8px;
+    border-radius: 4px;
+    background-color: #f7fafc;
+    overflow: hidden;
+    .progress-bar {
+      transition: width 0.6s ease;
+    }
+  }
+}

@@ -1,0 +1,28 @@
+.welcome-card {
+  .welcome-content {
+    .welcome-header {
+      h5 {
+        font-weight: 600;
+        font-size: 1.5rem;
+      }
+    }
+    .stats-container {
+      .stat-item {
+        h3 {
+          font-size: 1.25rem;
+          font-weight: 700;
+        }
+        p {
+          font-size: 0.875rem;
+          color: #64748b;
+        }
+      }
+    }
+  }
+  .welcome-illustration {
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+}
