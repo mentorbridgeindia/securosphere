@@ -1,6 +1,6 @@
 {
   "name": "securosphere",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@codemirror/lang-javascript": "^6.2.2",
@@ -56,7 +56,6 @@
     "react-toastify": "^11.0.3",
     "reactjs-popup": "^2.0.6",
     "react-simple-maps": "^3.0.0",
-    "react-toastify": "^11.0.2",
     "reactstrap": "^9.2.3",
     "recharts": "^2.15.1",
     "sass": "^1.82.0",
@@ -68,10 +67,8 @@
     "yup": "^1.6.1"
   },
   "scripts": {
-
     "start": "set NODE_ENV=development&& craco start",
     "build": "cross-env  GENERATE_SOURCEMAP=false craco build && npm run sentry:sourcemaps",
-
     "test": "craco test",
     "eject": "react-scripts eject",
     "sentry:sourcemaps": "sentry-cli sourcemaps inject --org mentorbridge-or --project javascript-react ./build/static/js"
@@ -99,9 +96,8 @@
     "@craco/craco": "^7.1.0",
     "@svgr/webpack": "^8.1.0",
     "cross-env": "^7.0.3",
-    "@types/react-bootstrap": "^0.32.37"
     "@types/react-bootstrap": "^0.32.37",
-    "@types/swagger-ui-react": "^5.18.0"
+    "@types/swagger-ui-react": "^5.18.0",
     "@types/reactstrap": "^8.7.2"
   }
 }

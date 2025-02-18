@@ -27,7 +27,7 @@ export const sendData = async <T>(
 
 const handleLoginResponse = (response: any, body: ILoginMutation) => {
   if (response?.data && body) {
-    sessionStorage.setItem("otp", body.email);
+    sessionStorage.setItem("email", body.email);
     if (!response.data?.errorCode) {
       sessionStorage.setItem("qrCode", response.data);
     }

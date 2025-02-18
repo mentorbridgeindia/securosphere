@@ -56,10 +56,7 @@ export const RegisterForm = ({
           <Form.Group>
             <FormLabel>First Name</FormLabel>
 
-            <Form.Control
-              type="text"
-              {...register("firstName")}
-            />
+            <Form.Control type="text" {...register("firstName")} />
             {errors.firstName && (
               <p className="text-danger">{errors.firstName.message}</p>
             )}
@@ -68,10 +65,7 @@ export const RegisterForm = ({
         <Col xs={12} lg={6}>
           <Form.Group>
             <FormLabel>Last Name</FormLabel>
-            <Form.Control
-              type="text"
-              {...register("lastName")}
-            />
+            <Form.Control type="text" {...register("lastName")} />
             {errors.lastName && (
               <p className="text-danger">{errors.lastName.message}</p>
             )}
@@ -87,10 +81,7 @@ export const RegisterForm = ({
 
       <Form.Group className="mb-2">
         <FormLabel>Password</FormLabel>
-        <Form.Control
-          type="password"
-          {...register("password")}
-        />
+        <Form.Control type="password" {...register("password")} />
         {errors.password && (
           <p className="text-danger">{errors.password.message}</p>
         )}
@@ -98,19 +89,15 @@ export const RegisterForm = ({
 
       <Form.Group className="mb-2">
         <FormLabel>Confirm Password</FormLabel>
-        <Form.Control
-          type="password"
-          {...register("confirmPassword")}
-        />
+        <Form.Control type="password" {...register("confirmPassword")} />
         {errors.confirmPassword && (
           <p className="text-danger">{errors.confirmPassword.message}</p>
         )}
       </Form.Group>
 
       <Form.Group className="d-flex align-items-center my-3">
-        <Form.Check type="checkbox" />
         <FormLabel className="ms-2 d-flex align-items-center gap-1">
-          I agree to the
+          By clicking on Sign up, you agree to the
           <Anchor className="p-0" href={termsOfServiceUrl}>
             Terms and Conditions
           </Anchor>
