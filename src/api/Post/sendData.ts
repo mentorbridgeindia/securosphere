@@ -10,7 +10,8 @@ export const sendData = async <T>(
     if (
       response.status === 200 ||
       response.status === 201 ||
-      response.status === 204
+      response.status === 204 ||
+      response.status === 206
     ) {
       if (url.includes("mfa-login")) handleMFALoginResponse(response);
       if (url.includes("signin"))

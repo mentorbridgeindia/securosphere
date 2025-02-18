@@ -2,7 +2,6 @@ import { Spinner } from "@atoms/Spinner";
 import { useInit } from "@entities/Domain";
 import { OTPInput } from "@molecules/OTPInput";
 import { Card, Col, Row } from "react-bootstrap";
-import {Anchor} from "@atoms/Anchor";
 
 export const MfaForm = ({ onSubmit }: { onSubmit: (code: string) => void }) => {
   let qrCode = sessionStorage.getItem("qrCode");
@@ -12,10 +11,12 @@ export const MfaForm = ({ onSubmit }: { onSubmit: (code: string) => void }) => {
     onSubmit(otp);
   };
 
-  const microsoft = "https://play.google.com/store/apps/details?id=com.azure.authenticator&hl=en_IN"
-  const google = "https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=en_IN";
-  const authy = "https://play.google.com/store/apps/details?id=com.authy.authy&hl=en_IN";
-
+  const microsoft =
+    "https://play.google.com/store/apps/details?id=com.azure.authenticator&hl=en_IN";
+  const google =
+    "https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=en_IN";
+  const authy =
+    "https://play.google.com/store/apps/details?id=com.authy.authy&hl=en_IN";
 
   if (isLoading) return <Spinner isLoading />;
 
@@ -43,8 +44,34 @@ export const MfaForm = ({ onSubmit }: { onSubmit: (code: string) => void }) => {
                 </div>
                 <h6 className="mb-2 fw-bold fs-7">Step 1: Scan this QR code</h6>
                 <p className="mb-2 ms-4 fs-8">
-                  Scan using your authenticator app, like <a className="brand" href={google} target="_blank">Google Authenticator</a>,
-                  <a href={microsoft} className="brand" target="_blank">Microsoft Authenticator</a>, <a href={authy} target="_blank" className="brand">Authy</a> etc.
+                  Scan using your authenticator app, like{" "}
+                  <a
+                    className="brand"
+                    href={google}
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    Google Authenticator
+                  </a>
+                  ,
+                  <a
+                    href={microsoft}
+                    className="brand"
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    Microsoft Authenticator
+                  </a>
+                  ,{" "}
+                  <a
+                    href={authy}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="brand"
+                  >
+                    Authy
+                  </a>{" "}
+                  etc.
                 </p>
                 <div id="qrCode" className="d-flex justify-content-center mt-3">
                   <Card className="p-2">
@@ -70,7 +97,11 @@ export const MfaForm = ({ onSubmit }: { onSubmit: (code: string) => void }) => {
             ) : (
               <div id="otpBlock" className="mt-4 d-flex flex-column gap-4">
                 <div className="text-center">
-                <img src="https://www.securosphere.in/static/media/mfa1.bf53fe8ac5a2387fa8c77a5b8e94f16c.svg" alt="mfa" style={{width: "200px"}}/>
+                  <img
+                    src="https://www.securosphere.in/static/media/mfa1.bf53fe8ac5a2387fa8c77a5b8e94f16c.svg"
+                    alt="mfa"
+                    style={{ width: "200px" }}
+                  />
                 </div>
                 <h5 className=" fs-4 fw-bold">2-step verification</h5>
                 <p className=" fs-6">
@@ -79,7 +110,10 @@ export const MfaForm = ({ onSubmit }: { onSubmit: (code: string) => void }) => {
                 </p>
                 <OTPInput onComplete={handleOTPComplete} />
                 <div>
-                  Got a new phone? <a href="" onClick={()=>{}}>Reset your Verification code again</a>
+                  Got a new phone?{" "}
+                  <a href="" onClick={() => {}}>
+                    Reset your Verification code again
+                  </a>
                 </div>
               </div>
             )}

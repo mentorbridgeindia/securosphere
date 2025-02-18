@@ -42,7 +42,11 @@ export const AuthCard = ({
           <Card className="p-4 shadow rounded w-100">
             <div className="d-flex justify-content-center brand-lg">
               {data?.logo && (
-                <img src={data?.logo} alt="logo" className="img-fluid" />
+                <img
+                  src={data?.logo}
+                  alt="logo"
+                  className="img-fluid app-logo"
+                />
               )}
             </div>
             {data?.applicationName && (
