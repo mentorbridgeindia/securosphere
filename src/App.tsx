@@ -2,6 +2,7 @@ import { AppNavbar } from "@modules/Navbar";
 import VerifyEmail from "@modules/VerifyEmail";
 import { AuthConfiguration } from "@pages/AuthConfiguration";
 import { ChangePassword } from "@pages/ChangePassword/ChangePassword";
+import Dashboard from "@pages/Dashboard/Dashboard";
 import { ErrorPage } from "@pages/Error";
 import { ForgotPassword } from "@pages/ForgotPassword";
 import { Home } from "@pages/Home";
@@ -20,6 +21,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "./App.scss";
 import { PrivateRoute } from "./routes/PrivateRoute";
+
 function App() {
   return (
     <div className="App">
@@ -35,6 +37,7 @@ function App() {
             <Route path="/change-password" element={<ChangePassword />} />
             <Route path="/oauth" element={<OAuth />} />
             <Route path="/verify-email" element={<VerifyEmail />} />
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/mfa" element={<Mfa />} />
             <Route element={<PrivateRoute />}>
               <Route

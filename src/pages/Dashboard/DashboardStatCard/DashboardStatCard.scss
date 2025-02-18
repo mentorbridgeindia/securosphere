@@ -1,0 +1,29 @@
+.bg-light-info {
+  background-color: rgba(0, 123, 255, 0.1) !important;
+}
+
+.bg-light-primary {
+  background-color: #fef5e5 !important;
+}
+
+.bg-light-success {
+  background-color: rgba(40, 167, 69, 0.1) !important;
+}
+
+.bg-light-warning {
+  background-color: rgba(255, 193, 7, 0.1) !important;
+}
+
+.dashboard-stat-card {
+  .bi-person {
+    font-size: 2rem;
+  }
+  p {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+  h5 {
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+}
