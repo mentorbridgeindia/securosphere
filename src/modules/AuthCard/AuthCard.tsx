@@ -22,7 +22,7 @@ export const AuthCard = ({
     sessionStorage.removeItem("accessToken");
   }, [isLoading, data]);
 
-  if (isLoading) return <Spinner isLoading />;
+  if (isLoading) return <Spinner isLoading={isLoading} />;
 
   return (
     <div className="d-flex align-items-center justify-content-center my-2 mt-5">

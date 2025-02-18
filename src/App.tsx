@@ -1,11 +1,13 @@
 import { AppNavbar } from "@modules/Navbar";
 import VerifyEmail from "@modules/VerifyEmail";
 import { AuthConfiguration } from "@pages/AuthConfiguration";
+import { ChangePassword } from "@pages/ChangePassword/ChangePassword";
 import { ErrorPage } from "@pages/Error";
 import { ForgotPassword } from "@pages/ForgotPassword";
 import { Home } from "@pages/Home";
 import { Information } from "@pages/Information";
 import { Login } from "@pages/Login/Login";
+import { Mfa } from "@pages/Mfa";
 import { OAuth } from "@pages/OAuth";
 import { Profile } from "@pages/Profile";
 import { Register } from "@pages/Register";
@@ -18,8 +20,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "./App.scss";
 import { PrivateRoute } from "./routes/PrivateRoute";
-import { ChangePassword } from "./pages/ChangePassword/ChangePassword";
-
 function App() {
   return (
     <div className="App">
@@ -35,8 +35,7 @@ function App() {
             <Route path="/change-password" element={<ChangePassword />} />
             <Route path="/oauth" element={<OAuth />} />
             <Route path="/verify-email" element={<VerifyEmail />} />
-            <Route path="/settings" element={<Settings />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/mfa" element={<Mfa />} />
             <Route element={<PrivateRoute />}>
               <Route
                 path="/auth-configuration"
