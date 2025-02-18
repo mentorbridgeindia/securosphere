@@ -21,6 +21,9 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "./App.scss";
 import { PrivateRoute } from "./routes/PrivateRoute";
+import { ChangePassword } from "./pages/ChangePassword/ChangePassword";
+import TermsAndContiditions from "./pages/TermsAndContiditions/TermsAndContiditions";
+import PrivacyPolicy from "./pages/PrivacyPolicy/PrivacyPolicy";
 import Swagger from "./pages/Swagger";
 
 function App() {
@@ -41,6 +44,8 @@ function App() {
             <Route path="/verify-email" element={<VerifyEmail />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/mfa" element={<Mfa />} />
+            <Route path="/terms" element={<TermsAndContiditions />} />
+            <Route path="/policy" element={<PrivacyPolicy />} />
             <Route element={<PrivateRoute />}>
               <Route
                 path="/auth-configuration"
