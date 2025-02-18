@@ -20,6 +20,8 @@ export const AuthCard = ({
       window.location.href = "https://securosphere.in";
     }
     sessionStorage.removeItem("accessToken");
+    const subDomain = window.location.hostname.split(".")[0];
+    localStorage.setItem("subDomain", subDomain);
   }, [isLoading, data]);
 
   if (isLoading) return <Spinner isLoading={isLoading} />;

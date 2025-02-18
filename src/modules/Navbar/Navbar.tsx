@@ -16,11 +16,10 @@ export const AppNavbar = () => {
     <Navbar expand="lg" className="navbar-dark shadow-lg bg-primary">
       <Container>
         <Navbar.Brand href="/" className="brand">
-          {data?.logo ? (
-            <img src={data?.logo} alt="logo" className="img-fluid" />
-          ) : (
-            data?.applicationName
+          {data?.logo && (
+            <img src={data?.logo} alt="logo" className="img-fluid nav-logo" />
           )}
+          {data?.applicationName}
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
