@@ -1,11 +1,14 @@
 import { AppNavbar } from "@modules/Navbar";
 import VerifyEmail from "@modules/VerifyEmail";
 import { AuthConfiguration } from "@pages/AuthConfiguration";
+import { ChangePassword } from "@pages/ChangePassword/ChangePassword";
+import Dashboard from "@pages/Dashboard/Dashboard";
 import { ErrorPage } from "@pages/Error";
 import { ForgotPassword } from "@pages/ForgotPassword";
 import { Home } from "@pages/Home";
 import { Information } from "@pages/Information";
 import { Login } from "@pages/Login/Login";
+import { Mfa } from "@pages/Mfa";
 import { OAuth } from "@pages/OAuth";
 import { Profile } from "@pages/Profile";
 import { Register } from "@pages/Register";
@@ -18,7 +21,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "./App.scss";
 import { PrivateRoute } from "./routes/PrivateRoute";
-import Dashboard from "./pages/Dashboard/Dashboard";
 
 function App() {
   return (
@@ -32,11 +34,11 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/reset-password" element={<ResetPassword />} />
+            <Route path="/change-password" element={<ChangePassword />} />
             <Route path="/oauth" element={<OAuth />} />
             <Route path="/verify-email" element={<VerifyEmail />} />
-            <Route path="/settings" element={<Settings />} />
-            <Route path="/profile" element={<Profile />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/mfa" element={<Mfa />} />
             <Route element={<PrivateRoute />}>
               <Route
                 path="/auth-configuration"

@@ -42,6 +42,7 @@
     "lucide-react": "^0.473.0",
     "pigeon-maps": "^0.22.1",
     "posthog-js": "^1.205.0",
+    "qrcode.react": "^4.2.0",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.6",
     "react-chartjs-2": "^5.3.0",
