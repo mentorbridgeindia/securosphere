@@ -61,6 +61,7 @@ const ComponentsList = () => {
             <RoleLabel color="yellow">Junior</RoleLabel>
             <RoleLabel color="gray">Senior</RoleLabel>
             <RoleLabel color="brown">User</RoleLabel>
+            <StatusLabel type="primary">Active</StatusLabel>
           </div>
         </Col>
       </Row>

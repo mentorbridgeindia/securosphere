@@ -11,7 +11,7 @@ export const loginCallbackSchema = yup.object({
     .required("Organization Name is required")
     .max(70, "Organization Name must be less than 70 characters")
     .matches(
-      /^[a-zA-Z0-9\s!@#$%^&*()_+={}\[\]:;"'<>,.?\/\\-]*$/,
+      /^[\w\s!@#$%^&*()_+={}\\[\]:;"'<>,.?\\-]*$/,
       "Organization Name is invalid"
     ),
   website: yup

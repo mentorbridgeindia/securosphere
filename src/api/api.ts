@@ -9,7 +9,7 @@ const isLocalHost = window.location.hostname.includes("localhost");
 let baseURL = "https://api.securosphere.in";
 
 if (isLocalHost) {
-  baseURL = "http://localhost:8080";
+  // baseURL = "http://localhost:8080";
 }
 
 const token = sessionStorage.getItem("accessToken") ?? null;
@@ -20,8 +20,8 @@ const axiosParams = {
   baseURL: baseURL,
   headers: {
     Accept: "application/json",
-    Authorization: `${tokenType} ${token}`,
-    ClientId: isMainHost ? undefined : clientId ?? undefined,
+    "X-Client-Id": isMainHost ? undefined : clientId ?? undefined,
+    ...(token ? { Authorization: `${tokenType} ${token}` } : {}),
   },
 };
 
@@ -32,10 +32,10 @@ axiosInstance.interceptors.request.use(
     const token = sessionStorage.getItem("accessToken");
     const clientId = sessionStorage.getItem("clientId");
     if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+      config.headers["Authorization"] = `Bearer ${token}`;
     }
     if (clientId) {
-      config.headers.ClientId = isMainHost
+      config.headers["x-client-id"] = isMainHost
         ? undefined
         : clientId ?? undefined;
     }
@@ -60,15 +60,18 @@ axiosInstance.interceptors.response.use(
     ) {
       // sessionStorage.removeItem("accessToken");
       // sessionStorage.removeItem("clientId");
-      window.location.href = window.location.origin + "/login";
+      if (
+        window.location.pathname !== "/login" &&
+        window.location.pathname !== "/register"
+      ) {
+        window.location.href = window.location.origin + "/login";
+      }
     }
     return Promise.reject(error);
   }
 );
 
 const api = (axios: AxiosInstance) => {
-  console.log(axiosParams);
-
   return {
     get: <T>(url: string, config: AxiosRequestConfig = {}) =>
       axios.get<T>(url, config),

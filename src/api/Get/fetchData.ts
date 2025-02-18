@@ -17,7 +17,7 @@ export const fetchData = async <T>(url: string): Promise<T> => {
 
 const handleInitData = (response: AxiosResponse<any>) => {
   if (response) {
-    const clientId = response.headers["clientid"];
+    const clientId = response.headers["x-client-id"];
     if (
       clientId !== undefined &&
       clientId !== null &&

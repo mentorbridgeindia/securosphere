@@ -87,6 +87,7 @@ export const useLoginSocialGoogle = ({
       .catch((err) => {
         onReject(err);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleResponse = useCallback(

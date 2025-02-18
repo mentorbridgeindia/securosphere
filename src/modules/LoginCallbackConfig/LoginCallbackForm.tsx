@@ -30,7 +30,7 @@ export const LoginCallbackForm = ({ isReadOnly }: { isReadOnly: boolean }) => {
     setValue,
     watch,
     reset,
-    formState: { errors, isDirty },
+    formState: { errors },
   } = useForm<LoginCallbackConfigState>({
     resolver: yupResolver(loginCallbackSchema as any),
     defaultValues: {
@@ -45,12 +45,10 @@ export const LoginCallbackForm = ({ isReadOnly }: { isReadOnly: boolean }) => {
     mode: "onBlur",
   });
 
-  const values = watch();
-
   useEffect(() => {
     if (data) {
       reset({
-        authorizedOrigins: data.authorizedDomains,
+        authorizedOrigins: data.authorizedDomains ?? [""],
         orgLogo: data.logo,
         orgName: data.organizationName,
         callbackUrl: data.callbackUrl,
@@ -59,6 +57,7 @@ export const LoginCallbackForm = ({ isReadOnly }: { isReadOnly: boolean }) => {
         termsOfServiceUrl: data.termsOfServiceUrl,
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   const {
@@ -118,7 +117,7 @@ export const LoginCallbackForm = ({ isReadOnly }: { isReadOnly: boolean }) => {
     setLoginCallbackConfig({
       orgName: watch("orgName"),
       subDomain: watch("subDomain"),
-      authorizedOrigins: watch("authorizedOrigins"),
+      authorizedOrigins: watch("authorizedOrigins") ?? [""],
       callbackUrl: watch("callbackUrl"),
       orgLogo: watch("orgLogo"),
       website: watch("website"),
@@ -128,13 +127,21 @@ export const LoginCallbackForm = ({ isReadOnly }: { isReadOnly: boolean }) => {
 
   useEffect(() => {
     updateLoginCallbackConfig();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     watch("orgName"),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     watch("subDomain"),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     watch("authorizedOrigins"),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     watch("callbackUrl"),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     watch("orgLogo"),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     watch("website"),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     watch("termsOfServiceUrl"),
   ]);
 
