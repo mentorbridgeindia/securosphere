@@ -6,7 +6,11 @@ export const sendData = async <T>(
 ): Promise<T | null> => {
   try {
     const response = await api.post<T>(url, body);
-    if (response.status === 200 || response.status === 201) {
+    if (
+      response.status === 200 ||
+      response.status === 201 ||
+      response.status === 204
+    ) {
       if (url.includes("signin")) handleLoginResponse(response);
       return response.data;
     }
@@ -19,11 +23,21 @@ export const sendData = async <T>(
 
 const handleLoginResponse = (response: any) => {
   if (response) {
-    // TODO: Check if its login URL
     const accessToken = response.headers["authorization"];
+    const isClientIdAvailable = sessionStorage.getItem("clientId");
+    const location = response.headers["location"];
+    const isNotSecurosphere =
+      !/^(?!.*app\.securosphere\.in).*\.securosphere\.in$/.test(
+        window.location.href
+      );
+
+    if (isClientIdAvailable && isNotSecurosphere && location && accessToken) {
+      sessionStorage.clear();
+      window.location.href = location + "?token=" + accessToken.split(" ")[1];
+    }
     if (accessToken !== undefined && accessToken !== null) {
-      console.log("accessToken", accessToken);
       sessionStorage.setItem("accessToken", accessToken.split(" ")[1]);
     }
+    return response.data;
   }
 };

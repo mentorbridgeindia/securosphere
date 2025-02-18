@@ -1,0 +1,20 @@
+.redirection-wrapper {
+  max-width: 100%;
+
+  .code-container {
+    flex-basis: 80%;
+    flex-grow: 1;
+    overflow: hidden;
+    min-width: 0;
+  }
+
+  .copy-icon {
+    flex-basis: 10%;
+    flex-grow: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    max-width: fit-content;
+  }
+}

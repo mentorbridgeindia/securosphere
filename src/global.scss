@@ -103,13 +103,13 @@ input[type="number"] {
 }
 
 .form-label {
-  margin-bottom: 0 !important;
+  // margin-bottom: 0 !important;
 }
 
 .input-group-text {
   font-size: 14px;
   height: fit-content;
-  margin-top: 0.5rem;
+  // margin-top: 0.5rem;
 }
 
 .table {
@@ -127,6 +127,10 @@ input[type="number"] {
 
 .form-control {
   font-size: 14px !important;
+
+  &:focus {
+    box-shadow: 0 0 0 0.025rem $primary !important;
+  }
 }
 
 .truncate {

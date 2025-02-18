@@ -7,4 +7,5 @@ export interface IConfigurationData {
   organizationName: string;
   termsOfServiceUrl: string;
   socialProviders: Record<string, boolean>;
+  logo?: string;
 }

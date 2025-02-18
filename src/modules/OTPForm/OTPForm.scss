@@ -1,0 +1,23 @@
+@import "../../colors.scss";
+
+.otp-input {
+  height: 50px !important;
+  width: 60px !important;
+  font-size: 18px !important;
+  border-radius: 10px !important;
+  color: $success !important;
+  border: 1.5px solid #ccc !important;
+
+  &:focus {
+    border-color: $primary !important;
+    box-shadow: 0 0 0 0.05px $primary !important;
+  }
+}
+
+.otp-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}

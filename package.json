@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@codemirror/lang-javascript": "^6.2.2",
+    "@codemirror/lang-json": "^6.0.1",
+    "@codemirror/theme-one-dark": "^6.1.2",
+    "@codemirror/view": "^6.36.2",
     "@hookform/resolvers": "^3.9.1",
     "@radix-ui/colors": "^3.0.0",
     "@radix-ui/react-avatar": "^1.1.2",
@@ -16,18 +20,24 @@
     "@types/node": "^16.18.121",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
+    "@types/react-icons": "^3.0.0",
+    "@uiw/codemirror-theme-vscode": "^4.23.7",
+    "@uiw/react-codemirror": "^4.23.7",
     "@vercel/analytics": "^1.4.1",
     "@vercel/speed-insights": "^1.1.0",
     "axios": "^1.7.9",
     "bootstrap": "^5.3.3",
+    "cross-env": "^7.0.3",
     "headless-stepper": "^1.11.0",
     "jotai": "^2.11.0",
+    "lucide-react": "^0.473.0",
     "posthog-js": "^1.205.0",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.6",
     "react-dom": "^18.3.1",
     "react-ga4": "^2.1.0",
     "react-hook-form": "^7.54.2",
+    "react-icons": "^5.4.0",
     "react-router-dom": "^7.0.2",
     "react-scripts": "5.0.1",
     "react-toastify": "^11.0.3",
@@ -38,11 +48,13 @@
     "yup": "^1.6.1"
   },
   "scripts": {
-    "start": "cross-env NODE_ENV=development craco start",
-    "build": "craco build && npm run sentry:sourcemaps",
+
+    "start": "set NODE_ENV=development&& craco start",
+    "build": "cross-env  GENERATE_SOURCEMAP=false craco build && npm run sentry:sourcemaps",
+
     "test": "craco test",
     "eject": "react-scripts eject",
-    "sentry:sourcemaps": "sentry-cli sourcemaps inject --org mentorbridge-or --project javascript-react ./build/static/js && sentry-cli sourcemaps upload --org mentorbridge-or --project javascript-react ./build/static/js"
+    "sentry:sourcemaps": "sentry-cli sourcemaps inject --org mentorbridge-or --project javascript-react ./build/static/js"
   },
   "eslintConfig": {
     "extends": [
@@ -63,8 +75,13 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@craco/craco": "^7.1.0",
     "@svgr/webpack": "^8.1.0",
-    "cross-env": "^7.0.3"
+
+    "cross-env": "^7.0.3",
+
+    "@types/react-bootstrap": "^0.32.37"
+
   }
 }

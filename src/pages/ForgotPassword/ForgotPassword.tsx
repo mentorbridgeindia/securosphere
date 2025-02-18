@@ -1,8 +1,8 @@
+import forgotppasswordimg from "@assets/forgotpassword.svg";
 import { ForgotPasswordForm } from "@modules/ForgotPasswordForm";
 import { Card } from "react-bootstrap";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import forgotppasswordimg from "@assets/forgotpassword.svg";
 
 export const ForgotPassword = () => {
   return (
@@ -11,7 +11,7 @@ export const ForgotPassword = () => {
         <Col
           lg={4}
           className="d-none d-lg-flex justify-content-center align-items-center"
-          style={{ paddingRight: "50px" }} 
+          style={{ paddingRight: "50px" }}
         >
           <img
             src={forgotppasswordimg}
@@ -21,7 +21,7 @@ export const ForgotPassword = () => {
         </Col>
 
         <Col
-          lg={4} 
+          lg={4}
           xs={12}
           md={10}
           className="d-flex align-items-center justify-content-center"
