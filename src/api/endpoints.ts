@@ -9,6 +9,9 @@ export const LOGIN_SOCIAL_ENDPOINT = `account/social-signin`;
 export const CONFIGURATION_ENDPOINT = `auth/config`;
 export const ORGANIZATION_ENDPOINT = `organization`;
 export const DOMAIN_ENDPOINT = `domain`;
+
+export const USERS_ENDPOINT = `user`;
+
 export const INIT_ENDPOINT = `init`;
 export const FORGOT_PASSWORD_ENDPOINT = `account/resetPassword`;
 export const VERIFY_OTP_ENDPOINT = `account/otp`;

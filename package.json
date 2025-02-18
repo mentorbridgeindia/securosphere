@@ -53,6 +53,8 @@
     "react-leaflet": "^4.2.1",
     "react-router-dom": "^7.0.2",
     "react-scripts": "5.0.1",
+    "react-toastify": "^11.0.3",
+    "reactjs-popup": "^2.0.6",
     "react-simple-maps": "^3.0.0",
     "react-toastify": "^11.0.2",
     "reactstrap": "^9.2.3",
@@ -66,8 +68,10 @@
     "yup": "^1.6.1"
   },
   "scripts": {
+
     "start": "set NODE_ENV=development&& craco start",
     "build": "cross-env  GENERATE_SOURCEMAP=false craco build && npm run sentry:sourcemaps",
+
     "test": "craco test",
     "eject": "react-scripts eject",
     "sentry:sourcemaps": "sentry-cli sourcemaps inject --org mentorbridge-or --project javascript-react ./build/static/js"
@@ -94,6 +98,8 @@
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@craco/craco": "^7.1.0",
     "@svgr/webpack": "^8.1.0",
+    "cross-env": "^7.0.3",
+    "@types/react-bootstrap": "^0.32.37"
     "@types/react-bootstrap": "^0.32.37",
     "@types/swagger-ui-react": "^5.18.0"
     "@types/reactstrap": "^8.7.2"

@@ -95,6 +95,7 @@ input[type="number"] {
   cursor: pointer;
 }
 
+
 .btn-bg {
   border: none;
   background: none;
@@ -119,6 +120,8 @@ input[type="number"] {
     font-weight: 500;
     text-transform: uppercase;
     font-size: 14px;
+    color: white;
+    background-color:gray;
   }
 }
 
@@ -175,5 +178,11 @@ input[type="number"] {
   svg {
     width: 150px;
     height: 100px;
+  }
+  .btn-invite{
+    display: flex;
+    background-color: white;
+    color: black;
+    border: none;
   }
 }

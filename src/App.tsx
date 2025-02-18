@@ -21,10 +21,16 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "./App.scss";
 import { PrivateRoute } from "./routes/PrivateRoute";
+
+import {TeamManagement} from "@pages/TeamManagement/TeamManagement";
+import {InviteUser} from "@pages/TeamManagement/InviteUser";
+import 'react-toastify/dist/ReactToastify.css';
+
 import { ChangePassword } from "./pages/ChangePassword/ChangePassword";
 import TermsAndContiditions from "./pages/TermsAndContiditions/TermsAndContiditions";
 import PrivacyPolicy from "./pages/PrivacyPolicy/PrivacyPolicy";
 import Swagger from "./pages/Swagger";
+
 
 function App() {
   return (
@@ -32,6 +38,7 @@ function App() {
       <AppNavbar />
       <ToastContainer />
       <Container className="well-container">
+        <QueryClientProvider client={queryClient}>
         <BrowserRouter>
           <Routes>
             <Route path="/login" element={<Login />} />
@@ -40,6 +47,7 @@ function App() {
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/change-password" element={<ChangePassword />} />
             <Route path="/oauth" element={<OAuth />} />
+            <Route path="/team-management" element={<TeamManagement />} />
             <Route path="/swagger" element={<Swagger />}/>
             <Route path="/verify-email" element={<VerifyEmail />} />
             <Route path="/dashboard" element={<Dashboard />} />
@@ -67,6 +75,8 @@ function App() {
             <Route path="*" element={<ErrorPage />} />
           </Routes>
         </BrowserRouter>
+       </QueryClientProvider>
+
       </Container>
       <SpeedInsights />
       <Analytics />
