@@ -6,6 +6,9 @@ import { useEffect } from "react";
 import { Alert, Button, Col, Container, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { InfoStep } from "./components/InfoStep";
+import { QueryClient } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 export const Information = () => {
   const navigate = useNavigate();
@@ -24,6 +27,12 @@ export const Information = () => {
       navigate("/");
     }
   }, [error, navigate]);
+
+  useEffect(() => {
+    queryClient.invalidateQueries({
+      queryKey: ["organization", false],
+    });
+  }, [data]);
 
   if (isLoading) {
     return <Spinner isLoading={isLoading} />;
