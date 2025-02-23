@@ -10,7 +10,7 @@ interface RedirectionProps {
 }
 
 const Redirection = ({ subDomain }: RedirectionProps) => {
-  const url = "https://" + subDomain + ".securosphere.in/auth/callback";
+  const url = "https://" + subDomain + ".securosphere.in/register";
 
   const handleCopy = () => {
     navigator.clipboard.writeText(url);
