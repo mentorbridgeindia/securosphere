@@ -16,7 +16,12 @@ export const OAuth = () => {
   useEffect(() => {
     if (token) {
       sessionStorage.setItem("accessToken", token);
-      navigate("/");
+      const subDomain = localStorage.getItem("subDomain");
+      if (subDomain) {
+        navigate(`https://${subDomain}.securosphere.in`);
+      } else {
+        navigate("/");
+      }
     } else {
       navigate("/login");
     }

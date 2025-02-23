@@ -1,0 +1,75 @@
+.recent-users-list {
+  .user-timeline-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 12px 0;
+    position: relative;
+    .time-stamp {
+      min-width: 70px;
+      color: #64748b;
+      font-size: 0.875rem;
+      padding-top: 2px;
+    }
+    .user-info {
+      display: flex;
+      align-items: center;
+      flex-grow: 1;
+      position: relative;
+      .timeline-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        margin: 0 15px;
+        background-color: #0d6efd;
+        position: relative;
+        z-index: 2;
+        &::after {
+          content: "";
+          position: absolute;
+          top: 8px;
+          left: 50%;
+          transform: translateX(-50%);
+          height: calc(100% + 24px);
+          width: 2px;
+          background-color: #e0e6ed;
+          z-index: 1;
+        }
+      }
+      .user-name {
+        font-size: 0.875rem;
+        color: #1e293b;
+      }
+    }
+    &:last-child {
+      .timeline-dot::after {
+        display: none;
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .recent-users-list {
+    .user-timeline-item {
+      flex-direction: column;
+      align-items: flex-start;
+      .time-stamp {
+        min-width: auto;
+        margin-bottom: 8px;
+      }
+      .user-info {
+        flex-direction: row;
+        align-items: center;
+        .timeline-dot {
+          margin: 0 8px 0 0;
+          &::after {
+            display: none;
+          }
+        }
+        .user-name {
+          font-size: 0.875rem;
+        }
+      }
+    }
+  }
+}

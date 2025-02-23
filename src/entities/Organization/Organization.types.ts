@@ -20,6 +20,8 @@ export interface IOrganizationEntity {
   logo: string;
   applicationName: string;
   termsOfServiceUrl: string;
+
   socialProviders: SocialProvidersObject;
   publicKey?: string;
+
 }

@@ -29,7 +29,7 @@ export const useInit = (config: { enabled?: boolean } = { enabled: true }) => {
   const { data, error, isLoading } = useQuery<InitData>({
     queryKey: QUERY_KEY,
     queryFn: getInitData,
-    staleTime: 1000 * 60 * 5,
+    staleTime: 1000 * 60 * 30,
     enabled: config?.enabled,
   });
 

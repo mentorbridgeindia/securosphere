@@ -39,18 +39,12 @@ export const SocialLoginButtons = ({
     };
 
     if (providerMap[provider as SocialProvider]) {
-      const { hostname, protocol } = window.location;
-      const subDomain = hostname.split(".")[0];
+      const { hostname } = window.location;
       const isLocalHost = hostname.includes("localhost");
 
-      const getApiDomain = () => {
-        if (isLocalHost) {
-          return `localhost:8080`;
-        }
-        return `${subDomain}.api.securosphere.in`;
-      };
-
-      const baseURL = `${isLocalHost ? "http" : protocol}://${getApiDomain()}`;
+      const baseURL = isLocalHost
+        ? "http://localhost:8080"
+        : "https://api.securosphere.in";
       window.location.href = `${baseURL}/oauth2/authorization/${provider}`;
     }
   };

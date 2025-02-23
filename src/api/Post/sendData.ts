@@ -1,3 +1,4 @@
+import { ILoginMutation } from "../../entities/Login";
 import api from "../api";
 
 export const sendData = async <T>(
@@ -9,9 +10,12 @@ export const sendData = async <T>(
     if (
       response.status === 200 ||
       response.status === 201 ||
-      response.status === 204
+      response.status === 204 ||
+      response.status === 206
     ) {
-      if (url.includes("signin")) handleLoginResponse(response);
+      if (url.includes("mfa-login")) handleMFALoginResponse(response);
+      if (url.includes("signin"))
+        handleLoginResponse(response, body as never as ILoginMutation);
       return response.data;
     }
     return null;
@@ -21,7 +25,17 @@ export const sendData = async <T>(
   }
 };
 
-const handleLoginResponse = (response: any) => {
+const handleLoginResponse = (response: any, body: ILoginMutation) => {
+  if (response?.data && body) {
+    sessionStorage.setItem("email", body.email);
+    if (!response.data?.errorCode) {
+      sessionStorage.setItem("qrCode", response.data);
+    }
+    window.location.href = "/mfa";
+  }
+};
+
+const handleMFALoginResponse = (response: any) => {
   if (response) {
     const accessToken = response.headers["authorization"];
     const isClientIdAvailable = sessionStorage.getItem("clientId");

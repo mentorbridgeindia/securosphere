@@ -9,7 +9,7 @@ const isLocalHost = window.location.hostname.includes("localhost");
 let baseURL = "https://api.securosphere.in";
 
 if (isLocalHost) {
-  baseURL = "http://localhost:8080";
+  // baseURL = "http://localhost:8080";
 }
 
 const token = sessionStorage.getItem("accessToken") ?? null;
@@ -72,8 +72,6 @@ axiosInstance.interceptors.response.use(
 );
 
 const api = (axios: AxiosInstance) => {
-  console.log(axiosParams);
-
   return {
     get: <T>(url: string, config: AxiosRequestConfig = {}) =>
       axios.get<T>(url, config),

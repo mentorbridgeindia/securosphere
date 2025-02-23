@@ -1,0 +1,159 @@
+.activity-chart-card {
+  .card-title {
+    color: #2c3e50;
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+
+  .activity-chart {
+    display: flex;
+    height: 250px;
+    padding: 15px 5px;
+    position: relative;
+
+    .chart-labels {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding-right: 8px;
+      color: #64748b;
+      min-width: 35px;
+
+      span {
+        font-size: 0.65rem;
+        font-weight: 500;
+        white-space: nowrap;
+      }
+    }
+
+    .chart-container {
+      flex-grow: 1;
+      position: relative;
+
+      svg {
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          to bottom,
+          rgba(203, 213, 225, 0.2) 1px,
+          transparent 1px
+        );
+        background-size: 100% 25%;
+        filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+
+        .main-line {
+          vector-effect: non-scaling-stroke;
+          stroke-dasharray: 1000;
+          stroke-dashoffset: 1000;
+          animation: drawLine 2s ease forwards;
+          stroke-width: 0.8;
+        }
+
+        .area-path {
+          opacity: 0;
+          animation: fadeIn 1s ease forwards 0.5s;
+        }
+      }
+
+      .x-labels {
+        display: flex;
+        justify-content: space-between;
+        position: absolute;
+        bottom: -20px;
+        left: 0;
+        right: 0;
+        color: #64748b;
+
+        span {
+          font-size: 0.65rem;
+          font-weight: 500;
+          transform: translateX(-50%);
+          transition: color 0.3s ease;
+
+          &:hover {
+            color: #4318ff;
+          }
+
+          &:first-child {
+            transform: translateX(0);
+          }
+
+          &:last-child {
+            transform: translateX(-100%);
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .activity-chart-card {
+    .activity-chart {
+      height: 220px;
+
+      .chart-labels span {
+        font-size: 0.6rem;
+      }
+
+      .chart-container .x-labels span {
+        font-size: 0.6rem;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .activity-chart-card {
+    .activity-chart {
+      height: 280px;
+
+      .chart-labels span {
+        font-size: 0.7rem;
+      }
+
+      .chart-container .x-labels span {
+        font-size: 0.7rem;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .activity-chart-card {
+    .activity-chart {
+      height: 200px;
+      padding: 10px 5px;
+
+      .chart-labels {
+        padding-right: 5px;
+
+        span {
+          font-size: 0.6rem;
+        }
+      }
+
+      .chart-container {
+        .x-labels {
+          bottom: -15px;
+
+          span {
+            font-size: 0.6rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+@keyframes drawLine {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}

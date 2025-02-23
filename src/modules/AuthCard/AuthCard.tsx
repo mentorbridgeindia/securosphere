@@ -20,9 +20,11 @@ export const AuthCard = ({
       window.location.href = "https://securosphere.in";
     }
     sessionStorage.removeItem("accessToken");
+    const subDomain = window.location.hostname.split(".")[0];
+    localStorage.setItem("subDomain", subDomain);
   }, [isLoading, data]);
 
-  if (isLoading) return <Spinner isLoading />;
+  if (isLoading) return <Spinner isLoading={isLoading} />;
 
   return (
     <div className="d-flex align-items-center justify-content-center my-2 mt-5">
@@ -42,7 +44,11 @@ export const AuthCard = ({
           <Card className="p-4 shadow rounded w-100">
             <div className="d-flex justify-content-center brand-lg">
               {data?.logo && (
-                <img src={data?.logo} alt="logo" className="img-fluid" />
+                <img
+                  src={data?.logo}
+                  alt="logo"
+                  className="img-fluid app-logo"
+                />
               )}
             </div>
             {data?.applicationName && (

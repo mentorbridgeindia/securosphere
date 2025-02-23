@@ -1,6 +1,7 @@
 import { Spinner } from "@atoms/Spinner";
 import { useResendOTP, useVerifyOTP } from "@entities/Password";
-import React, { useRef, useState } from "react";
+import { OTPInput } from "@molecules/OTPInput";
+import React, { useEffect, useState } from "react";
 import { FaInfoCircle } from "react-icons/fa";
 import { useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -13,15 +14,14 @@ export const OTPForm = ({
   handleSuccess: () => void;
   updateOtp?: (otp: string) => void;
 }) => {
-  const otpRefs = useRef<(HTMLInputElement | null)[]>([]);
-  const [otp, setOtp] = useState<string[]>(Array(6).fill(""));
   const [searchParams] = useSearchParams();
+  const [otp, setOtp] = useState<string>("");
   const email = searchParams.get("email");
+  const defaultOtp = searchParams.get("otp");
 
   const { mutate: verifyOTP, isPending } = useVerifyOTP({
     onSuccess: () => {
       toast.success("OTP verified successfully!");
-      updateOtp && updateOtp(otp.join(""));
       handleSuccess();
     },
     onError: (error: any) => {
@@ -38,51 +38,34 @@ export const OTPForm = ({
     },
   });
 
+  const handleResendClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    if (email) {
+      resendOTP({
+        email: decodeURIComponent(email),
+        otp: "",
+      });
+    }
+  };
+
+  const handleOtpComplete = (otp: string) => {
+    if (otp && otp.length === 6 && email) {
+      verifyOTP({
+        otp,
+        email: decodeURIComponent(email),
+      });
+    }
+  };
+
+  useEffect(() => {
+    if (defaultOtp) {
+      setOtp(defaultOtp);
+    }
+  }, [defaultOtp]);
+
   if (!email) {
     return null;
   }
-
-  const handleInputChange = (
-    index: number,
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const value = e.target.value;
-    if (/^\d?$/.test(value)) {
-      const newOtp = [...otp];
-      newOtp[index] = value;
-      setOtp(newOtp);
-      if (value && index < otpRefs.current.length - 1) {
-        otpRefs.current[index + 1]?.focus();
-      }
-      if (newOtp.join("").length === 6 && email) {
-        verifyOTP({
-          otp: newOtp.join(""),
-          email: decodeURIComponent(email),
-        });
-      }
-    }
-  };
-
-  const handleKeyDown = (
-    index: number,
-    e: React.KeyboardEvent<HTMLInputElement>
-  ) => {
-    if (e.key === "Backspace" && !otp[index]) {
-      if (index > 0) {
-        otpRefs.current[index - 1]?.focus();
-      } else if (index < 3) {
-        otpRefs.current[index + 3]?.focus();
-      }
-    }
-  };
-
-  const handleResendClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    resendOTP({
-      email: decodeURIComponent(email),
-      otp: "",
-    });
-  };
 
   return (
     <div className="otp-form">
@@ -96,24 +79,7 @@ export const OTPForm = ({
         </div>
       </div>
 
-      <div className="d-flex justify-content-center gap-3">
-        {otp.map((digit, index) => (
-          <div
-            className="col-2 d-flex justify-content-center gap-3"
-            key={index}
-          >
-            <input
-              type="text"
-              className="form-control text-center rounded-lg otp-input"
-              maxLength={1}
-              ref={(el) => (otpRefs.current[index] = el)}
-              value={digit}
-              onChange={(e) => handleInputChange(index, e)}
-              onKeyDown={(e) => handleKeyDown(index, e)}
-            />
-          </div>
-        ))}
-      </div>
+      <OTPInput onComplete={handleOtpComplete} defaultOtp={otp} />
 
       <div className="text-center d-flex justify-content-center align-items-center gap-2">
         <p className="text-lg mb-0">Didn’t receive the email?</p>

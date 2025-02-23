@@ -2,6 +2,7 @@ import { Spinner } from "@atoms/Spinner";
 import { useGetOrganization } from "@entities/Organization";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Dashboard from "../Dashboard/Dashboard";
 
 export const Home = () => {
   const navigate = useNavigate();
@@ -28,11 +29,7 @@ export const Home = () => {
     <div className="d-flex align-items-center justify-content-center">
       <Spinner isLoading={isLoading || isPending} />
       {/* TODO: Add Dashboard details */}
-      {!isLoading && (
-        <h2 className="text-center mt-5">
-          Welcome to {data?.organizationName} Dashboard
-        </h2>
-      )}
+      {!isLoading && <Dashboard />}
     </div>
   );
 };
