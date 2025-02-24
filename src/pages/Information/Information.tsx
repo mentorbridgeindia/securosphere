@@ -2,11 +2,11 @@ import DecodeJWT from "@/modules/Information/DecodeJWT";
 import Redirection from "@/modules/Information/Redirection";
 import { Spinner } from "@atoms/Spinner";
 import { useGetOrganization } from "@entities/Organization";
+import { QueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { Alert, Button, Col, Container, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { InfoStep } from "./components/InfoStep";
-import { QueryClient } from "@tanstack/react-query";
 
 const queryClient = new QueryClient();
 
@@ -38,6 +38,10 @@ export const Information = () => {
     return <Spinner isLoading={isLoading} />;
   }
 
+  const handleContinue = () => {
+    window.location.href = window.location.origin + "/";
+  };
+
   return (
     <Container className="mt-4">
       <Row className="justify-content-center">
@@ -65,7 +69,7 @@ export const Information = () => {
       )}
 
       <div className="center">
-        <Button variant="primary" onClick={() => navigate("/")}>
+        <Button variant="primary" onClick={handleContinue}>
           Continue
         </Button>
       </div>
