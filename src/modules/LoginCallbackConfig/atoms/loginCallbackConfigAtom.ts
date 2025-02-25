@@ -5,7 +5,6 @@ export const loginCallbackConfigAtom = atom<LoginCallbackConfigState>({
   orgName: "",
   website: "",
   orgLogo: "",
-  authorizedOrigins: [""],
   callbackUrl: "",
   subDomain: "",
   termsOfServiceUrl: "",

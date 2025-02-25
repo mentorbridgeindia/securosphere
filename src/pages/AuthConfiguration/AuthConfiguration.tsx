@@ -42,15 +42,14 @@ export const AuthConfiguration = () => {
     signUpConfig?.appName !== "" &&
     signUpConfig?.socialProviders?.length > 0;
 
-  const validateLoginCallbackConfig =
+  const validateLoginCallbackConfig = !!(
     loginCallbackConfig &&
     loginCallbackConfig?.orgName !== "" &&
     loginCallbackConfig?.website !== "" &&
     loginCallbackConfig?.callbackUrl !== "" &&
     loginCallbackConfig?.termsOfServiceUrl !== "" &&
-    loginCallbackConfig?.subDomain !== "" &&
-    loginCallbackConfig?.authorizedOrigins.every((origin) => origin !== "");
-
+    loginCallbackConfig?.subDomain !== ""
+  );
   useEffect(() => {
     setSteps((prev) => [
       { ...prev[0], isValid: validateLoginCallbackConfig },

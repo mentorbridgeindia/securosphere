@@ -37,7 +37,6 @@ export const LoginCallbackForm = ({ isReadOnly }: { isReadOnly: boolean }) => {
       orgName: loginCallbackConfig?.orgName || "",
       website: loginCallbackConfig?.website || "",
       orgLogo: loginCallbackConfig?.orgLogo || "",
-      authorizedOrigins: loginCallbackConfig?.authorizedOrigins || [""],
       callbackUrl: loginCallbackConfig?.callbackUrl || "",
       subDomain: loginCallbackConfig?.subDomain || "",
       termsOfServiceUrl: loginCallbackConfig?.termsOfServiceUrl || "",
@@ -48,7 +47,6 @@ export const LoginCallbackForm = ({ isReadOnly }: { isReadOnly: boolean }) => {
   useEffect(() => {
     if (data) {
       reset({
-        authorizedOrigins: data.authorizedDomains ?? [""],
         orgLogo: data.logo,
         orgName: data.organizationName,
         callbackUrl: data.callbackUrl,
@@ -74,21 +72,6 @@ export const LoginCallbackForm = ({ isReadOnly }: { isReadOnly: boolean }) => {
     }
   }, [domainData, domainLoading, domainError, watch]);
 
-  const handleAddOrigin = () => {
-    const authorizedOrigins = watch("authorizedOrigins");
-    const isFilled = authorizedOrigins.every((origin) => origin.trim() !== "");
-    if (isFilled) {
-      setValue("authorizedOrigins", [...authorizedOrigins, ""]);
-    }
-  };
-
-  const handleRemoveOrigin = (index: number) => {
-    const authorizedOrigins = watch("authorizedOrigins");
-    setValue(
-      "authorizedOrigins",
-      authorizedOrigins.filter((_, i) => i !== index)
-    );
-  };
 
   const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, files } = e.target;
@@ -115,14 +98,13 @@ export const LoginCallbackForm = ({ isReadOnly }: { isReadOnly: boolean }) => {
 
   const updateLoginCallbackConfig = () => {
     setLoginCallbackConfig({
-      orgName: watch("orgName"),
-      subDomain: watch("subDomain"),
-      authorizedOrigins: watch("authorizedOrigins") ?? [""],
-      callbackUrl: watch("callbackUrl"),
-      orgLogo: watch("orgLogo"),
-      website: watch("website"),
-      termsOfServiceUrl: watch("termsOfServiceUrl"),
-    });
+          orgName: watch("orgName"),
+          subDomain: watch("subDomain"),
+          callbackUrl: watch("callbackUrl"),
+          orgLogo: watch("orgLogo"),
+          website: watch("website"),
+          termsOfServiceUrl: watch("termsOfServiceUrl"),
+        });
   };
 
   useEffect(() => {
@@ -133,8 +115,6 @@ export const LoginCallbackForm = ({ isReadOnly }: { isReadOnly: boolean }) => {
     watch("orgName"),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     watch("subDomain"),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    watch("authorizedOrigins"),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     watch("callbackUrl"),
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -220,46 +200,7 @@ export const LoginCallbackForm = ({ isReadOnly }: { isReadOnly: boolean }) => {
           </div>
         )}
       </Form.Group>
-      <Form.Group controlId="authorizedOrigins" className="mb-3">
-        <FormLabel className="d-flex align-items-center justify-content-between">
-          <div>Authorized Origins</div>
-          <button
-            type="button"
-            className="ms-2 empty-btn"
-            onClick={handleAddOrigin}
-          >
-            <IconPlus />
-          </button>
-        </FormLabel>
-        {watch("authorizedOrigins")?.map((origin, index) => (
-          <div className="d-flex align-items-center mb-2" key={index}>
-            <Controller
-              name={`authorizedOrigins.${index}`}
-              control={control}
-              render={({ field }) => (
-                <Form.Control
-                  type="url"
-                  isInvalid={!!errors.authorizedOrigins?.[index]}
-                  {...field}
-                  autoComplete="off"
-                  isValid={!!watch(`authorizedOrigins.${index}`)}
-                  placeholder="localhost,stublab.in"
-                  disabled={isReadOnly}
-                />
-              )}
-            />
-            {watch("authorizedOrigins").length > 1 && (
-              <button
-                type="button"
-                className="ms-2 empty-btn text-danger"
-                onClick={() => handleRemoveOrigin(index)}
-              >
-                <IconTrash />
-              </button>
-            )}
-          </div>
-        ))}
-      </Form.Group>
+      
       <Form.Group controlId="callbackUrls" className="mb-3">
         <FormLabel className="d-flex align-items-center justify-content-start">
           Callback URL
