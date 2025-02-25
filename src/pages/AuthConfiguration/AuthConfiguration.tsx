@@ -50,6 +50,7 @@ export const AuthConfiguration = () => {
     loginCallbackConfig?.termsOfServiceUrl !== "" &&
     loginCallbackConfig?.subDomain !== ""
   );
+  
   useEffect(() => {
     setSteps((prev) => [
       { ...prev[0], isValid: validateLoginCallbackConfig },
