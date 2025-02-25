@@ -49,7 +49,6 @@ export const AuthConfiguration = () => {
     loginCallbackConfig?.callbackUrl !== "" &&
     loginCallbackConfig?.termsOfServiceUrl !== "" &&
     loginCallbackConfig?.subDomain !== "" &&
-    loginCallbackConfig?.authorizedOrigins?.length > 0 &&
     loginCallbackConfig?.authorizedOrigins.every((origin) => origin !== "");
 
   useEffect(() => {
@@ -63,9 +62,9 @@ export const AuthConfiguration = () => {
   const onFinalSubmit = () => {
     const configurationData = {
       subDomain: loginCallbackConfig.subDomain,
-      authorizedDomains: loginCallbackConfig.authorizedOrigins,
       callbackUrl: loginCallbackConfig.callbackUrl,
       website: loginCallbackConfig.website,
+      logo: loginCallbackConfig.orgLogo,
       applicationName: signUpConfig.appName,
       organizationName: loginCallbackConfig.orgName,
       termsOfServiceUrl: loginCallbackConfig.termsOfServiceUrl,

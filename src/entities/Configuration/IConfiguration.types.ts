@@ -1,6 +1,5 @@
 export interface IConfigurationData {
   subDomain: string;
-  authorizedDomains: string[];
   callbackUrl: string;
   website: string;
   applicationName: string;
