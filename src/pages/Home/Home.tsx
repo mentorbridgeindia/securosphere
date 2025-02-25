@@ -29,7 +29,7 @@ export const Home = () => {
     <div className="d-flex align-items-center justify-content-center">
       <Spinner isLoading={isLoading || isPending} />
       {/* TODO: Add Dashboard details */}
-      {!isLoading && <Dashboard />}
+      {!isLoading && !isPending && <Dashboard />}
     </div>
   );
 };
