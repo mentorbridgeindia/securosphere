@@ -48,16 +48,7 @@ export const Register = () => {
     >
        <Spinner isLoading={isLoading} /> 
       <div className="mt-3">
-        <GoogleReCaptchaProvider
-          reCaptchaKey="6LcGntkqAAAAAIBxjVl7MxCIirQlvERk3Y1IQf6q"
-          scriptProps={{
-            async: true,
-            defer: true,
-            appendTo: 'head',
-          }}
-        >
-      <RegisterForm termsOfServiceUrl={data?.termsOfServiceUrl ?? ""} />
-      </GoogleReCaptchaProvider>
+        <RegisterForm termsOfServiceUrl={data?.termsOfServiceUrl ?? ""} />
       </div>
     </AuthCard>
   );
