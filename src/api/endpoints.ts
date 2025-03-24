@@ -11,6 +11,7 @@ export const ORGANIZATION_ENDPOINT = `organization`;
 export const DOMAIN_ENDPOINT = `domain`;
 
 export const USERS_ENDPOINT = `user`;
+export const ROLES_ENDPOINT = `roles`;
 
 export const INIT_ENDPOINT = `init`;
 export const FORGOT_PASSWORD_ENDPOINT = `account/resetPassword`;

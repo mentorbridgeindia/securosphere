@@ -52,13 +52,8 @@ export const Login = () => {
       <Spinner isLoading={isPending} />
       
       <div className="mt-3">
-                        <GoogleReCaptchaProvider
-                  reCaptchaKey="6LcGntkqAAAAAIBxjVl7MxCIirQlvERk3Y1IQf6q"
-                >
-                          <LoginForm loginUser={handleLogin} />
-                      
-                </GoogleReCaptchaProvider>
-                </div> 
+          <LoginForm loginUser={handleLogin} />
+      </div> 
 
     </AuthCard>
   );
