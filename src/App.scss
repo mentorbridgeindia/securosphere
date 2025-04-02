@@ -15,3 +15,9 @@
   width: 150px;
   height: 150px;
 }
+
+.grecaptcha-badge{
+  height: 1px !important;
+  width: 1px !important;
+  pointer-events: none !important;
+}

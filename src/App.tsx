@@ -25,7 +25,9 @@ import { PrivateRoute } from "./routes/PrivateRoute";
 
 import PrivacyPolicy from "@pages/PrivacyPolicy/PrivacyPolicy";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 import TermsAndContiditions from "./pages/TermsAndContiditions/TermsAndContiditions";
+import Roles from "./pages/Roles/Roles";
 
 const queryClient = new QueryClient();
 
@@ -36,40 +38,43 @@ function App() {
       <ToastContainer />
       <Container className="well-container">
         <QueryClientProvider client={queryClient}>
-          <BrowserRouter>
-            <Routes>
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/forgot-password" element={<ForgotPassword />} />
-              <Route path="/reset-password" element={<ResetPassword />} />
-              <Route path="/change-password" element={<ChangePassword />} />
-              <Route path="/oauth" element={<OAuth />} />
-              <Route path="/team-management" element={<TeamManagement />} />
-              <Route path="/verify-email" element={<VerifyEmail />} />
-              <Route path="/mfa" element={<Mfa />} />
-              <Route path="/terms" element={<TermsAndContiditions />} />
-              <Route path="/policy" element={<PrivacyPolicy />} />
-              <Route element={<PrivateRoute />}>
-                <Route
-                  path="/auth-configuration"
-                  element={<AuthConfiguration />}
-                />
-              </Route>
-              <Route element={<PrivateRoute />}>
-                <Route path="/" element={<Home />} />
-              </Route>
-              <Route element={<PrivateRoute />}>
-                <Route path="/information" element={<Information />} />
-              </Route>
-              <Route element={<PrivateRoute />}>
-                <Route path="/profile" element={<Profile />} />
-              </Route>
-              <Route element={<PrivateRoute />}>
-                <Route path="/settings" element={<Settings />} />
-              </Route>
-              <Route path="*" element={<ErrorPage />} />
-            </Routes>
-          </BrowserRouter>
+          <GoogleReCaptchaProvider reCaptchaKey="6LcGntkqAAAAAIBxjVl7MxCIirQlvERk3Y1IQf6q">
+            <BrowserRouter>
+              <Routes>
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/forgot-password" element={<ForgotPassword />} />
+                <Route path="/reset-password" element={<ResetPassword />} />
+                <Route path="/change-password" element={<ChangePassword />} />
+                <Route path="/oauth" element={<OAuth />} />
+                <Route path="/team-management" element={<TeamManagement />} />
+                <Route path="/roles" element={<Roles/>}/>
+                <Route path="/verify-email" element={<VerifyEmail />} />
+                <Route path="/mfa" element={<Mfa />} />
+                <Route path="/terms" element={<TermsAndContiditions />} />
+                <Route path="/policy" element={<PrivacyPolicy />} />
+                <Route element={<PrivateRoute />}>
+                  <Route
+                    path="/auth-configuration"
+                    element={<AuthConfiguration />}
+                  />
+                </Route>
+                <Route element={<PrivateRoute />}>
+                  <Route path="/" element={<Home />} />
+                </Route>
+                <Route element={<PrivateRoute />}>
+                  <Route path="/information" element={<Information />} />
+                </Route>
+                <Route element={<PrivateRoute />}>
+                  <Route path="/profile" element={<Profile />} />
+                </Route>
+                <Route element={<PrivateRoute />}>
+                  <Route path="/settings" element={<Settings />} />
+                </Route>
+                <Route path="*" element={<ErrorPage />} />
+              </Routes>
+            </BrowserRouter>
+          </GoogleReCaptchaProvider>
         </QueryClientProvider>
       </Container>
       <SpeedInsights />
