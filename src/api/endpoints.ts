@@ -10,8 +10,9 @@ export const CONFIGURATION_ENDPOINT = `auth/config`;
 export const ORGANIZATION_ENDPOINT = `organization`;
 export const DOMAIN_ENDPOINT = `domain`;
 
-export const USERS_ENDPOINT = `user`;
+export const USERS_ENDPOINT = `users`;
 export const ROLES_ENDPOINT = `roles`;
+export const TEAMS_ENDPOINT = `teams`;
 
 export const INIT_ENDPOINT = `init`;
 export const FORGOT_PASSWORD_ENDPOINT = `account/resetPassword`;

@@ -4,8 +4,9 @@ import "./DonutChart.scss";
 interface DonutChartProps {
   data: Array<{ name: string; value: number; color: string }>;
 }
-
 const DonutChart = ({ data }: DonutChartProps) => {
+  console.log(data); // Check the data here
+  console.log(Array.isArray(data)); // Check if data is an array
   const total = data.reduce((sum, item) => sum + item.value, 0);
   let rotateOffset = 0;
 

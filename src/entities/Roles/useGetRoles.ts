@@ -3,9 +3,6 @@ import { useQuery } from "@tanstack/react-query"
 import { IRolesEntity } from "./Role.types";
 import { fetchData } from "@/api/Get/fetchData";
 
-
-
-
 const getRoles=async ()=>{
     return await fetchData<IRolesEntity[]>(ROLES_ENDPOINT);
 }
