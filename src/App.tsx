@@ -29,6 +29,7 @@ import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 import TermsAndContiditions from "./pages/TermsAndContiditions/TermsAndContiditions";
 import Roles from "./pages/Roles/Roles";
 import Teams from "./pages/Teams/Teams";
+import AdminTabs from "./pages/AdminTabs/AdminTabs";
 
 const queryClient = new QueryClient();
 
@@ -48,9 +49,10 @@ function App() {
                 <Route path="/reset-password" element={<ResetPassword />} />
                 <Route path="/change-password" element={<ChangePassword />} />
                 <Route path="/oauth" element={<OAuth />} />
-                <Route path="/team-management" element={<TeamManagement />} />
+                {/* <Route path="/team-management" element={<TeamManagement />} />
                 <Route path="/roles" element={<Roles />} />
-                <Route path="/teams" element={<Teams />} />
+                <Route path="/teams" element={<Teams />} /> */}
+                <Route path="/admintabs" element={<AdminTabs />} />
                 <Route path="/verify-email" element={<VerifyEmail />} />
                 <Route path="/mfa" element={<Mfa />} />
                 <Route path="/terms" element={<TermsAndContiditions />} />
